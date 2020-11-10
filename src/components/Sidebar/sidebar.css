@@ -1,0 +1,45 @@
+.sidebar{
+  width: 1%;
+  line-height: 22px;
+  position: fixed;
+  z-index: 999;
+  height: 100%;
+  left: 0;
+  font-size: 15.5px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.sidebar:hover{
+  overflow-y: auto;
+}
+.sidebar  hr{
+  height: 1px;
+  border: 0;
+  background-color: lightgray;
+  margin: 10px 0;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: lightgray;
+  margin-bottom: 350px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+}
+
+.search-btn{
+  border: none;
+  outline: none;
+}
+
+@media only screen and (max-width: 1336px) {
+  .sidebar {
+    display: none;
+  }
+}

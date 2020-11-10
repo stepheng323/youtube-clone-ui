@@ -1,0 +1,51 @@
+.login {
+	display: flex;
+	height: 90vh;
+	justify-content: center;
+  align-items: center;
+  padding-top: 3em;
+}
+.login-card {
+	background: white;
+	width: 460px;
+	height: 500px;
+	border-radius: 8px;
+	border: 1px solid lightgray;
+}
+.login-text{
+  text-align: center;
+  font-size: 1em;
+}
+.login-form {
+  height: 400px;
+  display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.login-form > h3{
+  color: #030303;
+  font-size: 24px;
+  padding-bottom: 1em;
+  font-weight: unset;
+}
+
+.login-btn{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2em;
+  font-size: 14px;
+}
+.forgot-password{
+  margin-top: .3em;
+  display: flex;
+  font-size: 14px;
+  align-items: flex-start;
+
+}
+
+.login-alert{
+  margin-bottom: 1em;
+}

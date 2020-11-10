@@ -1,0 +1,130 @@
+.play-video {
+	width: 70%;
+	position: relative;
+  padding-top: 29% 
+}
+.player {
+	position: absolute;
+  top: 0;
+  left: 0;
+}
+.video-section {
+	min-height: 360px;
+	min-width: 500px;
+	background-color: #030303;
+	position: relative;
+}
+
+.video-section > video {
+	position: absolute;
+}
+
+.loading {
+	position: absolute;
+	bottom: 50%;
+	left: 50%;
+	color: red;
+}
+.controls {
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	width: 620px;
+	padding-left: 2em;
+	justify-content: space-between;
+}
+.video-icon {
+	color: white;
+	margin-right: 0.8em;
+	z-index: 999;
+	cursor: pointer;
+}
+
+.play-bar {
+	min-height: 3px solid red;
+}
+
+.video-info {
+	flex-direction: column;
+}
+.play-video-title {
+	color: #030303;
+	font-size: 18px;
+}
+.play-video-details {
+	display: flex;
+}
+
+.details-section {
+	margin: 2em 0;
+	padding-bottom: 1em;
+	border-bottom: 1px solid lightgray;
+}
+.details-section > p {
+	font-size: 18px;
+	color: #030303;
+	margin-bottom: 0.5em;
+}
+.video-info-details {
+	display: flex;
+	justify-content: space-between;
+	color: #606060;
+}
+
+.video-info-details > p {
+	font-size: 18px;
+	line-height: 24px;
+	font-weight: 400;
+}
+.icons {
+	display: flex;
+}
+.icon {
+	margin-right: 0.4em;
+	font-size: 18px !important;
+}
+
+.icon-container {
+	display: flex;
+	align-items: center;
+	margin-left: 2em;
+	cursor: pointer;
+	color: #606060;
+}
+.icon-container > p {
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.user-channel-info {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1em;
+}
+.user-profile {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.avatar {
+	margin-right: 0.5em;
+}
+.channel-name {
+	font-size: 14px;
+	color: #030303;
+	font-weight: bold;
+}
+
+.subscriber-count {
+	font-size: 13px;
+	color: #606060;
+	margin-top: .1em;
+}
+
+.description-main{
+	line-height: 1.5em;
+	margin-left: 3.5em;
+	font-size: 14px;
+	color: #030303;
+}

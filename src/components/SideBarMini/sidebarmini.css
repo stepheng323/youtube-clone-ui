@@ -1,0 +1,12 @@
+.sidebar-mini {
+	width: 6%;
+	line-height: 22px;
+	position: fixed;
+	z-index: 999;
+	height: 100%;
+	left: 0;
+	font-size: 15.5px;
+	background-color: #fff;
+  overflow: hidden;
+  /* display: none; */
+}

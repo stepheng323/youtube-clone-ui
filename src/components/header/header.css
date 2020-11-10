@@ -1,0 +1,76 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.5em 0;
+	position: sticky;
+	top: 0;
+	padding-right: 30px;
+	background-color: #fff;
+	z-index: 999;
+}
+
+.logo {
+	height: 36px;
+	object-fit: cover;
+	margin-left: 1.5em;
+}
+
+.header-input {
+	display: flex;
+	width: 45%;
+	padding: 0.15em;
+	align-items: center;
+	border: 1px solid lightgray;
+	border-radius: 1px;
+}
+
+.header-input > form {
+	display: unset;
+	color: black;
+	margin: 0;
+}
+.header-button {
+	background-color: #fafafa;
+	width: 50px !important;
+	color: gray;
+	border-left: 1px solid lightgray;
+	cursor: pointer;
+}
+
+.header-input > input {
+	border: none;
+	flex: 1;
+	outline: none;
+}
+
+.header-icons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.profile {
+	border-radius: 50px;
+	margin: 0;
+	padding: 0;
+	height: 30px;
+  cursor: pointer;
+  margin-left: 1em;
+}
+
+.header-icon {
+	padding-right: 0.8em;
+	color: #606060;
+	cursor: pointer;
+	font-size: 1.5em !important;
+}
+
+.header-btn{
+  padding: 1em;
+  font-weight: bold;
+}
+.header-btn-icon {
+  margin-right: 0.2em;
+  font-size: 30px !important;
+}
