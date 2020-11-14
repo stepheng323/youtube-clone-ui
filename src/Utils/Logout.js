@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from '../Context/User';
 import { REACT_APP_DEV_BASE_URL } from '../constant';
-import { ProfileContext } from '../Context/Profile';
+import { ProfileContext } from '../Context/ProfileCard';
 
 const useLogout = () => {
 	const history = useHistory();

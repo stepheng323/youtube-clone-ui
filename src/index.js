@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import UserContextProvider from './Context/User';
-import ProfileContextProvider from './Context/Profile';
+import ProfileContextProvider from './Context/ProfileCard';
 
 ReactDOM.render(
 	<React.StrictMode>

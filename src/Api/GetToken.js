@@ -1,7 +1,5 @@
-// import useLogout from '../Utils/Logout';
 
 const FetchToken = async () => {
-	// const { handleLogout } = useLogout();
 	const url = 'http://localhost:4000/api/v1/auth/token';
 	const options = {
 		method: 'POST',
@@ -12,10 +10,11 @@ const FetchToken = async () => {
 	};
 	try {
 		const res = await fetch(url, options);
-			const { payload } = await res.json();
-			return payload;
+		console.log('payload', res);
+		const { payload } = await res.json();
+		return payload;
 	} catch (err) {
-		// handleLogout();
+		console.log(err.message)
 	}
 };
 export default FetchToken;

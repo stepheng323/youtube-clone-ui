@@ -8,7 +8,7 @@ function UseFetch(url, options = {}) {
 
 	useEffect(() => {
 		const { tokenExpiry, refreshToken } = JSON.parse(localStorage.getItem('tokenData'));
-		if (Date.now() >= tokenExpiry * 1000){
+		if (Date.now() >= +tokenExpiry * 1000){
 			getToken(refreshToken)
 		}
 		const fetchData = async () => {

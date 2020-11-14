@@ -8,8 +8,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountIcon from '@material-ui/icons/AccountCircle';
 import { UserContext } from '../../Context/User';
-import { ProfileContext } from '../../Context/Profile';
-import VideoUploadModal from '../Modal/UploadModal';
+import { ProfileContext } from '../../Context/ProfileCard';
+import VideoUploadModal from '../FirstUploadModal/UploadModal';
 import logo from '../../img/logo.png';
 import '../header/header.css';
 

@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import VideoIcon from '@material-ui/icons/VideoCall';
+import WarningIcon from '@material-ui/icons/Warning';
 import CloseIcon from '@material-ui/icons/Close';
 import PublishIcon from '@material-ui/icons/Publish';
 import Tooltip from '@material-ui/core/Tooltip';
+import SecondUploadModal from '../SecondUploadModal/SecondUploadModal';
+import jetOut from '../../img/jet_out.gif';
+
 
 import './modal.css';
+import { UserContext } from '../../Context/User';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -18,18 +23,61 @@ const useStyles = makeStyles((theme) => ({
 	},
 	paper: {
 		backgroundColor: theme.palette.background.paper,
-		width: '73%',
-		height: '85%',
+		width: '74%',
+		height: '84%',
 		borderRadius: '5px',
 		outline: 'none',
 	},
 }));
 
 export default function VideoUploadModal({ handleClose, handleOpen, open }) {
-	const classes = useStyles();
+	const {user} = useContext(UserContext)
+	const [file, setFile] = useState('');
+	const [openSecondVideoUpload, setOpenSecondVideoUpload] = useState(false);
+	const [showJet, setShowJet] = useState(false);
+	const [info, setInfo] = useState("");
+	const [presignedUrlAndKey, setPresignedUrlAndKey] = useState('')
 
+	const handleVideoModal = () => {
+		setOpenSecondVideoUpload(!openSecondVideoUpload);
+	};
+	
+	const me = () => {
+		handleClose();
+		setOpenSecondVideoUpload(!openSecondVideoUpload)
+		setShowJet(false);
+
+	}
+	const handleChange = async (e) => {
+		e.preventDefault();
+		if (e.target.files[0].type !== 'video/mp4' ) {
+			setInfo("Invalid file format");
+			return;
+		}
+		setFile(e.target.files[0]);
+		setShowJet(true)
+		setTimeout(me, 1000)
+		const response = await fetch('http://localhost:4000/api/v1/video/presign', {
+			headers: {
+				'Authorization': `Bearer ${user.token}` ,
+				'Content-Type': 'application/json'
+			}, 
+		})
+		const data = await response.json();
+		setPresignedUrlAndKey(data.payload)
+
+	}
+
+	const classes = useStyles();
 	return (
 		<>
+			{openSecondVideoUpload && <SecondUploadModal
+					handleClose={handleVideoModal}
+					handleOpen={handleVideoModal}
+					open={openSecondVideoUpload}
+					file={file}
+					presignedUrlAndKey={presignedUrlAndKey}
+				/>}
 			<Tooltip title='Upload Video'>
 				<VideoIcon className='header-icon' onClick={handleOpen} />
 			</Tooltip>
@@ -48,13 +96,15 @@ export default function VideoUploadModal({ handleClose, handleOpen, open }) {
 				<Fade in={open}>
 					<div className={classes.paper}>
 						<div className='video-upload-modal-header'>
-							<h3 id='transition-modal-title'>Upload Video</h3>
+							<h3 className="modal-header" id='transition-modal-title'>Upload Video</h3>
 							<CloseIcon style={{ cursor: 'pointer' }} onClick={handleClose} />
 						</div>
 						<div className='uploader'>
 							<div className='upload-image'>
-								<PublishIcon className='publish-icon' />
+							<input onChange={handleChange} type="file" hidden id="file"/>
+								{!showJet && <label htmlFor="file"><PublishIcon className='publish-icon' /></label>}
 							</div>
+								{showJet ? <img className="jet" src={jetOut} alt="publish"/> : null}
 						</div>
 						<div className='texts-button'>
 							<p
@@ -70,17 +120,17 @@ export default function VideoUploadModal({ handleClose, handleOpen, open }) {
 							<p
 								style={{
 									textAlign: 'center',
-									marginTop: '.5em',
+									marginTop: '.8em',
 									fontSize: '12px',
 									color: '#606060',
-									marginBottom: '4em',
 								}}
 							>
 								Your videos will be private until you publish them.
 							</p>
+							{info && <p className="info"><WarningIcon className="info-icon"/> {info}</p>}
 							<div className='upload-button'>
-								<input type='file' id='actual-btn' hidden />
-								<label className='label' for='actual-btn'>
+								<input onChange={handleChange} type='file' id='actual-btn' hidden />
+								<label className='label' htmlFor='actual-btn'>
 									SELECT FILES
 								</label>{' '}
 							</div>
@@ -109,7 +159,6 @@ export default function VideoUploadModal({ handleClose, handleOpen, open }) {
 								rights. Learn more
 							</p>
 						</div>
-						{/* <p id='transition-modal-description'></p> */}
 					</div>
 				</Fade>
 			</Modal>

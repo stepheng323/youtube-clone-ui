@@ -16,6 +16,7 @@ function App() {
 	useEffect(() => {
 		const fetchdata = async () => {
 			const payload = await fetchToken();
+			localStorage.setItem('tokenExpiry', payload.tokenExpiry)
 			setUser(payload);
 		};
 		fetchdata();

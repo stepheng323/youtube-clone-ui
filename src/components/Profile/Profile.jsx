@@ -1,18 +1,35 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Avatar } from '@material-ui/core';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { UserContext } from '../../Context/User';
 import useLogout from '../../Utils/Logout';
+import CreateChannelModal from '../CreatChannelModal/create-channel-modal';
+import { ProfileContext } from '../../Context/ProfileCard';
+import SidebarRow from '../SidebarRow/SidebarRow';
 
 import './profile.css';
-import SidebarRow from '../SidebarRow/SidebarRow';
+
 
 function Profile() {
 	const { handleLogout } = useLogout();
 	const { user } = useContext(UserContext);
+	const { setOpenProfile } = useContext(ProfileContext);
+	const [openChannelModal, setChannelModal] = useState(false);
+
+	const handleChannelModal = () => {
+		setChannelModal(() => !openChannelModal);
+		// setOpenProfile(() => false);
+	};
+
 	return (
+		<>
+		<CreateChannelModal 
+		handleClose={handleChannelModal}
+		handleOpen={handleChannelModal}
+		open={openChannelModal}
+		/>
 		<div className='profile-card'>
 			<div className='profile-card-info'>
 				<Avatar
@@ -29,7 +46,8 @@ function Profile() {
 			</div>
 			<hr />
 			<div>
-				<SidebarRow Icon={AccountBoxIcon} title='Your channel' />
+				{user.hasChannel && <SidebarRow Icon={AccountBoxIcon} title='Your channel' />}
+				{!user.hasChannel && <div onClick={handleChannelModal}><SidebarRow showCreateChannelModal={handleLogout} Icon={AccountBoxIcon} title='Create a channel' /></div>}
 				<SidebarRow Icon={SettingsApplicationsIcon} title='YouTube Studio' />
 				<SidebarRow
 					handleLogout={handleLogout}
@@ -38,6 +56,7 @@ function Profile() {
 				/>
 			</div>
 		</div>
+		</>
 	);
 }
 

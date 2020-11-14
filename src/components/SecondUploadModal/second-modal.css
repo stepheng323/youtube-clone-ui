@@ -1,0 +1,143 @@
+
+.video-upload-modal-header {
+	display: flex;
+	justify-content: space-between;
+	padding: 1.2em;
+	align-items: center;
+	border-bottom: 1px solid lightgray;
+}
+.modal-header {
+	font-size: 20px;
+	line-height: 28px;
+	font-weight: 500;
+}
+
+.indicator-container {
+	border-bottom: 1px solid #9090907e;
+	padding-bottom: 1.5em;
+}
+.indicator {
+	width: 70%;
+	margin: auto;
+	padding-top: 0.8em;
+	font-size: 15px;
+	line-height: 24px;
+	font-weight: 500;
+	color: rgba(0, 0, 0, 0.87);
+	position: sticky;
+}
+
+.indicator-title {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 1em;
+}
+
+.indicator-bar {
+	width: 95%;
+	margin: auto;
+}
+
+.modal-subheader {
+	font-size: 25px;
+	line-height: 32px;
+	margin-bottom: 0.5em;
+	width: 90%;
+	margin: auto;
+	font-family: 'PT Sans', sans-serif;
+}
+
+.modal-body-container{
+  height:60%;
+  overflow:scroll;
+  overflow-x: hidden;
+
+}
+.modal-body {
+	display: flex;
+	width: 90%;
+	margin: auto;
+	margin-top: 1em;
+  gap: 3%;
+  position: relative;
+}
+
+.modal-body-left {
+  width: 65%;
+}
+
+.modal-body-right {
+  width: 35%;
+  position: sticky;
+}
+.modal-lable {
+	font-size: 12px;
+}
+.modal-video-title {
+	border: 1px solid #dddbdb;
+	padding: 0.5em 0.7em 2em 0.7em;
+	border-radius: 4px;
+	margin-bottom: 1.5em;
+}
+
+.modal-video-title > textarea {
+	border: none;
+	outline: none;
+	resize: none;
+	font-family: 'Roboto', sans-serif;
+	width: 100%;
+}
+.modal-body-right-card {
+	transition: 0.3s;
+	border-radius: 5px;
+}
+
+.details-container {
+	background-color: #ebebeb;
+  padding:  0.5em;
+  margin-top: -4px;
+}
+
+.card-title{
+margin-bottom: .4em;
+}
+.sub-title {
+	font-size: 13px;
+	line-height: 16px;
+}
+.modal-body-right-card .card-title {
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.55);
+	line-height: 16px;
+}
+.modal-body-right img {
+  margin: 0;
+  padding: 0;
+	border-radius: 5px 5px 0 0;
+}
+
+.video-upload-modal-footer {
+	display: flex;
+	justify-content: space-between;
+	padding: 1em;
+	align-items: center;
+	border-top: 1px solid lightgray;
+}
+
+.upload-meter{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.modal-body-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-body-container::-webkit-scrollbar-track {
+  background: gray;
+  margin-bottom: 230px;
+}
+
+.modal-body-container::-webkit-scrollbar-thumb {
+  background-color: gray;
+}
