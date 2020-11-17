@@ -64,6 +64,7 @@ export default function SecondUploadModal({handleClose, handleOpen, open, file, 
 				aria-describedby='transition-modal-description'
 				className={classes.modal}
 				open={open}
+				disableEscapeKeyDown	
 				onClose={handleClose}
 				closeAfterTransition
 				BackdropComponent={Backdrop}

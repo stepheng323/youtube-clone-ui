@@ -19,8 +19,7 @@ function Profile() {
 	const [openChannelModal, setChannelModal] = useState(false);
 
 	const handleChannelModal = () => {
-		setChannelModal(() => !openChannelModal);
-		// setOpenProfile(() => false);
+		setChannelModal(!openChannelModal);
 	};
 
 	return (

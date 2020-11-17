@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { UserContext } from '../../Context/User';
+import CreateChannelModal2 from '../CreateChannelModal2/CreateChannelModal2';
 
 
 import './channel-modal.css';
@@ -25,16 +25,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CreateChannelModal({ handleClose, handleOpen, open }) {
-	const {user} = useContext(UserContext)
+	const [openChannelModal2, setOpenChannelModal2] = useState(false);
+
+	const handleChannelModal2 = () => {
+		setOpenChannelModal2(!openChannelModal2)
+	}
+
+	const handleNext = () => {
+		handleClose()
+		setOpenChannelModal2(!openChannelModal2)
+	}
 
 	const classes = useStyles();
 	return (
+	<>
+		<CreateChannelModal2 
+				handleClose={handleChannelModal2}
+				handleOpen={handleChannelModal2}
+				open={openChannelModal2}
+				/>
 			<Modal
 				aria-labelledby='transition-modal-title'
 				aria-describedby='transition-modal-description'
 				className={classes.modal}
 				open={open}
 				onClose={handleClose}
+				disableEscapeKeyDown
 				closeAfterTransition
 				BackdropComponent={Backdrop}
 				BackdropProps={{
@@ -52,12 +68,14 @@ export default function CreateChannelModal({ handleClose, handleOpen, open }) {
                 <p className="channel-modal-text-body">Pursuing your creative passions, connecting with your audience, and sharing your stories begin with creating your channel. Learn more</p>
               </div>
               <div className="channel-modal-button">
-              <div className="channel-modal-button-get-started"><Button variant="contained" color="primary" disableElevation>
-                GET STARTED
+              <div onClick={handleNext} className="channel-modal-button-get-started">
+								<Button variant="contained" color="primary" disableElevation>
+                	GET STARTED
                 </Button>
                 </div>
-                <div onClick={handleClose} className="channel-modal-button-no-thanks"><Button color="primary">
-                NO THANKS
+                <div onClick={handleClose} className="channel-modal-button-no-thanks">
+								<Button color="primary">
+                	NO THANKS
                 </Button>
                 </div>
                 </div>
@@ -65,5 +83,6 @@ export default function CreateChannelModal({ handleClose, handleOpen, open }) {
 					</div>
 				</Fade>
 			</Modal>
+			</>
 	);
 }

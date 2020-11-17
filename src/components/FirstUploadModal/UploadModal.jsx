@@ -88,6 +88,7 @@ export default function VideoUploadModal({ handleClose, handleOpen, open }) {
 				open={open}
 				onClose={handleClose}
 				closeAfterTransition
+				disableEscapeKeyDown	
 				BackdropComponent={Backdrop}
 				BackdropProps={{
 					timeout: 500,

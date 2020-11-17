@@ -16,7 +16,6 @@ import '../header/header.css';
 function Header() {
 	const { user } = useContext(UserContext);
 	const { openProfile, setOpenProfile } = useContext(ProfileContext);
-	const myRef = useRef(null);
 	const [search, setSearch] = useState('');
 	const [openVideoUpload, setOpenVideoUpload] = useState(false);
 
@@ -60,7 +59,7 @@ function Header() {
 						</Button>
 					</Link>
 				)}
-				{openProfile && <Profile ref={myRef} />}
+				{openProfile && <Profile/>}
 				{userExist && (
 					<img
 						onClick={() => setOpenProfile(!openProfile)}
