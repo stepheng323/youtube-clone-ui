@@ -4,7 +4,7 @@
   background-color: #f9f9f9;
   padding: 1em 0 0 2em;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(15.5em, 1fr));
   border-top: 1px solid lightgray;
 
 }

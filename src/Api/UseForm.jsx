@@ -38,6 +38,7 @@ function UseForm(initialValues, url, method = 'POST') {
 		handleChange,
 		handleSubmit,
 		values,
+		setValues
 	};
 }
 

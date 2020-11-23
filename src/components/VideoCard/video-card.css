@@ -1,7 +1,6 @@
 .video-card {
-	margin-bottom: 4.5em;
+	margin-bottom: 3.5em;
 	margin-right: 1em;
-	/* position: relative; */
 }
 
 .video-image {
@@ -10,7 +9,7 @@
 }
 
 .video-image > img {
-	height: 160px;
+	height: 150px;
 	width: 100%;
 	object-fit: cover;
 	display: block;

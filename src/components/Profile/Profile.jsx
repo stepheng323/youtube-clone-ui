@@ -10,9 +10,11 @@ import { ProfileContext } from '../../Context/ProfileCard';
 import SidebarRow from '../SidebarRow/SidebarRow';
 
 import './profile.css';
-
+import { Link } from 'react-router-dom';
+import UseComponentVisible from '../../Hooks/UseComponentVisible';
 
 function Profile() {
+	const { ref, componentVisible } = UseComponentVisible(true);
 	const { handleLogout } = useLogout();
 	const { user } = useContext(UserContext);
 	const { setOpenProfile } = useContext(ProfileContext);
@@ -20,42 +22,51 @@ function Profile() {
 
 	const handleChannelModal = () => {
 		setChannelModal(!openChannelModal);
-	};
-
+	};	
 	return (
-		<>
-		<CreateChannelModal 
-		handleClose={handleChannelModal}
-		handleOpen={handleChannelModal}
-		open={openChannelModal}
-		/>
-		<div className='profile-card'>
-			<div className='profile-card-info'>
-				<Avatar
-					className='profile-card-avatar'
-					alt='profile'
-					src='https://lh3.googleusercontent.com/a-/AOh14GjySH9J2YXSPskpwCZ_l5_LU_r6StEnduNarQ67mw=s88-c-k-c0x00ffffff-no-rj-mo'
-				/>
-				<div className=''>
-					<p className='profile-name'>
-						{user.firstName} {user.lastName}
-					</p>
-					<p className='profile-email'>{user.email}</p>
+		<div ref={ref}>
+			<CreateChannelModal
+				handleClose={handleChannelModal}
+				handleOpen={handleChannelModal}
+				open={openChannelModal}
+			/>
+			{componentVisible && <div className='profile-card'>
+				<div className='profile-card-info'>
+					<Avatar
+						className='profile-card-avatar'
+						alt='profile'
+						src='https://lh3.googleusercontent.com/a-/AOh14GjySH9J2YXSPskpwCZ_l5_LU_r6StEnduNarQ67mw=s88-c-k-c0x00ffffff-no-rj-mo'
+					/>
+					<div className=''>
+						<p className='profile-name'>
+							{user.firstName} {user.lastName}
+						</p>
+						<p className='profile-email'>{user.email}</p>
+					</div>
 				</div>
-			</div>
-			<hr />
-			<div>
-				{user.hasChannel && <SidebarRow Icon={AccountBoxIcon} title='Your channel' />}
-				{!user.hasChannel && <div onClick={handleChannelModal}><SidebarRow showCreateChannelModal={handleLogout} Icon={AccountBoxIcon} title='Create a channel' /></div>}
-				<SidebarRow Icon={SettingsApplicationsIcon} title='YouTube Studio' />
-				<SidebarRow
-					handleLogout={handleLogout}
-					Icon={ExitToAppIcon}
-					title='Sign out'
-				/>
-			</div>
+				<hr />
+				<div>
+					{user.channelCount > 0 && (
+						<Link to="/channel"><SidebarRow Icon={AccountBoxIcon} title='Your channel' /></Link>
+					)}
+					{user.channelCount < 1 && (
+						<div onClick={handleChannelModal}>
+							<SidebarRow
+								showCreateChannelModal={handleLogout}
+								Icon={AccountBoxIcon}
+								title='Create a channel'
+							/>
+						</div>
+					)}
+					<SidebarRow className="pl-2" Icon={SettingsApplicationsIcon} title='YouTube Studio' />
+					<SidebarRow
+						handleLogout={handleLogout}
+						Icon={ExitToAppIcon}
+						title='Sign out'
+					/>
+				</div>
+			</div>}
 		</div>
-		</>
 	);
 }
 

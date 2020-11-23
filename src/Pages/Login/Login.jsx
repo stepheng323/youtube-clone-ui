@@ -9,6 +9,8 @@ import FormInput from '../../components/FormInput/FormInput';
 import './login.css';
 import UseForm from '../../Api/UseForm';
 import UseLogin from '../../Api/HandleLogin';
+import { LinearLoading } from '../../Utils/Loading';
+import { LinearProgress } from '@material-ui/core';
 
 function Login() {
 	const url = 'http://localhost:4000/api/v1/auth/login';
@@ -21,6 +23,7 @@ function Login() {
 
 	return (
 		<div className='login'>
+		<LinearProgress color="primary" variant="indeterminate" />
 			<div className='login-card'>
 				<div className='login-form'>
 					<h3>Sign in</h3>

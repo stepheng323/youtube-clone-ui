@@ -4,3 +4,7 @@ export const getTokenExpiryAndRefreshToken = () => {
 	);
 	return { tokenExpiry, refreshToken };
 };
+
+export const removeSpecialCharacters = (string) => {
+	return string.replace(/[^\w\s]/gi, ' ');
+};

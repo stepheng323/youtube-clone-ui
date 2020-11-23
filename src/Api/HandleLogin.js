@@ -24,7 +24,8 @@ const useLogin = (url, values) => {
 			});
 			const data = await response.json();
 			setSubmitting(false);
-			if (response.status === 200) {
+			const goodResponse = [200, 201];
+			if (goodResponse.includes(response.status)) {
 				const {
 					payload,
 					payload: { refreshToken, tokenExpiry },

@@ -24,7 +24,6 @@ function Signup() {
 		url,
 		values
 	);
-
 	const checkSubmit = (e) => {
 		e.preventDefault();
 		const { password, confirmPassword } = values;
@@ -46,9 +45,18 @@ function Signup() {
 							className='login-input'
 							required={true}
 							type='text'
-							name='name'
+							name='firstName'
 							handleChange={handleChange}
-							placeholder={'Name'}
+							placeholder={'Firstname'}
+							Icon={EmailIcon}
+						/>
+						<FormInput
+							className='login-input'
+							required={true}
+							type='text'
+							name='lastName'
+							handleChange={handleChange}
+							placeholder={'Lastname'}
 							Icon={EmailIcon}
 						/>
 						<FormInput
