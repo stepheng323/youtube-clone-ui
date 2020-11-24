@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -13,8 +13,6 @@ import jetOut from '../../img/jet_out.gif';
 
 
 import './modal.css';
-import { UserContext } from '../../Context/User';
-
 const useStyles = makeStyles((theme) => ({
 	modal: {
 		display: 'flex',
@@ -31,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function VideoUploadModal({ handleClose, handleOpen, open }) {
-	const {user} = useContext(UserContext)
 	const [file, setFile] = useState('');
 	const [openSecondVideoUpload, setOpenSecondVideoUpload] = useState(false);
 	const [showJet, setShowJet] = useState(false);
@@ -57,12 +54,7 @@ export default function VideoUploadModal({ handleClose, handleOpen, open }) {
 		setFile(e.target.files[0]);
 		setShowJet(true)
 		setTimeout(me, 1000)
-		const response = await fetch('http://localhost:4000/api/v1/video/presign', {
-			headers: {
-				'Authorization': `Bearer ${user.token}` ,
-				'Content-Type': 'application/json'
-			}, 
-		})
+		const response = await fetch('http://localhost:4000/api/v1/video/presign')
 		const data = await response.json();
 		setPresignedUrlAndKey(data.payload)
 

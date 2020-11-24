@@ -43,8 +43,6 @@ export default function SecondUploadModal({handleClose, handleOpen, open, file, 
 	const [thumbnailFile, setThumbnailFile ] = useState();
 
 
-	const { user } = useContext(UserContext)
-
 	useEffect(() => {
 		const uploadData = async () => {
 			const response = await axios.put(presignedUrlAndKey.url, file, {
@@ -78,12 +76,7 @@ export default function SecondUploadModal({handleClose, handleOpen, open, file, 
 	}
 
 	const handleFinalSubmit = async () => {
-		const getThumbnailPresignedUrl = await fetch('http://localhost:4000/api/v1/video/presign-thumbnail', {
-			headers: {
-				'Authorization': `Bearer ${user.token}` ,
-				'Content-Type': 'application/json'
-			}, 
-		});
+		const getThumbnailPresignedUrl = await fetch('http://localhost:4000/api/v1/video/presign-thumbnail');
 		const {payload} = await getThumbnailPresignedUrl.json();
 		setValues({...values, thumbnail: payload.key})
 		const uploadThumbnailToS3 = await axios.put(payload.url, thumbnailFile, {

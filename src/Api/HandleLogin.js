@@ -28,11 +28,10 @@ const useLogin = (url, values) => {
 			if (goodResponse.includes(response.status)) {
 				const {
 					payload,
-					payload: { refreshToken, tokenExpiry },
+					payload: { tokenExpiry },
 				} = data;
 				setUser(payload);
-				const tokenData = { refreshToken, tokenExpiry };
-				localStorage.setItem('tokenData', JSON.stringify(tokenData));
+				localStorage.setItem('tokenExpiry', JSON.stringify(tokenExpiry));
 				setResult(data);
 				return history.push('/');
 			}

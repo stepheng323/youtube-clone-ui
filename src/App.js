@@ -11,12 +11,13 @@ import './App.css';
 import { useContext } from 'react';
 import { useEffect } from 'react';
 
+
 function App() {
 	const {setUser } = useContext(UserContext);
 	useEffect(() => {
 		const fetchdata = async () => {
 			const payload = await fetchToken();
-			localStorage.setItem('tokenExpiry', payload?.tokenExpiry)
+			localStorage.setItem('tokenExpiry', payload?.tokenExpiry )
 			setUser(payload);
 		};
 		fetchdata();
