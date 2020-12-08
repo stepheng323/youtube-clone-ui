@@ -2,8 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 0.3em;
-	padding: 1em 0 1em 0;
+	padding: 1.1em .6em;
 	justify-content: center;
 }
 
@@ -13,7 +12,6 @@
 
 .sidebar-row-mini-icon {
 	font-size: 23px !important;
-	margin-bottom: 0.5em;
 	color: #606060 !important;
 }
 
@@ -21,6 +19,6 @@
   color: red !important;
   }
 .sidebar-row-mini > p {
-  font-size: 11px;
+  font-size: 10px;
   color: #606066;
 }

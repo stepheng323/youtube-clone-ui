@@ -64,7 +64,7 @@
 }
 
 .modal-body-container {
-	height: 64%;
+	height: 62%;
 	overflow: scroll;
 	overflow-x: hidden;
 }
@@ -112,6 +112,8 @@
 	background-color: #f4f4f4;
 	padding: 0.5em;
 	margin-top: -4px;
+	white-space: wrap;
+  text-overflow: ellipsis;
 }
 
 .card-title {
@@ -119,7 +121,7 @@
 	font-size: 11px;
 }
 .sub-title {
-	font-size: 15px;
+	font-size: 14px;
 	line-height: 16px;
 }
 .modal-body-right-card .card-title {
@@ -194,4 +196,13 @@
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+}
+
+.modal-body-right-card-pending-video{
+	width: 100%;
+	height: 160px;
+	background-color: #dddbdb;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

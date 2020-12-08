@@ -1,21 +1,21 @@
-.video-card {
+.small-video-card {
 	margin-bottom: 3.5em;
-	margin-right: 1em;
+	margin-right: .2em;
 }
 
-.video-image {
+.small-video-image {
 	position: relative;
 	background-color: lightgray
 }
 
-.video-image > img {
+.small-video-image > img {
 	width: 100%;
 	object-fit: cover;
 	display: block;
-	height: 150px;
+	height: 120px;
 }
 
-.video-time {
+.small-video-time {
 	position: absolute;
 	bottom: 6px;
 	right: 6px;
@@ -27,27 +27,27 @@
 	border-radius: 2px;
 	padding: 3px 5px;
 }
-.video-avatar {
+.small-video-avatar {
 	height: 37px !important;
 	width: 37px !important;
 }
-.video-infos {
+.small-video-infos {
 	display: flex;
 	justify-content: flex-start;
 	margin-top: 0.8em;
 }
-.video-text {
+.small-video-text {
 	margin-left: 0.7em;
 }
 
-.video-title {
+.small-video-title {
 	margin-bottom: 0.4em;
 	color: #030303;
 	font-size: 15px;
 	line-height: 20px;
 }
 
-.video-text p {
+.small-video-text p {
 	color: #606060;
 	font-size: 14px;
 }

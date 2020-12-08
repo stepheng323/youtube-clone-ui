@@ -1,22 +1,33 @@
 import React from 'react';
 import './recommendedVideo.css';
 import Video from '../VideoCard/VideoCard';
-import { videos } from '../../data'
+import UseFetch from '../../Api/UseFetch';
+import { REACT_APP_AWS_BASE_URL, REACT_APP_DEV_BASE_URL } from '../../constant';
+import { CircularLoading } from '../../Utils/Loading';
 
-function Recommended() {	
+function Recommended() {
+	const getRecommendedVideoUrl = `${REACT_APP_DEV_BASE_URL}/video/recommended`;
+	const { isLoading, result } = UseFetch(getRecommendedVideoUrl);
+
+	if(isLoading) return <CircularLoading />
+	const { payload: videos } = result;
+
 	return (
 		<div className='recommended-video'>
 			{videos.map((video) => {
-        const {id, title, thumbnail, channelImage, channel, views, date} = video;
+        const {_id: id, title, thumbnail, duration, channel: {name: channel, _id: channelId, channelAvatar: channelImage}, viewsCount, createdAt} = video;
         return (
 				<Video
-				key={id}
+					key={id}
+					id={id}
 					title={title}
-					thumbnail={thumbnail}
-          channel={channel}
-          channelImage={channelImage}
-          views={views}
-          date={date}
+					thumbnail={`http://localhost:4000/${thumbnail}`}
+					channel={channel}
+					channelId={channelId}
+          channelImage={channelImage || channel}
+					views={viewsCount}
+					duration={duration}
+					date={createdAt}
 				/>
 			)})}
 		</div>

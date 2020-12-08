@@ -10,9 +10,12 @@ import PublishIcon from '@material-ui/icons/Publish';
 import Tooltip from '@material-ui/core/Tooltip';
 import SecondUploadModal from '../SecondUploadModal/SecondUploadModal';
 import jetOut from '../../img/jet_out.gif';
-
+import UseForm from '../../Api/UseForm';
+import { REACT_APP_DEV_BASE_URL } from '../../constant';
 
 import './modal.css';
+
+
 const useStyles = makeStyles((theme) => ({
 	modal: {
 		display: 'flex',
@@ -33,7 +36,8 @@ export default function VideoUploadModal({ handleClose, handleOpen, open }) {
 	const [openSecondVideoUpload, setOpenSecondVideoUpload] = useState(false);
 	const [showJet, setShowJet] = useState(false);
 	const [info, setInfo] = useState("");
-	const [presignedUrlAndKey, setPresignedUrlAndKey] = useState('')
+	// const [presignedUrlAndKey, setPresignedUrlAndKey] = useState('')
+	// const { handleSubmit } = UseForm({}, `${REACT_APP_DEV_BASE_URL}/video/presign`, {method: 'GET'});
 
 	const handleVideoModal = () => {
 		setOpenSecondVideoUpload(!openSecondVideoUpload);
@@ -54,10 +58,8 @@ export default function VideoUploadModal({ handleClose, handleOpen, open }) {
 		setFile(e.target.files[0]);
 		setShowJet(true)
 		setTimeout(me, 1000)
-		const response = await fetch('http://localhost:4000/api/v1/video/presign')
-		const data = await response.json();
-		setPresignedUrlAndKey(data.payload)
-
+		// const { payload } = await handleSubmit(e)
+		// setPresignedUrlAndKey(payload)
 	}
 
 	const classes = useStyles();
@@ -68,7 +70,7 @@ export default function VideoUploadModal({ handleClose, handleOpen, open }) {
 					handleOpen={handleVideoModal}
 					open={openSecondVideoUpload}
 					file={file}
-					presignedUrlAndKey={presignedUrlAndKey}
+					// presignedUrlAndKey={presignedUrlAndKey}
 				/>}
 			<Tooltip title='Upload Video'>
 				<VideoIcon className='header-icon' onClick={handleOpen} />

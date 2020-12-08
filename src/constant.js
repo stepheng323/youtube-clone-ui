@@ -1,3 +1,11 @@
-const { REACT_APP_DEV_BASE_URL } = process.env;
+const {
+	REACT_APP_DEV_BASE_URL,
+	REACT_APP_AWS_BASE_URL,
+	REACT_APP_FRONT_END_URL,
+} = process.env;
 
-export { REACT_APP_DEV_BASE_URL };
+export {
+	REACT_APP_DEV_BASE_URL,
+	REACT_APP_AWS_BASE_URL,
+	REACT_APP_FRONT_END_URL,
+};

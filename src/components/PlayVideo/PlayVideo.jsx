@@ -1,19 +1,27 @@
-import React from 'react';
-import ReactPlayer from 'react-player'
+import React, { useEffect } from 'react';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ReplyIcon from '@material-ui/icons/Reply';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import MoreIcon from '@material-ui/icons/MoreHoriz';
-
+import axios from 'axios';
 
 import './play-video.css';
 import { Avatar, Button } from '@material-ui/core';
+import { REACT_APP_DEV_BASE_URL } from '../../constant';
+import { useParams } from 'react-router-dom';
 
 function PlayVideo() {
+	const { id } = useParams();
+	const url = `${REACT_APP_DEV_BASE_URL}/video/view/${id}`
+		setTimeout(() => {
+			axios.patch(url)
+		}, 30000);
 	return (
 		<div className='play-video'>
-			<ReactPlayer className="player" autoPlay width="100%" controls url='https://www.youtube.com/watch?v=ysz5S6PUM-U' />
+			<video crossOrigin="anonymous" autoPlay height="400px" width="100%" controls>
+				<source src={`${REACT_APP_DEV_BASE_URL}/video/watch/${id}`} type="video/mp4"></source>
+			</video>
 			<div className='details-section'>
 				<p>The Name of the video title goes here</p>
 				<div className="video-info-details">

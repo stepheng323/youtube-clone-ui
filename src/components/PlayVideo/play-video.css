@@ -1,12 +1,5 @@
 .play-video {
 	width: 70%;
-	position: relative;
-  padding-top: 29% 
-}
-.player {
-	position: absolute;
-  top: 0;
-  left: 0;
 }
 .video-section {
 	min-height: 360px;

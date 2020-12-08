@@ -8,14 +8,15 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountIcon from '@material-ui/icons/AccountCircle';
 import { UserContext } from '../../Context/User';
-import { ProfileContext } from '../../Context/ProfileCard';
 import VideoUploadModal from '../FirstUploadModal/UploadModal';
 import logo from '../../img/logo.png';
 import '../header/header.css';
+import {ProfileContext} from '../../Context/ProfileCard';
+
 
 function Header() {
 	const { user } = useContext(UserContext);
-	const { openProfile, setOpenProfile } = useContext(ProfileContext);
+	const {openProfile, setOpenProfile } = useContext(ProfileContext);
 	const [search, setSearch] = useState('');
 	const [openVideoUpload, setOpenVideoUpload] = useState(false);
 
@@ -26,7 +27,7 @@ function Header() {
 	const userExist = Object.keys(user).length > 0;
 	return (
 		<div className='header'>
-			<div className='pl-1'>
+			<div className='header-menu-logo'>
 				<MenuIcon />
 				<Link to='/'>
 					<img className='logo' src={logo} alt='logo' />
@@ -39,9 +40,9 @@ function Header() {
 					type='text'
 				/>
 				<Link to={`/search/${search}`}>
-					<button className='search-btn'>
+					<div className='search-btn'>
 						<SearchIcon className='header-button' />
-					</button>
+					</div>
 				</Link>
 			</form>
 			<div className='header-icons'>
@@ -59,7 +60,7 @@ function Header() {
 						</Button>
 					</Link>
 				)}
-				{openProfile && <Profile/>}
+				{openProfile && <Profile />}
 				{userExist && (
 					<img
 						onClick={() => setOpenProfile(!openProfile)}

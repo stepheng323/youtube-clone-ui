@@ -4,9 +4,11 @@
 
 .channel-modal2-container-loading {
 	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 100%;
-	top: 45%;
-	left: 47%;
+	height: 100%;
 }
 .channel-modal2-header {
 	font-size: 24px;

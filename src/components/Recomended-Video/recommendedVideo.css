@@ -1,10 +1,19 @@
 .recommended-video{
-  width: 99%;
-  margin-left: 6%;
+  width: 90%;
+  margin-left: 17%;
   background-color: #f9f9f9;
   padding: 1em 0 0 2em;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15.5em, 1fr));
-  border-top: 1px solid lightgray;
+  height: 85vh;
+}
 
+
+
+@media only screen and (max-width: 1336px) {
+  .recommended-video {
+    width: 98%;
+    margin-left: 6%; 
+  }
+  
 }

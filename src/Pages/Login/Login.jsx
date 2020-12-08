@@ -9,7 +9,6 @@ import FormInput from '../../components/FormInput/FormInput';
 import './login.css';
 import UseForm from '../../Api/UseForm';
 import UseLogin from '../../Api/HandleLogin';
-import { LinearLoading } from '../../Utils/Loading';
 import { LinearProgress } from '@material-ui/core';
 
 function Login() {

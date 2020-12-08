@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Avatar } from '@material-ui/core';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
@@ -6,31 +6,33 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { UserContext } from '../../Context/User';
 import useLogout from '../../Utils/Logout';
 import CreateChannelModal from '../CreatChannelModal/create-channel-modal';
-import { ProfileContext } from '../../Context/ProfileCard';
 import SidebarRow from '../SidebarRow/SidebarRow';
 
 import './profile.css';
 import { Link } from 'react-router-dom';
-import UseComponentVisible from '../../Hooks/UseComponentVisible';
+import UseFetch from '../../Api/UseFetch';
+import { REACT_APP_DEV_BASE_URL } from '../../constant';
+import { CircularLoading } from '../../Utils/Loading';
 
 function Profile() {
-	const { ref, componentVisible } = UseComponentVisible(true);
 	const { handleLogout } = useLogout();
 	const { user } = useContext(UserContext);
-	const { setOpenProfile } = useContext(ProfileContext);
 	const [openChannelModal, setChannelModal] = useState(false);
+
+	const channelCountUrl = `${REACT_APP_DEV_BASE_URL}/channel/count`;
+	const { result } = UseFetch(channelCountUrl, {}, 'GET');
 
 	const handleChannelModal = () => {
 		setChannelModal(!openChannelModal);
 	};	
 	return (
-		<div ref={ref}>
+		<div className="profile-card-container">
 			<CreateChannelModal
 				handleClose={handleChannelModal}
 				handleOpen={handleChannelModal}
 				open={openChannelModal}
 			/>
-			{componentVisible && <div className='profile-card'>
+			{result ? <div className='profile-card'>
 				<div className='profile-card-info'>
 					<Avatar
 						className='profile-card-avatar'
@@ -46,10 +48,10 @@ function Profile() {
 				</div>
 				<hr />
 				<div>
-					{user.channelCount > 0 && (
+					{result.payload >= 1 && (
 						<Link to="/channel"><SidebarRow Icon={AccountBoxIcon} title='Your channel' /></Link>
 					)}
-					{user.channelCount < 1 && (
+					{result.payload <= 0 && (
 						<div onClick={handleChannelModal}>
 							<SidebarRow
 								showCreateChannelModal={handleLogout}
@@ -65,7 +67,7 @@ function Profile() {
 						title='Sign out'
 					/>
 				</div>
-			</div>}
+			</div> : <div className="profile-loading-container"><CircularLoading /></div>}
 		</div>
 	);
 }

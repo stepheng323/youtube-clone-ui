@@ -20,6 +20,7 @@ const useLogout = () => {
 			});
 			if (res.status === 200) {
 				setUser({});
+				localStorage.removeItem('tokenExpiry')
 				setOpenProfile(false)
 				history.push('/');
 			}

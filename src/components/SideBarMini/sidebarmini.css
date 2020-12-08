@@ -8,5 +8,12 @@
 	font-size: 15.5px;
 	background-color: #fff;
   overflow: hidden;
-  /* display: none; */
+}
+
+
+@media only screen and (min-width: 1336px) {
+  .sidebar-mini {
+    display: none;
+  }
+  
 }

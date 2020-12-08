@@ -24,12 +24,13 @@ function Sidebar() {
       <SidebarRow Icon={WatchLaterIcon} title="Watch Later" />
       <SidebarRow Icon={ThumbUpAltOutlinedIcon} title="Liked Videos" />
       <SidebarRow Icon={ExpandMoreOutlinedIcon} title="Show More" />
-      <SidebarRow Icon={ExpandMoreOutlinedIcon} title="Show More" />
-      <SidebarRow Icon={ExpandMoreOutlinedIcon} title="Show More" />
-      <SidebarRow Icon={ExpandMoreOutlinedIcon} title="Show More" />
-      <SidebarRow Icon={ExpandMoreOutlinedIcon} title="Show More" />
-      <SidebarRow Icon={ExpandMoreOutlinedIcon} title="Show More" />
       <hr />
+      <p className="sidebar-title">SUBSCRIPTIONS</p>
+      <SidebarRow Icon={ExpandMoreOutlinedIcon} title="Show More" />
+      <SidebarRow Icon={ExpandMoreOutlinedIcon} title="Show More" />
+      <SidebarRow Icon={ExpandMoreOutlinedIcon} title="Show More" />
+      <SidebarRow Icon={ExpandMoreOutlinedIcon} title="Show More" />
+      <SidebarRow Icon={ExpandMoreOutlinedIcon} title="Show More" />
     </div>
   )
 }

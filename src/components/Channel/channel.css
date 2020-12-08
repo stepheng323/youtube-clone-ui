@@ -1,0 +1,100 @@
+.channel {
+	width: 100%;
+	margin-left: 17.5%;
+	background-color: #f9f9f9;
+	margin-top: 0.5em;
+}
+
+.channel-banner {
+	width: 100%;
+	background-position: center;
+	background-size: cover;
+}
+
+.channel-dashboard {
+	display: flex;
+	justify-content: space-between;
+	width: 80%;
+	margin: auto;
+	background-color: #f9f9f9;
+	margin-top: 0.7em;
+}
+
+.channel-profile-info {
+	margin-left: 1em;
+}
+
+.channel-name {
+	font-size: 24px;
+	line-height: 30px;
+	color: #030303;
+}
+.channel-subcriber-count {
+	font-size: 14px;
+	line-height: 21px;
+	color: #060606;
+}
+
+.channel-subcriber {
+	display: flex;
+	height: 100px;
+	align-items: center;
+}
+.channel-profile-image {
+	border-radius: 50px;
+	margin: 0;
+	padding: 0;
+	height: 80px;
+	cursor: pointer;
+}
+
+.channel-action-button {
+	display: flex;
+	align-items: center;
+}
+
+.channel-navigation {
+	width: 75%;
+	margin: auto;
+	margin-top: 0.5em;
+}
+
+.channel-navigation-tab {
+	display: flex;
+}
+
+.channel-navigation-tab-item {
+	font-size: 14px;
+	color: #030303;
+	text-transform: uppercase;
+	font-weight: 500;
+	margin-right: 7em;
+	cursor: pointer;
+}
+
+.channel-uploads-container {
+	background-color: #eeeeee;
+	margin-top: 0.5em;
+	border-bottom: 1px solid grey;
+	padding: 0 1em;
+}
+
+.channel-uploads-container > p {
+	color: #030303;
+	font-weight: 500;
+	line-height: 20px;
+	padding: 1em 0;
+}
+.channel-uploads {
+	/* width: 96%; */
+	/* margin: auto; */
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(12.5em, 1fr));
+}
+
+@media only screen and (max-width: 1336px) {
+	.channel {
+		width: 98%;
+		margin-left: 6%;
+	}
+}

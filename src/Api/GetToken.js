@@ -10,7 +10,7 @@ const FetchToken = async () => {
 	};
 	try {
 		const res = await fetch(url, options);
-		const { payload } = await res.json();
+		const payload = await res.json();
 		return payload;
 	} catch (err) {
 		console.log(err.message)

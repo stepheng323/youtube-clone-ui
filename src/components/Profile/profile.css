@@ -1,4 +1,4 @@
-.profile-card {
+.profile-card-container{
 	width: 280px;
 	background-color: white;
 	color: black;
@@ -8,6 +8,16 @@
 	right: 70px;
 	top: 0vh;
 	border: 1px solid lightgray;
+	height: 200px;
+}
+
+.profile-loading-container {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
 }
 
 .profile-card-info {
