@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../header/header';
+import Layout from '../Layout/Layout';
 import PlayVideo from '../PlayVideo/PlayVideo';
 import Upnext from '../Upnext/Upnext';
 
@@ -7,14 +7,14 @@ import './watch.css';
 
 function Watch() {
 	return (
-		<>
-			<Header />
-			<div className='watch'>
-				<PlayVideo />
-				<Upnext />
-			</div>
-		</>
+			<Layout>
+				<div className='watch'>
+					<PlayVideo />
+					<Upnext />
+				</div>
+			</Layout>
 	);
 }
 
 export default Watch;
+

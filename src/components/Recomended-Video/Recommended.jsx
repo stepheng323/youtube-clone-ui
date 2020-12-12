@@ -2,7 +2,7 @@ import React from 'react';
 import './recommendedVideo.css';
 import Video from '../VideoCard/VideoCard';
 import UseFetch from '../../Api/UseFetch';
-import { REACT_APP_AWS_BASE_URL, REACT_APP_DEV_BASE_URL } from '../../constant';
+import { REACT_APP_DEV_BASE_URL } from '../../constant';
 import { CircularLoading } from '../../Utils/Loading';
 
 function Recommended() {

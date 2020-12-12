@@ -1,7 +1,6 @@
 .video-row {
   display: flex;
   margin-bottom: .8em;
-  width: 80%;
 }
 
 .video-row-thumbnail-container {
@@ -12,7 +11,9 @@
 .video-row-thumbnail-container > img {
   width: 100%;
   object-fit: cover;
+  height: 200px;
 }
+
 
 .video-row-info h4 {
   margin-bottom: 0.2em;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -14,7 +13,7 @@ import UseForm from '../../Api/UseForm';
 import { LinearProgressWithLabel } from '../Progress/Progress';
 import Buttons from '../Button/Button';
 import { removeSpecialCharacters } from '../../Utils';
-import { REACT_APP_DEV_BASE_URL, REACT_APP_FRONT_END_URL } from '../../constant';
+import { REACT_APP_DEV_BASE_URL } from '../../constant';
 import { Redirect } from 'react-router-dom';
 import UseUpload from '../../Api/UseUpload';
 
@@ -42,10 +41,10 @@ export default function SecondUploadModal({handleClose, handleOpen, open, file})
 	const formData = new FormData();
 	formData.append("video", file);
 	const videoUploadUrl = `${REACT_APP_DEV_BASE_URL}/video`;
-
 	const {uploadPercentage, isVideoUploaded, result} = UseUpload(videoUploadUrl, formData)
-	const [uploadedThumbnailPreview, setUploadedThumbnailPreview] = useState();
+	const [uploadedThumbnailPreview, setUploadedThumbnailPreview] = useState('');
 	const [videoDuration, setVideoDuration] = useState(0);
+	const [thumbnail, setThumnail] = useState('');
 
 	const classes = useStyles();
 	const initialValues = {
@@ -54,13 +53,18 @@ export default function SecondUploadModal({handleClose, handleOpen, open, file})
 		thumbnail: '',
 	};
 	const url = `${REACT_APP_DEV_BASE_URL}/video/`;
-	const { values, handleChange, handleFile, handleMultipart, multipartResult } = UseForm(initialValues, url,'POST');
+	const { values, handleChange, handleMultipart, multipartResult } = UseForm(initialValues, url,'POST');
+	
+	const handleThumbnail = (e) => {
+		setUploadedThumbnailPreview(URL.createObjectURL(e.target.files[0]))
+		setThumnail(e.target.files[0]);
+	};
 
 	const handleFinalSubmit = async (e) => {
 		const videoData = new FormData();
 		videoData.append('title', values.title);
 		videoData.append('description', values.description);
-		videoData.append('thumbnail', values.thumbnail);
+		videoData.append('thumbnail', thumbnail);
 		videoData.append('duration', videoDuration);
 		const videoDetailsUrl = `${REACT_APP_DEV_BASE_URL}/video/${result._id}`;
 		handleMultipart(videoDetailsUrl, videoData)
@@ -129,7 +133,7 @@ export default function SecondUploadModal({handleClose, handleOpen, open, file})
 										</label>
 										<TextareaAutosize
 											name='title'
-											value={values.title.replace(/[^\w\s]/gi, '')}
+											value={values.title.replace(/[^\w\s]/gi, '') || removeSpecialCharacters(file.name)}
 											onChange={handleChange}
 											aria-label='empty textarea'
 											placeholder='Add a title that describe your video'
@@ -168,7 +172,7 @@ export default function SecondUploadModal({handleClose, handleOpen, open, file})
 										<div className='thummbnail-images'>
 											<div>
 												<input
-													onChange={handleFile}
+													onChange={handleThumbnail}
 													type='file'
 													hidden
 													id='file'
@@ -223,7 +227,7 @@ export default function SecondUploadModal({handleClose, handleOpen, open, file})
 								<LinearProgressWithLabel value={uploadPercentage} />
 							</div>
 							<div onClick={handleFinalSubmit}>
-								<Buttons color='primary' disabled={!values.title || !values.description} variant='contained'>
+								<Buttons color='primary' disabled={!result._id || !values.title || !values.description || !thumbnail} variant='contained'>
 									Submit
 								</Buttons>
 							</div>

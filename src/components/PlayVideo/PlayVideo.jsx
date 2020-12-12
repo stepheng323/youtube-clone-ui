@@ -4,19 +4,24 @@ import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ReplyIcon from '@material-ui/icons/Reply';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import MoreIcon from '@material-ui/icons/MoreHoriz';
-import axios from 'axios';
 
 import './play-video.css';
 import { Avatar, Button } from '@material-ui/core';
 import { REACT_APP_DEV_BASE_URL } from '../../constant';
 import { useParams } from 'react-router-dom';
+import UseForm from '../../Api/UseForm';
 
 function PlayVideo() {
 	const { id } = useParams();
 	const url = `${REACT_APP_DEV_BASE_URL}/video/view/${id}`
-		setTimeout(() => {
-			axios.patch(url)
+	const { handleFetch } = UseForm('', url, {method: 'PATCH'});
+	
+		useEffect(() => {
+				setTimeout(() => {
+					handleFetch();
 		}, 30000);
+
+		}, []);
 	return (
 		<div className='play-video'>
 			<video crossOrigin="anonymous" autoPlay height="400px" width="100%" controls>

@@ -70,10 +70,43 @@ function UseForm(initialValues, url, options) {
 					'Content-Type': 'multipart/form-data',
 				},
 			});
-			 if (response && response === 201) {
+			 if (response && response.status === 201) {
 				 setMultipartResult(response.data.payload)
 			 }
 
+		} catch (err) {
+			setError(err);
+		}
+	};
+
+
+	const handleFetch = async () => {
+		let token;
+		setSubmitting(true);
+		if (Date.now() >= +tokenExpiry * 1000) {
+			const getNewToken = async () => {
+				const response = await getToken();
+				if (response.success) {
+					const { payload } = response;
+					token = payload.token;
+					localStorage.setItem('tokenExpiry', payload.tokenExpiry);
+					setUser(() => payload);
+				}
+			};
+			await getNewToken();
+		}
+		try {
+			const res = await fetch(url, {
+				...options,
+				headers: {
+					Authorization: `Bearer ${token ||user.token}`,
+					'Content-Type': 'application/json',
+				},
+			});
+			const data = await res.json();
+			setResult(data);
+			setSubmitting(false);
+			return data;
 		} catch (err) {
 			setError(err);
 		}
@@ -103,6 +136,7 @@ function UseForm(initialValues, url, options) {
 		handleSubmit,
 		values,
 		setValues,
+		handleFetch,
 		handleMultipart,
 		multipartResult
 	};

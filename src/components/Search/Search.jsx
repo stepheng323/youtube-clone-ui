@@ -1,27 +1,64 @@
 import React from 'react';
 import VideoRow from '../VideoRow/VideoRow';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import './search.css';
-
-import { videos } from '../../data';
+import nodata from '../../img/nodata.png';
+import UseFetch from '../../Api/UseFetch';
+import { REACT_APP_DEV_BASE_URL } from '../../constant';
+import ChannelSearch from '../ChannelSearch/channelSearch';
 
 function Search() {
+	const { query } = useParams();
+	const url = `${REACT_APP_DEV_BASE_URL}/video/search/${query}`;
+	const { result, isLoading } = UseFetch(url);
+
+	if (!result) return <p>Loading</p>;
+
+	const { payload: searchResult } = result;
+	console.log(searchResult);
 	return (
-		<Link>
 		<div className='search-page'>
-			{videos.map((video) => (
-				<VideoRow
-					title={video.title}
-					thumbnail={video.thumbnail}
-					views={video.views}
-          date={video.date}
-          channel={video.channel}
-          channelImage={video.channelImage}
-          description={video.description}
-				/>
-			))}
+			{result.success ? (
+				searchResult.map((item) =>
+					item.title ? (
+						<VideoRow
+							title={item.title}
+							thumbnail={item.thumbnail}
+							views={item.viewsCount}
+							date={item.createdAt}
+							channel={item.channel.name}
+							channelImage={item.channelAvatar}
+							description={item.description}
+							duration={item.duration}
+							videoId={item._id}
+						/>
+					) : (
+						<ChannelSearch
+							channelName={item.name}
+							subcribersCount={item.videos.length}
+							videosCount={item.videos.length}
+							description={item.description}
+						/>
+					)
+				)
+			) : (
+				<div className='search-page-no-result'>
+					<div
+						style={{
+							backgroundImage: `url(${nodata})`,
+							backgroundPosition: 'center',
+							backgroundSize: 'contain',
+							backgroundRepeat: 'no-repeat'
+						}}
+						className='search-page-no-result-image'
+					></div>
+					<p className='search-page-no-result-header'>No Result Found</p>
+					<p className='search-page-no-result-body'>
+						Try different keywords or remove search filters
+					</p>
+				</div>
+			)}
 		</div>
-		</Link>
 	);
 }
 

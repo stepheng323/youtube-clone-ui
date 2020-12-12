@@ -12,13 +12,20 @@ import VideoUploadModal from '../FirstUploadModal/UploadModal';
 import logo from '../../img/logo.png';
 import '../header/header.css';
 import {ProfileContext} from '../../Context/ProfileCard';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 function Header() {
+	const history = useHistory();
 	const { user } = useContext(UserContext);
 	const {openProfile, setOpenProfile } = useContext(ProfileContext);
 	const [search, setSearch] = useState('');
 	const [openVideoUpload, setOpenVideoUpload] = useState(false);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		history.push(`/search/${search}`);
+	}
 
 	const handleVideoModal = () => {
 		setOpenVideoUpload(!openVideoUpload);
@@ -33,7 +40,7 @@ function Header() {
 					<img className='logo' src={logo} alt='logo' />
 				</Link>
 			</div>
-			<form className='header-input'>
+			<form onSubmit={handleSubmit} className='header-input'>
 				<input
 					onChange={(e) => setSearch(e.target.value)}
 					placeholder='Search'

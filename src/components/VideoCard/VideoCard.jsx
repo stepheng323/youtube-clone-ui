@@ -20,7 +20,7 @@ function VideoCard({ id, title, thumbnail, channel, channelImage, channelId, vie
 						<div className='video-text'>
 							<Link to={`/watch/${id}`}><h4 className="video-title">{title}</h4></Link>
 							<Link to={`/channel/${channel}`}><p style={{marginBottom: '.2em'}}>{channel}</p></Link>
-							<Link to={`/watch/${id}`}><p>{views} views • {getRelativeTime(date)} ago</p></Link>
+							<Link to={`/watch/${id}`}><p>{views} {views > 1 ? 'views' : 'view'} • {getRelativeTime(date)} ago</p></Link>
 				</div>
 			</div>
 		</div>

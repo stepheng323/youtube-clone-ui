@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../Context/User';
 import getToken from './GetToken';
 
-function UseFetch(url, body, method = 'GET') {
+function UseFetch(url, method = 'GET') {
 	const { setUser, user } = useContext(UserContext);
 	const [result, setResult] = useState(null);
 	const [isLoading, setLoading] = useState(true);
