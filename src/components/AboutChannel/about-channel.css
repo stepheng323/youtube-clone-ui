@@ -1,0 +1,54 @@
+.about-channel {
+	display: flex;
+	justify-content: space-between;
+	width: 95%;
+	margin: 0 auto;
+  padding-top: 1em;
+}
+
+.about-channel-left {
+	width: 62%;
+}
+
+.about-channel-right {
+	width: 30%;
+}
+
+.about-channel-headings {
+	font-size: 16px;
+	line-height: 20px;
+	margin: 0;
+	margin-bottom: 1.5em;
+	padding-top: 1em;
+	color: #030303;
+}
+
+.about-channel-right-headings {
+	font-size: 16px;
+	line-height: 20px;
+  padding: 1em 0 .6em 0;
+}
+
+.about-channel-description {
+	font-size: 14px;
+	line-height: 21px;
+	color: #030303;
+	margin-bottom: 2em;
+}
+
+.detail-top{
+  display: flex;
+  margin-bottom: 1.5em;
+
+}
+.detail-top-property{
+  margin-right: 1em;
+  font-size: 13px;
+  line-height: 18px;
+  color: #030303;
+}
+
+.detail-top-value{
+  font-size: 13px;
+  line-height: 18px;
+}

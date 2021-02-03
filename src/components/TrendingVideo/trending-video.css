@@ -1,0 +1,39 @@
+.trending-video {
+	display: flex;
+	padding-top: 1em;
+}
+
+.trending-container {
+	width: 250px;
+	min-width: 250px;
+	margin-right: 1em;
+}
+.trending-container > img {
+	width: 100%;
+	object-fit: cover;
+	height: 130px;
+}
+.trending-video-stats {
+	display: flex;
+	font-size: 13px;
+	line-height: 18px;
+	color: gray;
+}
+.trending-video-title {
+	font-size: 18px;
+	line-height: 24px;
+	color: #030303;
+}
+
+.trending-video-channel {
+	margin-right: .7em;
+	color: gray;
+
+}
+
+.trending-video-details {
+	font-size: 13px;
+	line-height: 18px;
+	color: gray;
+	margin-top: 0.8em;
+}

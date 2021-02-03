@@ -1,21 +1,21 @@
 .sidebar-row {
 	display: flex;
-  align-items: center;
+	align-items: center;
 	padding-left: 25px;
+	height: 40px;
 }
 
 .sidebar-row-icon {
 	color: #606060;
-	font-size: 1.3em !important;
+	font-size: 1.4em !important;
 }
 
 .sidebar-row-title {
 	flex: 1;
 	margin: 0.8em;
-	margin-left: 20px;
+	margin-left: 25px;
 	font-size: 0.89em;
 	line-height: 21px;
-
 }
 
 .sidebar-row:hover {

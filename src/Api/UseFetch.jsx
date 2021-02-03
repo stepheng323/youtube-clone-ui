@@ -2,7 +2,8 @@ import { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../Context/User';
 import getToken from './GetToken';
 
-function UseFetch(url, method = 'GET') {
+function UseFetch(url) {
+	const controller = new AbortController()
 	const { setUser, user } = useContext(UserContext);
 	const [result, setResult] = useState(null);
 	const [isLoading, setLoading] = useState(true);
@@ -11,10 +12,10 @@ function UseFetch(url, method = 'GET') {
 
 	const fetchData = async () => {
 		let token;
-		if (Date.now() >= +tokenExpiry * 1000) {
+		if (Date.now() >= +tokenExpiry * 1000 || !user.token) {
 			const getNewToken = async () => {
 				const response = await getToken();
-				if (response?.success) {
+				if (response && response.success) {
 					const { payload } = response;
 					token = payload.token;
 					localStorage.setItem('tokenExpiry', payload.tokenExpiry);
@@ -25,7 +26,8 @@ function UseFetch(url, method = 'GET') {
 		}
 		try {
 			const res = await fetch(url, {
-				method: method,
+				method: 'GET',
+				signal: controller.signal,
 				headers: {
 					Authorization: `Bearer ${token || user.token}`,
 					'Content-Type': 'application/json',
@@ -36,15 +38,19 @@ function UseFetch(url, method = 'GET') {
 			setLoading(false);
 			return data;
 		} catch (err) {
+			if(err.name === 'AbortError') return;
 			setError(err);
+			setLoading(false);
 		}
 	};
 
 	useEffect(() => {
 		fetchData();
+		return () => controller.abort();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	return { result, error, isLoading };
+	return { result, error, isLoading, setLoading, setResult };
 }
 
 export default UseFetch;

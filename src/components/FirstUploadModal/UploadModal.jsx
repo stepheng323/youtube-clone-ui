@@ -10,11 +10,8 @@ import PublishIcon from '@material-ui/icons/Publish';
 import Tooltip from '@material-ui/core/Tooltip';
 import SecondUploadModal from '../SecondUploadModal/SecondUploadModal';
 import jetOut from '../../img/jet_out.gif';
-import UseForm from '../../Api/UseForm';
-import { REACT_APP_DEV_BASE_URL } from '../../constant';
 
 import './modal.css';
-
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -35,43 +32,39 @@ export default function VideoUploadModal({ handleClose, handleOpen, open }) {
 	const [file, setFile] = useState('');
 	const [openSecondVideoUpload, setOpenSecondVideoUpload] = useState(false);
 	const [showJet, setShowJet] = useState(false);
-	const [info, setInfo] = useState("");
-	// const [presignedUrlAndKey, setPresignedUrlAndKey] = useState('')
-	// const { handleSubmit } = UseForm({}, `${REACT_APP_DEV_BASE_URL}/video/presign`, {method: 'GET'});
+	const [info, setInfo] = useState('');
 
 	const handleVideoModal = () => {
 		setOpenSecondVideoUpload(!openSecondVideoUpload);
 	};
-	
+
 	const me = () => {
 		handleClose();
-		setOpenSecondVideoUpload(!openSecondVideoUpload)
+		setOpenSecondVideoUpload(!openSecondVideoUpload);
 		setShowJet(false);
-
-	}
+	};
 	const handleChange = async (e) => {
 		e.preventDefault();
-		if (e.target.files[0].type !== 'video/mp4' ) {
-			setInfo("Invalid file format");
+		if (e.target.files[0].type !== 'video/mp4') {
+			setInfo('Invalid file format');
 			return;
 		}
 		setFile(e.target.files[0]);
-		setShowJet(true)
-		setTimeout(me, 1000)
-		// const { payload } = await handleSubmit(e)
-		// setPresignedUrlAndKey(payload)
-	}
+		setShowJet(true);
+		setTimeout(me, 1000);
+	};
 
 	const classes = useStyles();
 	return (
 		<>
-			{openSecondVideoUpload && <SecondUploadModal
+			{openSecondVideoUpload && (
+				<SecondUploadModal
 					handleClose={handleVideoModal}
 					handleOpen={handleVideoModal}
 					open={openSecondVideoUpload}
 					file={file}
-					// presignedUrlAndKey={presignedUrlAndKey}
-				/>}
+				/>
+			)}
 			<Tooltip title='Upload Video'>
 				<VideoIcon className='header-icon' onClick={handleOpen} />
 			</Tooltip>
@@ -82,7 +75,7 @@ export default function VideoUploadModal({ handleClose, handleOpen, open }) {
 				open={open}
 				onClose={handleClose}
 				closeAfterTransition
-				disableEscapeKeyDown	
+				disableEscapeKeyDown
 				BackdropComponent={Backdrop}
 				BackdropProps={{
 					timeout: 500,
@@ -91,15 +84,23 @@ export default function VideoUploadModal({ handleClose, handleOpen, open }) {
 				<Fade in={open}>
 					<div className={classes.paper}>
 						<div className='video-upload-modal-header'>
-							<h3 className="modal-header" id='transition-modal-title'>Upload Video</h3>
+							<h3 className='modal-header' id='transition-modal-title'>
+								Upload Video
+							</h3>
 							<CloseIcon style={{ cursor: 'pointer' }} onClick={handleClose} />
 						</div>
 						<div className='uploader'>
 							<div className='upload-image'>
-							<input onChange={handleChange} type="file" hidden id="file"/>
-								{!showJet && <label htmlFor="file"><PublishIcon className='publish-icon' /></label>}
+								<input onChange={handleChange} type='file' hidden id='file' />
+								{!showJet && (
+									<label htmlFor='file'>
+										<PublishIcon className='publish-icon' />
+									</label>
+								)}
 							</div>
-								{showJet ? <img className="jet" src={jetOut} alt="publish"/> : null}
+							{showJet ? (
+								<img className='jet' src={jetOut} alt='publish' />
+							) : null}
 						</div>
 						<div className='texts-button'>
 							<p
@@ -122,9 +123,18 @@ export default function VideoUploadModal({ handleClose, handleOpen, open }) {
 							>
 								Your videos will be private until you publish them.
 							</p>
-							{info && <p className="info"><WarningIcon className="info-icon"/> {info}</p>}
+							{info && (
+								<p className='info'>
+									<WarningIcon className='info-icon' /> {info}
+								</p>
+							)}
 							<div className='upload-button'>
-								<input onChange={handleChange} type='file' id='actual-btn' hidden />
+								<input
+									onChange={handleChange}
+									type='file'
+									id='actual-btn'
+									hidden
+								/>
 								<label className='label' htmlFor='actual-btn'>
 									SELECT FILES
 								</label>{' '}

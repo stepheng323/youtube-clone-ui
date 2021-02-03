@@ -1,24 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { REACT_APP_DEV_UPLOAD_URL } from '../../constant';
+import { getRelativeTime } from '../../Utils';
 
 import './index.css';
 
-function SideVideoRow({ thumbnail, channelImage, channel, title, views, date }) {
+function SideVideoRow({ id, thumbnail, channelImage, channel, title, views, date }) {
 	return (
-		<Link to="/watch"><div className='side-video-row'>
+		<Link to={{ pathname: `/watch/${id}`, state: {videoName: title} }}><div className='side-video-row'>
 			<div className='side-video-row-thumbnail-container'>
-				<img src={thumbnail} alt='thumbnail' />
+				<img src={`${REACT_APP_DEV_UPLOAD_URL}/${thumbnail}`} alt='thumbnail' />
 			</div>
 			<div className=''>
 				<div className='side-video-row-info'>
 					<h4>{title}</h4>
-					<Link to="/channel">
+					<Link to={`/channel/${channel}`}>
 					<p>{channel}</p>
 					</Link>
 				</div>
 				<div className="side-video-row-channel-info">
 					<p>
-						{views} • {date}
+						{views} Views• {getRelativeTime(date)} ago
 					</p>
 				</div>
 			</div>

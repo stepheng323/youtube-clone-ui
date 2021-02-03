@@ -18,7 +18,7 @@ function UseForm(initialValues, url, options) {
 		event.preventDefault();
 		let token;
 		setSubmitting(true);
-		if (Date.now() >= +tokenExpiry * 1000) {
+		if (Date.now() >= +tokenExpiry * 1000 || !user.token) {
 			const getNewToken = async () => {
 				const response = await getToken();
 				if (response.success) {
@@ -51,7 +51,7 @@ function UseForm(initialValues, url, options) {
 	const handleMultipart = async (url, multipartFile) => {
 		let token;
 		setSubmitting(true);
-		if (Date.now() >= +tokenExpiry * 1000) {
+		if (Date.now() >= +tokenExpiry * 1000 || !user.token) {
 			const getNewToken = async () => {
 				const response = await getToken();
 				if (response.success) {
@@ -70,10 +70,9 @@ function UseForm(initialValues, url, options) {
 					'Content-Type': 'multipart/form-data',
 				},
 			});
-			 if (response && response.status === 201) {
+			 if (response &&  (response.status === 200 || response.status === 201)) {
 				 setMultipartResult(response.data.payload)
 			 }
-
 		} catch (err) {
 			setError(err);
 		}
@@ -83,7 +82,7 @@ function UseForm(initialValues, url, options) {
 	const handleFetch = async () => {
 		let token;
 		setSubmitting(true);
-		if (Date.now() >= +tokenExpiry * 1000) {
+		if (Date.now() >= +tokenExpiry * 1000 || !user.token) {
 			const getNewToken = async () => {
 				const response = await getToken();
 				if (response.success) {

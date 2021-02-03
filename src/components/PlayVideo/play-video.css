@@ -1,40 +1,12 @@
 .play-video {
-	width: 70%;
-}
-.video-section {
-	min-height: 360px;
-	min-width: 500px;
-	background-color: #030303;
-	position: relative;
+	width: 60%;
 }
 
-.video-section > video {
-	position: absolute;
-}
-
-.loading {
-	position: absolute;
-	bottom: 50%;
-	left: 50%;
-	color: red;
-}
-.controls {
-	position: absolute;
-	bottom: 0;
-	display: flex;
-	width: 620px;
-	padding-left: 2em;
-	justify-content: space-between;
-}
 .video-icon {
 	color: white;
 	margin-right: 0.8em;
 	z-index: 999;
 	cursor: pointer;
-}
-
-.play-bar {
-	min-height: 3px solid red;
 }
 
 .video-info {
@@ -49,12 +21,13 @@
 }
 
 .details-section {
-	margin: 2em 0;
+	margin: 1em 0;
 	padding-bottom: 1em;
 	border-bottom: 1px solid lightgray;
 }
 .details-section > p {
 	font-size: 18px;
+	line-height: 24px;
 	color: #030303;
 	margin-bottom: 0.5em;
 }
@@ -65,8 +38,8 @@
 }
 
 .video-info-details > p {
-	font-size: 18px;
-	line-height: 24px;
+	font-size: 14px;
+	line-height: 21px;
 	font-weight: 400;
 }
 .icons {
@@ -74,7 +47,7 @@
 }
 .icon {
 	margin-right: 0.4em;
-	font-size: 18px !important;
+	font-size: 26px !important;
 }
 
 .icon-container {
@@ -101,9 +74,9 @@
 }
 
 .avatar {
-	margin-right: 0.5em;
+	margin-right: 1em;
 }
-.channel-name {
+.description-channel-name {
 	font-size: 14px;
 	color: #030303;
 	font-weight: bold;
@@ -112,12 +85,22 @@
 .subscriber-count {
 	font-size: 13px;
 	color: #606060;
-	margin-top: .1em;
+	margin-top: 0.1em;
 }
 
-.description-main{
-	line-height: 1.5em;
-	margin-left: 3.5em;
+.description {
+	border-bottom: 1px solid lightgray;
+}
+.description-main {
+	line-height: 21px;
+	margin-left: 4em;
 	font-size: 14px;
 	color: #030303;
+	padding-bottom: 1.2em;
+}
+.highlight-icon{
+	color: #065fd4;
+}
+.play-video-loading{
+	width: 60%
 }

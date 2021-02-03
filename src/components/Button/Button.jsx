@@ -10,12 +10,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Buttons({children, variant, color, disabled}) {
+function Buttons({children, variant, color, disabled, handleClick}) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Button disableElevation variant={variant} disabled={disabled} color={color}>
+      <Button onClick={handleClick} disableElevation variant={variant} disabled={disabled} color={color}>
         {children}
       </Button>
     </div>

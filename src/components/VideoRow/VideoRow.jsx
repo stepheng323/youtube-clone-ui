@@ -8,7 +8,7 @@ import './video-row.css';
 
 function VideoRow({ thumbnail, channelImage, channel, duration, title, views, date, description, videoId }) {
 	return (
-		<Link to={`/watch/${videoId}`}><div className='video-row'>
+		<Link to={{ pathname: `/watch/${videoId}` }}><div className='video-row'>
 			<div className='video-row-thumbnail-container video-image'>
 				<img src={`${REACT_APP_DEV_UPLOAD_URL}/${thumbnail}`} alt='thumbnail' />
 				<p className="video-time">{convertSecondsToHms(duration)}</p>
@@ -22,10 +22,10 @@ function VideoRow({ thumbnail, channelImage, channel, duration, title, views, da
 					</p>
 				</div>
 				<div className="video-row-channel-info">
-					<Link to="/channel">
+					<Link to={`/channel/${channel}`}>
 					<Avatar className="video-row-avatar" alt={channel} src={channelImage} />
 					</Link>
-					<p>{channel}</p>
+					<Link to={`/channel/${channel}`}><p>{channel}</p></Link>
 				</div>
 					<p className="video-row-description">{description}</p>
 			</div>

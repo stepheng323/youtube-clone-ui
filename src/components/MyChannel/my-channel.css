@@ -1,0 +1,114 @@
+.my-channel {
+	width: 82.5%;
+	margin-left: 17.5%;
+	background-color: #f1f1f1;
+}
+
+.my-channel-banner {
+	width: 100%;
+	background-position: center;
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.my-channel-banner-inner {
+	display: flex;
+	width: 80%;
+	margin: auto;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.my-channel-banner-inner-left {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.my-channel-profile-image {
+	border-radius: 50px;
+	margin: 0;
+	padding: 0;
+	height: 80px;
+	cursor: pointer;
+	margin-right: 1em;
+}
+
+.my-channel-banner-inner-right {
+	display: flex;
+}
+
+.my-channel-navigation {
+	width: 90%;
+	margin: auto;
+	position: sticky;
+}
+
+.my-channel-navigation-tab {
+	display: flex;
+}
+
+.my-channel-navigation-tab-item {
+	font-size: 14px;
+	color: #606060;
+	text-transform: uppercase;
+	font-weight: 500;
+	margin-right: 5em;
+	cursor: pointer;
+	padding: 0.5em 1em;
+}
+
+.my-channel-navigation-tab-item:hover {
+	color: #030303;
+}
+.my-channel-pannel {
+	background-color: #f1f1f1;
+	height: 80vh;
+}
+.my-channel-pannel-home {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 5em;
+}
+.my-channel-pannel-home > img {
+	width: 16%;
+}
+.my-channel-pannel-home > h1 {
+	font-size: 24px;
+	line-height: 30px;
+	color: #030303;
+	margin-top: 0.7em;
+}
+
+.my-channel-pannel-home {
+	font-size: 14px;
+	line-height: 21px;
+	color: #606060;
+	margin: 0.5em 0 1em 0;
+	text-align: center;
+}
+
+.my-channel-setup-card-label {
+	background-color: #065fd4;
+	color: #fff;
+	font-weight: 500;
+	text-transform: uppercase;
+	padding: 10px 12px;
+	border-radius: 4px;
+}
+
+.my-channel-pannel-home-footnote {
+	font-size: 12px;
+	line-height: 15px;
+	color: #606060;
+	margin-top: 2em;
+}
+
+@media only screen and (max-width: 1336px) {
+	.my-channel {
+		margin-left: 6%;
+	}
+}

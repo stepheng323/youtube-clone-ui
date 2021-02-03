@@ -1,0 +1,17 @@
+.comments{
+  margin-top: 1em;
+}
+
+.comments-field-container{
+  display: flex;
+  align-items: center;
+}
+
+.comments-count{
+  line-height: 20px;
+  padding: 1em 0;
+}
+.comment-buttons{
+  display: flex;
+  justify-content: flex-end;
+}

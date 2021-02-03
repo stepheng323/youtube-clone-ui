@@ -1,18 +1,20 @@
 .video-card {
-	margin-bottom: 3.5em;
+	margin-bottom: 2.5em;
 	margin-right: 1em;
 }
 
 .video-image {
 	position: relative;
-	background-color: lightgray
+	background-color: lightgray;
+	max-height: 150px;
 }
 
 .video-image > img {
 	width: 100%;
+	/* width: 300px; */
+	max-height: 150px;
 	object-fit: cover;
 	display: block;
-	height: 150px;
 }
 
 .video-time {

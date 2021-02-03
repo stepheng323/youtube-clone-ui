@@ -33,6 +33,7 @@
 	line-height: 21px;
 	margin-top: 1em;
 }
+
 @media only screen and (max-width: 1336px) {
 	.search-page {
 		margin-left: 6%;

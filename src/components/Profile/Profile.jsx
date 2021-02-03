@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { Avatar } from '@material-ui/core';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
@@ -19,55 +19,66 @@ function Profile() {
 	const { user } = useContext(UserContext);
 	const [openChannelModal, setChannelModal] = useState(false);
 
-	const channelCountUrl = `${REACT_APP_DEV_BASE_URL}/channel/count`;
-	const { result } = UseFetch(channelCountUrl, {}, 'GET');
+	const channelInfoUrl = `${REACT_APP_DEV_BASE_URL}/channel`;
+	const { result, isLoading } = UseFetch(channelInfoUrl);
 
 	const handleChannelModal = () => {
 		setChannelModal(!openChannelModal);
-	};	
+	};
+
 	return (
-		<div className="profile-card-container">
+		<div className='profile-card-container'>
 			<CreateChannelModal
 				handleClose={handleChannelModal}
 				handleOpen={handleChannelModal}
 				open={openChannelModal}
 			/>
-			{result ? <div className='profile-card'>
-				<div className='profile-card-info'>
-					<Avatar
-						className='profile-card-avatar'
-						alt='profile'
-						src='https://lh3.googleusercontent.com/a-/AOh14GjySH9J2YXSPskpwCZ_l5_LU_r6StEnduNarQ67mw=s88-c-k-c0x00ffffff-no-rj-mo'
-					/>
-					<div className=''>
-						<p className='profile-name'>
-							{user.firstName} {user.lastName}
-						</p>
-						<p className='profile-email'>{user.email}</p>
+			{isLoading ? (
+				<div className='profile-loading-container'>
+					<CircularLoading />
+				</div>
+			) : (
+				<div className='profile-card'>
+					<div className='profile-card-info'>
+						<Avatar
+							className='profile-card-avatar'
+							alt={user.firstName}
+							src={user?.channel?.channelAvatar || user.firstName}
+						/>
+						<div className=''>
+							<p className='profile-name'>
+								{user.firstName} {user.lastName}
+							</p>
+							<p className='profile-email'>{user.email}</p>
+						</div>
+					</div>
+					<hr />
+					<div>
+						{result.payload.length ? (
+							<Link to={`/channel/${result.payload[0].name}`}>
+								<SidebarRow Icon={AccountBoxIcon} title='Your channel' />
+							</Link>
+						): <div onClick={handleChannelModal}>
+						<SidebarRow
+							showCreateChannelModal={handleLogout}
+							Icon={AccountBoxIcon}
+							title='Create a channel'
+						/>
+					</div> }
+							
+						<SidebarRow
+							className='pl-2'
+							Icon={SettingsApplicationsIcon}
+							title='YouTube Studio'
+						/>
+						<SidebarRow
+							handleLogout={handleLogout}
+							Icon={ExitToAppIcon}
+							title='Sign out'
+						/>
 					</div>
 				</div>
-				<hr />
-				<div>
-					{result.payload >= 1 && (
-						<Link to="/channel"><SidebarRow Icon={AccountBoxIcon} title='Your channel' /></Link>
-					)}
-					{result.payload <= 0 && (
-						<div onClick={handleChannelModal}>
-							<SidebarRow
-								showCreateChannelModal={handleLogout}
-								Icon={AccountBoxIcon}
-								title='Create a channel'
-							/>
-						</div>
-					)}
-					<SidebarRow className="pl-2" Icon={SettingsApplicationsIcon} title='YouTube Studio' />
-					<SidebarRow
-						handleLogout={handleLogout}
-						Icon={ExitToAppIcon}
-						title='Sign out'
-					/>
-				</div>
-			</div> : <div className="profile-loading-container"><CircularLoading /></div>}
+			)}
 		</div>
 	);
 }

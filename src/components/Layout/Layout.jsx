@@ -7,7 +7,7 @@ const Layout = ({children}) => {
 	return (
 		<>
 		<Header />
-		<div className='app-page'>
+		<div id="app-page" className='app-page'>
 			<Sidebar />
 			<SidebarMini />
 			{children}

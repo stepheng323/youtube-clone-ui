@@ -12,16 +12,16 @@ function Search() {
 	const url = `${REACT_APP_DEV_BASE_URL}/video/search/${query}`;
 	const { result, isLoading } = UseFetch(url);
 
-	if (!result) return <p>Loading</p>;
+	if (isLoading) return <p>Loading</p>;
 
 	const { payload: searchResult } = result;
-	console.log(searchResult);
 	return (
 		<div className='search-page'>
 			{result.success ? (
 				searchResult.map((item) =>
 					item.title ? (
 						<VideoRow
+							key={item._id}
 							title={item.title}
 							thumbnail={item.thumbnail}
 							views={item.viewsCount}
@@ -34,6 +34,7 @@ function Search() {
 						/>
 					) : (
 						<ChannelSearch
+							key={item._id}
 							channelName={item.name}
 							subcribersCount={item.videos.length}
 							videosCount={item.videos.length}

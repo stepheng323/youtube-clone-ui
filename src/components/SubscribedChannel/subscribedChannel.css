@@ -1,0 +1,17 @@
+.subscribedChannel {
+	display: flex;
+	align-items: center;
+  padding-left: 25px;
+	height: 40px;
+}
+
+.subscribedChannel:hover {
+	background-color: rgba(211, 211, 211, 0.685);
+	cursor: pointer;
+}
+
+.channelAvatar {
+	margin-right: 20px;
+	height: 29px !important;
+	width: 29px !important;
+}

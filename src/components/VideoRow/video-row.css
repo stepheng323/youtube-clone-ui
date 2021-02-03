@@ -1,17 +1,19 @@
 .video-row {
   display: flex;
   margin-bottom: .8em;
+  margin-left: 17.5%;
 }
 
 .video-row-thumbnail-container {
-  width: 360px;
-  min-width: 360px;
-	margin-right: 1em;
+  width: 280px;
+  min-width: 280px;
+  margin-right: 1em;
+  /* height: 250px; */
 }
 .video-row-thumbnail-container > img {
   width: 100%;
   object-fit: cover;
-  height: 200px;
+  
 }
 
 
@@ -49,4 +51,12 @@
   font-size: 13px;
   color: #606060;
   line-height: 20px;
+}
+
+
+@media only screen and (max-width: 1336px) {
+	.video-row {
+		width: 98%;
+		margin-left: 6%;
+	}
 }

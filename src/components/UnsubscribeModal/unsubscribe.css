@@ -1,0 +1,11 @@
+.unsubcribe-controls{
+  display: flex;
+  margin-top: 2em;
+  justify-content: flex-end;
+}
+
+.unsubscribe-info{
+  font-size: 14px;
+  line-height: 21px;
+  color: rgba(17, 17, 17, 0.8);
+}

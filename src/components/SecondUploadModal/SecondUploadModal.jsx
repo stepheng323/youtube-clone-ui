@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -14,7 +14,7 @@ import { LinearProgressWithLabel } from '../Progress/Progress';
 import Buttons from '../Button/Button';
 import { removeSpecialCharacters } from '../../Utils';
 import { REACT_APP_DEV_BASE_URL } from '../../constant';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import UseUpload from '../../Api/UseUpload';
 
 
@@ -214,7 +214,6 @@ export default function SecondUploadModal({handleClose, handleOpen, open, file})
 											</div>}
 										<div className='details-container'>
 											<p className='card-title'>Video Link</p>
-											{/* <a href={`${REACT_APP_FRONT_END_URL}/watch/${presignedUrlAndKey.key}`} className='sub-title mb-1'>{`${REACT_APP_FRONT_END_URL}/watch/${presignedUrlAndKey.key}`}</a> */}
 											<p className='card-title'>Filename</p>
 											<p className='sub-title mb-1'>{file.name}</p>
 										</div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { REACT_APP_DEV_UPLOAD_URL } from '../../constant';
 import { getRelativeTime, convertSecondsToHms } from '../../Utils/index';
 
 import './small-video-card.css';
@@ -10,7 +11,7 @@ function SmallVideoCard({ id, title, thumbnail, channel,  views, date, duration 
 		<div className='small-video-card'>
 			<Link to={`/watch/${id}`}>
 				<div className="small-video-image">
-					<img src={thumbnail} alt='thumbnail' />
+					<img src={`${REACT_APP_DEV_UPLOAD_URL}/${thumbnail}`} alt='thumbnail' />
 					<p className="small-video-time">{convertSecondsToHms(duration)}</p>
 				</div>
 			</Link>

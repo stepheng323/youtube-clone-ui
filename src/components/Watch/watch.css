@@ -1,8 +1,7 @@
 .watch {
 	display: flex;
-	justify-content: space-between;
-	gap: 1.7em;
+	gap: 1.2em;
 	padding-top: 30px;
-	padding-left: 5em;
+	padding-left: 8%;
 	background-color: #f9f9f9;
 }

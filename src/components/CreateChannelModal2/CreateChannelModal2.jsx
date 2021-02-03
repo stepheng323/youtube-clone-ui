@@ -7,6 +7,7 @@ import { CircularLoading } from '../../Utils/Loading';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { Link } from 'react-router-dom';
 import { REACT_APP_DEV_BASE_URL } from '../../constant';
 
 import './channel-modal2.css';
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 	paper: {
 		backgroundColor: theme.palette.background.paper,
 		width: '47%',
-		height: '82%',
+		height: '85%',
 		outline: 'none',
 	},
 }));
@@ -101,9 +102,11 @@ export default function CreateChannelModal2({ handleClose, handleOpen, open }) {
 									/>
 								</div>
 								<div className='channel-modal2-options-button'>
-									<Button variant='contained' color='primary' disableElevation>
-										SELECT
-									</Button>
+									<Link to="/channel/create">
+										<Button variant='contained' color='primary' disableElevation>
+											SELECT
+										</Button>
+									</Link>
 								</div>
 							</div>
 						</div>
