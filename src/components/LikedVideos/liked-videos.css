@@ -3,14 +3,19 @@
 	width: 100%;
 	background-color: #f9f9f9;
 	display: flex;
+	justify-content: space-between;
 	position: relative;
 }
 
 .liked-videos-right {
 	background-color: #f1f1f1;
 	padding: 1em 2em 0 0.5em;
-	margin-left: 430px;
-	width: 70%;
+	margin-left: 420px;
+
+}
+
+.no-liked-videos{
+
 }
 
 @media only screen and (max-width: 1336px) {

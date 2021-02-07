@@ -1,20 +1,21 @@
 import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
+import noThumnail from '../../img/noThumbnail.jpg';
 import { REACT_APP_DEV_UPLOAD_URL } from '../../constant';
 
 import './playlist-info.css';
 
-function PlaylistInfo({ user, lastThumnail, videosCount }) {
+function PlaylistInfo({ user, lastThumbnail, videosCount, playlistType }) {
 	return (
 		<div className='playlist-info'>
 			<div className='playlist-info-img-container'>
-				<img alt='' src={`${REACT_APP_DEV_UPLOAD_URL}/${lastThumnail}`} />
+				<img alt='' src={lastThumbnail ? `${REACT_APP_DEV_UPLOAD_URL}/${lastThumbnail}` : noThumnail } />
 				<div className='playlist-info-img-play-all'>
 					<p>Play All</p>
 				</div>
 			</div>
-			<h1 className='playlist-info-header'>Liked Videos</h1>
+			<h1 className='playlist-info-header'>{playlistType}</h1>
 			<div className='playlist-info-details'>
 				<p>{`${videosCount} videos`}</p>
 				<p>No views</p>
@@ -25,7 +26,7 @@ function PlaylistInfo({ user, lastThumnail, videosCount }) {
 				<Avatar
 					style={{ marginRight: '1em' }}
 					src={user?.channel?.channelAvatar || ' '}
-					alt={user.channel.name}
+					alt={user?.channel?.name}
 				/>
 				<p>{user?.channel?.name}</p>
 			</div>

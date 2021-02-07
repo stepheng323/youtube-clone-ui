@@ -31,8 +31,8 @@ function Sidebar() {
 	};
 
 	const { pathname } = useLocation();
-	const subscriptionUrl = `${REACT_APP_DEV_BASE_URL}/subscriber/subscription`;
-	const { result, isLoading, error } = useFetch(subscriptionUrl);
+	const subscriptionUrl = `${REACT_APP_DEV_BASE_URL}/subscriber/subscription?page=1&limit=7`;
+	const { result } = useFetch(subscriptionUrl);
 	const homeSelected = pathname === '/' ? true : false;
 	const trendingSelected = pathname.startsWith('/trending') ? true : false;
 	const subscriptionSelected = pathname.startsWith('/subscription')
@@ -66,11 +66,13 @@ function Sidebar() {
 				/>
 			</Link>
 			<hr />
+			<Link to="/library">
 			<SidebarRow
 				selected={librarySelected}
 				Icon={VideoLibraryIcon}
 				title='Library'
 			/>
+			</Link>
 			<Link to='/history'>
 				<SidebarRow
 					selected={historySelected}
@@ -124,8 +126,8 @@ function Sidebar() {
 				<>
 					<p className='sidebar-title'>SUBSCRIPTIONS</p>
 					{result &&
-						result.payload.length &&
-						result.payload.map((channel) => {
+						result?.payload?.data?.length &&
+						result?.payload?.data?.map((channel) => {
 							const {
 								channel: { name },
 								channelAvatar,

@@ -1,26 +1,25 @@
 .video-row {
   display: flex;
-  margin-bottom: .8em;
-  margin-left: 17.5%;
+	margin-bottom: 0.8em;
+	margin-left: 17.5%;
 }
 
 .video-row-thumbnail-container {
-  width: 280px;
-  min-width: 280px;
-  margin-right: 1em;
-  /* height: 250px; */
+	margin-right: 1em;
+  position: relative;
+	background-color: lightgray;
 }
 .video-row-thumbnail-container > img {
-  width: 100%;
-  object-fit: cover;
-  
+	object-fit: cover;
+	width: 360px;
+	height: 185px;
 }
 
 
 .video-row-info h4 {
-  margin-bottom: 0.2em;
-  font-size: 18px;
-  color: #030303;
+	margin-bottom: 0.2em;
+	font-size: 18px;
+	color: #030303;
 }
 .video-row-info p {
 	font-size: 12px;
@@ -30,29 +29,29 @@
 
 .video-row-channel-info {
 	display: flex;
-  align-items: center;
-  margin-bottom: 1em;
+	align-items: center;
+	margin-bottom: 1em;
 }
 
-.video-row-channel-info > p {
-  color: #606060;
+.video-row-channel-info p {
+	color: #606060;
   font-size: 13px;
+  line-height: 18px;
 }
 .video-row-avatar {
 	height: 25px !important;
-  width: 25px !important;
-  margin-right: .4em;
+	width: 25px !important;
+	margin-right: 0.4em;
 }
 .video-row-text {
 	display: flex;
 }
 
 .video-row-description {
-  font-size: 13px;
-  color: #606060;
-  line-height: 20px;
+	font-size: 13px;
+	color: #606060;
+	line-height: 20px;
 }
-
 
 @media only screen and (max-width: 1336px) {
 	.video-row {

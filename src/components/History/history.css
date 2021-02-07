@@ -11,13 +11,22 @@
 	display: block;
 	background-color: #f9f9f9;
 	padding: 1em ;
-	width: 58%;
+	width: 60%;
 }
 
 .history-header {
 	font-weight: 500;
 	line-height: 22px;
 	color: #030303;
+}
+
+.no-history{
+	display: flex;
+	justify-content: center;
+	margin-top: 2em;
+	font-size: 14px;
+	line-height: 21px;
+	/* height: 100%; */
 }
 .search-history {
 	background-color: #f1f1f1;

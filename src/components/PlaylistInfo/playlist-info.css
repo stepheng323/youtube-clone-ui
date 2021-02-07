@@ -1,16 +1,17 @@
 .playlist-info {
 	padding: 1.5em 2em;
-	width: 24em;
+	width: 28%;
 	background-color: #f9f9f9;
 	position: fixed;
 	height: 100%;
 }
 .playlist-info-img-container {
 	position: relative;
-	height: 220px;
+	height: 210px;
 	background-color: #606060;
 }
 .playlist-info-img-container > img {
+	height: 100%;
 	width: 100%;
 }
 .playlist-info-header {

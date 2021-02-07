@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { REACT_APP_DEV_BASE_URL } from '../../constant';
 import HistoryVideo from '../TrendingVideo/TrendingVideo';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -11,38 +11,53 @@ import Divider from '@material-ui/core/Divider';
 import Radio from '@material-ui/core/Radio';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PauseIcon from '@material-ui/icons/Pause';
+import getToken from '../../Api/GetToken';
+import { UserContext } from '../../Context/User';
+import UseFetch from '../../Api/UseFetch';
 
 import './history.css';
 
 function History() {
+	const { setUser, user } = useContext(UserContext);
 	const [hasMore, setHasMore] = useState(true);
-	const [videos, setVideos] = useState([]);
 	const [page, setPage] = useState(1);
-	const [initialLoading, setinitialLoading] = useState(true);
-	const videoHistoryUrl = `${REACT_APP_DEV_BASE_URL}/history?page=1&limit=8`;
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const res = await fetch(videoHistoryUrl);
-			const result = await res.json();
-			setVideos(result.payload.data);
-			setinitialLoading(false);
-			if (!result.payload.next) {
-				setHasMore(false);
-			}
-		};
-		fetchData();
-	}, []);
+	const videoHistoryUrl = `${REACT_APP_DEV_BASE_URL}/history?page=1&limit=12`;
+	const { result, setResult, isLoading } = UseFetch(videoHistoryUrl);
+	const tokenExpiry = JSON.parse(localStorage.getItem('tokenExpiry'));
+	let token;
+
+	const getNewToken = async () => {
+		const response = await getToken();
+		if (response.success) {
+			const { payload } = response;
+			token = payload.token;
+			localStorage.setItem('tokenExpiry', payload.tokenExpiry);
+			setUser(() => payload);
+		}
+	};
 
 	const fetchNext = async () => {
+		if (Date.now() >= +tokenExpiry * 1000 || !user.token) {
+			await getNewToken();
+		}
 		setPage((page) => page + 1);
 		const getMoreVideos = async () => {
 			const response = await fetch(
-				`${REACT_APP_DEV_BASE_URL}/history?page=${page + 1}&limit=8`
+				`${REACT_APP_DEV_BASE_URL}/history?page=${page + 1}&limit=8`,
+				{
+					headers: {
+						Authorization: `Bearer ${token || user.token}`,
+						'Content-Type': 'application/json',
+					},
+				}
 			);
 			const result = await response.json();
 			if (result.success) {
-				setVideos(videos.concat(...result.payload.data));
+				setResult({
+					...result,
+					payload: { data: result.payload.data.concat(...result.payload.data) },
+				});
 			}
 			if (!result.payload.next) {
 				setHasMore(false);
@@ -51,48 +66,52 @@ function History() {
 		getMoreVideos();
 	};
 
-	if (initialLoading) {
-		return (
-			<div className='recommended-video'>
-				{Array(16).map((item) => (
-					<TrendingSkeleton key={item} />
-				))}
-			</div>
-		);
-	}
+	// if(result?.payload?.data?.length){
+	// 	const dates = result.payload.data.map(video => video.updatedAt.split('T')[0]);
+	// 	const distinctDate = [...new Set(dates)]
+	// }
+
 	return (
 		<div className='history'>
-			<InfiniteScroll
-				style={{ overflowY: 'hidden' }}
-				dataLength={videos.length}
-				next={fetchNext}
-				hasMore={hasMore}
-				loader={
-					<div className='recommended-loading-container'>
-						<CircularLoading />
-					</div>
-				}
-			>
-				<div className='watch-history'>
-					<p className='history-header'>Watch history</p>
-					{videos.length &&
-						videos.map((history) => {
+			{isLoading ? (
+				<div style={{ padding: '1em' }}>
+					{Array.from(Array(16)).map((item) => (
+						<TrendingSkeleton key={item} />
+					))}
+				</div>
+			) : result.payload.data?.length ? (
+				<InfiniteScroll
+					style={{ overflowY: 'hidden' }}
+					dataLength={result.payload.data.length}
+					next={fetchNext}
+					hasMore={hasMore}
+					loader={
+						<div className='watch-history'>
+							<CircularLoading />
+						</div>
+					}
+				>
+					<div className='watch-history'>
+						<p className='history-header'>Watch history</p>
+						{result.payload.data.map((history) => {
 							const {
 								_id,
 								video: {
+									_id: videoId,
 									title,
 									description,
 									thumbnail,
 									duration,
 									viewsCount,
+									createdAt,
 									channel: { name: channelName },
 								},
-								createdAt,
 							} = history;
 							return (
-								<HistoryVideo style={{width: '100%'}}
+								<HistoryVideo
+									style={{ width: '100%' }}
 									key={_id}
-									id={history._id}
+									id={videoId}
 									description={description}
 									title={title}
 									duration={duration}
@@ -103,8 +122,17 @@ function History() {
 								/>
 							);
 						})}
+					</div>
+				</InfiniteScroll>
+			) : (
+				<div style={{height: '85vh'}} className='watch-history'>
+					<p className='history-header'>Watch history</p>
+					<div className='no-history'>
+						<p>This list has no videos.</p>
+					</div>
 				</div>
-			</InfiniteScroll>
+			)}
+
 			<div className='search-history'>
 				<form className='search-history-text-field-container'>
 					<TextField
@@ -127,7 +155,6 @@ function History() {
 						<p className='search-history-property'>Watch history</p>
 						<Radio
 							checked={true}
-							// onChange={handleChange}
 							value='a'
 							name='radio-button-demo'
 							inputProps={{ 'aria-label': 'A' }}
@@ -140,9 +167,9 @@ function History() {
 							<p>clear all watch history</p>
 						</div>
 						<div className='search-history-actions-container'>
-								<PauseIcon className='search-history-icons' />
-								<p>pause watch history</p>
-							</div>
+							<PauseIcon className='search-history-icons' />
+							<p>pause watch history</p>
+						</div>
 					</div>
 				</div>
 			</div>

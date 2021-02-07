@@ -12,6 +12,7 @@ import logo from '../../img/logo.png';
 import '../header/header.css';
 import { ProfileContext } from '../../Context/ProfileCard';
 import { useHistory } from 'react-router-dom';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 function Header() {
 	const history = useHistory();
@@ -19,6 +20,15 @@ function Header() {
 	const { openProfile, setOpenProfile } = useContext(ProfileContext);
 	const [search, setSearch] = useState('');
 	const [openVideoUpload, setOpenVideoUpload] = useState(false);
+	const [open, setOpen] = React.useState(false);
+
+	const handleClick = () => {
+		setOpen((prev) => !prev);
+	};
+
+	const handleClickAway = () => {
+		setOpen(false);
+	};
 	const userExist = Object.keys(user).length > 0;
 
 	const handleSubmit = (e) => {
@@ -47,8 +57,8 @@ function Header() {
 			height: theme.spacing(7),
 		},
 	}));
-	
-  const classes = useStyles();
+
+	const classes = useStyles();
 
 	return (
 		<div className='header'>
@@ -84,15 +94,23 @@ function Header() {
 						</Button>
 					</Link>
 				)}
-				{openProfile && <Profile />}
-				{userExist && (
-					<Avatar
-					className={`${classes.small} profile`}
-						onClick={() => setOpenProfile(!openProfile)}
-						alt={capitalize(user.firstName) }
-						src={user?.channel?.channelAvatar || user.firstName}
-					/>
-				)}
+				<ClickAwayListener
+					mouseEvent='onMouseDown'
+					touchEvent='onTouchStart'
+					onClickAway={handleClickAway}
+				>
+					<div>
+						{open ? <Profile /> : null}
+					{userExist && (
+						<Avatar
+							className={`${classes.small} profile`}
+							onClick={handleClick}
+							alt={capitalize(user?.firstName)}
+							src={user?.channel?.channelAvatar || ' '}
+						/>
+						 )}
+					</div>
+				</ClickAwayListener>
 			</div>
 		</div>
 	);

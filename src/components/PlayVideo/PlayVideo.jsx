@@ -190,7 +190,7 @@ function PlayVideo() {
 				/>
 			<video crossOrigin='anonymous' autoPlay height='auto' width='100%' controls>
 				<source
-					src={`${REACT_APP_DEV_BASE_URL}/video/watch/${'id'}`}
+					src={`${REACT_APP_DEV_BASE_URL}/video/watch/${id}`}
 					type='video/mp4'>
 					</source>
 			</video>

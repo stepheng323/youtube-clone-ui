@@ -6,7 +6,7 @@ import { getRelativeTime, convertSecondsToHms } from '../../Utils/index';
 import './small-video-card.css';
 
 
-function SmallVideoCard({ id, title, thumbnail, channel,  views, date, duration }) {
+function SmallVideoCard({ id, title, thumbnail, channel, views, date, duration }) {
 	return (
 		<div className='small-video-card'>
 			<Link to={`/watch/${id}`}>

@@ -15,6 +15,7 @@ import { useContext } from 'react';
 import { useEffect } from 'react';
 import TrendingPage from './Pages/Trending';
 import LikedVideoPage from './Pages/LikedVideoPage';
+import LibraryPage from './Pages/LibraryPage';
 
 
 import './App.css';
@@ -42,6 +43,7 @@ function App() {
 					<Route exact path='/login' component={Login} />
 					<Route exact path='/signup' component={Signup} />
 					<Route exact path='/trending' component={TrendingPage} />
+					<Route exact path='/library' component={LibraryPage} />
 					<Route exact path='/history' component={HistoryPage} />
 					<Route exact path='/channel' component={MyChannel} />
 					<Route exact path='/channel/create' component={CustomChannel} />
