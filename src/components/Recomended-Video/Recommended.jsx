@@ -85,7 +85,7 @@ function Recommended() {
 								key={id}
 								id={id}
 								title={title}
-								thumbnail={`http://localhost:4000/${thumbnail}`}
+								thumbnail={thumbnail}
 								channel={channel}
 								channelId={channelId}
 								channelImage={channelImage || channel}

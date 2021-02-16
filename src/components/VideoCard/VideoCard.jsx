@@ -78,7 +78,7 @@ function VideoCard({
 		<div className='video-card'>
 			<Link to={`/watch/${id}`}>
 				<div className='video-image'>
-					<img style={{ display: 'block' }} src={thumbnail} alt='thumbnail' />
+					<img style={{ display: 'block' }} src={`${REACT_APP_DEV_UPLOAD_URL}/thumbnail`} alt='thumbnail' />
 					<p className='video-time'>{convertSecondsToHms(duration)}</p>
 					<div className='hidden'>
 						<WatchLaterIcon className='watch-later ' />

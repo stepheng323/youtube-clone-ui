@@ -37,7 +37,6 @@ function Subscription() {
 		payload: { data: channels = [] },
 	} = result;
 
-	console.log(result);
 	const getNewToken = async () => {
 		const response = await getToken();
 		if (response.success) {

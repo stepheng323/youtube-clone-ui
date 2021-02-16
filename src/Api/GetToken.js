@@ -1,6 +1,7 @@
+import { REACT_APP_DEV_BASE_URL } from "../constant";
 
 const FetchToken = async () => {
-	const url = 'http://localhost:4000/api/v1/auth/token';
+	const url = `${REACT_APP_DEV_BASE_URL}/auth/token`;
 	const options = {
 		method: 'POST',
 		headers: {
