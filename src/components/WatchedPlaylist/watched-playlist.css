@@ -1,28 +1,28 @@
-.liked-videos {
+.watched-videos {
 	margin-left: 17.5%;
 	background-color: #f9f9f9;
 	display: flex;
 	min-height: 90vh;
 }
 
-.liked-videos-right {
+.no-watched-videos {
+	min-height: 83vh;
+}
+
+.watched-videos-right {
 	margin-left: 26em;
 	height: 90vh;
 	width: 100%;
 }
 
-.no-liked-videos {
-	min-height: 83vh;
-}
-
 @media only screen and (max-width: 1336px) {
-	.liked-videos {
+	.watched-videos {
 		margin-left: 6%;
 	}
 }
 
 @media only screen and (max-width: 1336px) {
-	.liked-videos {
+	.watched-videos {
 		margin-left: 6%;
 	}
 }

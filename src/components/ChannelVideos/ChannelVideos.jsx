@@ -2,10 +2,10 @@ import React from 'react';
 import SmallVideoCard from '../SmallVideoCard/smallVideoCard';
 import './channel-videos.css';
 
-function ChannelVideos({ videos }) {
+function ChannelVideos({ videos, title }) {
 	return (
 		<>
-			<p>Uploads</p>
+			<p style={{fontWeight: 500,lineHeight: '20px',color: '#030303', padding: '1em 0'}}>{title}</p>
 			<div className='channel-uploads'>
 				{videos &&
 					videos.payload.length &&

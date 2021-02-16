@@ -18,7 +18,7 @@ function Trending() {
 			try {
 				const res = await fetch(trendingVideosUrl);
 				const result = await res.json();
-				setVideos(result.payload.data);
+				setVideos(result.payload.data || []);
 				setinitialLoading(false);
 				if (!result.payload.next) {
 					setHasMore(false);
@@ -57,19 +57,19 @@ function Trending() {
 
 	return (
 		<div className='trending-videos-container'>
-		<InfiniteScroll
-			style={{ overflowY: 'hidden' }}
-			dataLength={videos.length}
-			next={fetchNext}
-			hasMore={hasMore}
-			loader={
-				<div className=''>
-					<CircularLoading />
-				</div>
-			}
-		>
-				{videos.length ? (
-					videos.map((videoInfo) => {
+			{videos.length ? (
+				<InfiniteScroll
+					style={{ overflowY: 'hidden' }}
+					dataLength={videos.length}
+					next={fetchNext}
+					hasMore={hasMore}
+					loader={
+						<div className=''>
+							<CircularLoading />
+						</div>
+					}
+				>
+					{videos.map((videoInfo) => {
 						const {
 							_id,
 							title,
@@ -93,12 +93,12 @@ function Trending() {
 								channelName={channelName}
 							/>
 						);
-					})
-				) : (
-					<p>There are no trending videos at this time please tyr again</p>
-				)}
-		 </InfiniteScroll>
-			</div>
+					})}
+				</InfiniteScroll>
+			) : (
+				<p>This list has no videos</p>
+			)}
+		</div>
 	);
 }
 export default Trending;

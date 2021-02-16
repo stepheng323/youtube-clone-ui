@@ -102,7 +102,7 @@ export default function CreateChannelModal2({ handleClose, handleOpen, open }) {
 									/>
 								</div>
 								<div className='channel-modal2-options-button'>
-									<Link to="/channel/create">
+									<Link to="/create/channel">
 										<Button variant='contained' color='primary' disableElevation>
 											SELECT
 										</Button>

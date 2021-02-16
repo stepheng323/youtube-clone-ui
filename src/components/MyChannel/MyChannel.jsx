@@ -4,13 +4,13 @@ import Buttons from '../Button/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
+import Avatar from '../Avatar/Avatar';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import UseFetch from '../../Api/UseFetch';
-
 import './my-channel.css';
-import { REACT_APP_DEV_BASE_URL } from '../../constant';
+import { REACT_APP_DEV_BASE_URL, REACT_APP_DEV_UPLOAD_URL } from '../../constant';
 import { useParams } from 'react-router-dom';
 
 function MyChannel() {
@@ -37,8 +37,6 @@ function MyChannel() {
 			'aria-controls': `simple-tabpanel-${index}`,
 		};
 	}
-
-	const classes = useStyles();
 
 	function TabPanel(props) {
 		const { children, value, index, ...other } = props;
@@ -72,11 +70,11 @@ function MyChannel() {
 				<div className='my-channel-banner-inner-container'>
 					<div className='my-channel-banner-inner'>
 						<div className='my-channel-banner-inner-left'>
-							<img
-								className='my-channel-profile-image'
-								alt='channel'
-								src='https://lh3.googleusercontent.com/a-/AOh14GjySH9J2YXSPskpwCZ_l5_LU_r6StEnduNarQ67mw=s88-c-k-c0x00ffffff-no-rj-mo'
-							/>
+						<Avatar
+						alt={channelName}
+						src={`${REACT_APP_DEV_UPLOAD_URL}/${channelAvatar}`}
+						size='medium'
+					/>
 							<div className=''>
 								<h2>{name}</h2>
 								<p>No Subscribers</p>

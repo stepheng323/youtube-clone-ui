@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { REACT_APP_DEV_UPLOAD_URL } from '../../constant';
-import { convertSecondsToHms, getRelativeTime } from '../../Utils';
+import { convertSecondsToHms, getRelativeTime, trimText } from '../../Utils';
 import './trending-video.css';
 
 function TrendingVideo({id, title, description, thumbnail, duration, views, date, channelName}) {
@@ -21,7 +21,7 @@ function TrendingVideo({id, title, description, thumbnail, duration, views, date
 						{views} {views > 1 ? 'views' : 'view'} • {getRelativeTime(date)} ago
 					</p>
         </div>
-        <p className="trending-video-details">{description}</p>
+        <p className="trending-video-details">{trimText(description, 180)}</p>
       </div>
     </div>
     </Link>

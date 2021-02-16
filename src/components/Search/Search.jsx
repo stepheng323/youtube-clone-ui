@@ -6,14 +6,24 @@ import nodata from '../../img/nodata.png';
 import UseFetch from '../../Api/UseFetch';
 import { REACT_APP_DEV_BASE_URL } from '../../constant';
 import ChannelSearch from '../ChannelSearch/channelSearch';
+import { TrendingSkeleton } from '../Skeleton/Skeleton';
 
 function Search() {
 	const { query } = useParams();
 	const url = `${REACT_APP_DEV_BASE_URL}/video/search/${query}`;
 	const { result, isLoading } = UseFetch(url);
 
-	if (isLoading) return <p>Loading</p>;
+	if (isLoading) {
+		return (
+			<div className='search-page'>
+				{Array.from(Array(16)).map((item) => (
+					<TrendingSkeleton key={item} />
+				))}
+			</div>
+		);
+	}
 
+	console.log(result);
 	const { payload: searchResult } = result;
 	return (
 		<div className='search-page'>
@@ -27,7 +37,7 @@ function Search() {
 							views={item.viewsCount}
 							date={item.createdAt}
 							channel={item.channel.name}
-							channelImage={item.channelAvatar}
+							channelImage={item.channel.channelAvatar}
 							description={item.description}
 							duration={item.duration}
 							videoId={item._id}
@@ -36,9 +46,9 @@ function Search() {
 						<ChannelSearch
 							key={item._id}
 							channelName={item.name}
-							subcribersCount={item.videos.length}
+							subcribersCount={item.subcribersCount}
 							videosCount={item.videos.length}
-							description={item.description}
+							description={item.channelDescription}
 						/>
 					)
 				)

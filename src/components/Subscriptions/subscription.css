@@ -1,0 +1,11 @@
+.subscription {
+  margin-left: 17.5%; 
+	width: 100%;
+}
+
+
+@media only screen and (max-width: 1336px) {
+	.subscription {
+		margin-left: 6%;
+	}
+}

@@ -8,7 +8,7 @@ import { UserContext } from '../../Context/User';
 import LikedVideo from '../LikedVideo/likeVideo';
 import PlaylistInfo from '../PlaylistInfo/PlaylistInfo';
 import getToken from '../../Api/GetToken';
-
+import { LikedVideoSkeleton } from '../Skeleton/Skeleton';
 
 function LikedVideos() {
 	const { user, setUser } = useContext(UserContext);
@@ -19,6 +19,7 @@ function LikedVideos() {
 	const tokenExpiry = JSON.parse(localStorage.getItem('tokenExpiry'));
 	let token;
 
+	console.log(result);
 	const getNewToken = async () => {
 		const response = await getToken();
 		if (response.success) {
@@ -35,17 +36,21 @@ function LikedVideos() {
 		}
 		setPage((page) => page + 1);
 		const getMoreVideos = async () => {
-			const response = await fetch(`${REACT_APP_DEV_BASE_URL}/like?page=${page + 1}&limit=8`, {
-				method: 'GET',
-				headers: {
-					Authorization: `Bearer ${token || user.token}`,
-					'Content-Type': 'application/json',
-				}});
+			const response = await fetch(
+				`${REACT_APP_DEV_BASE_URL}/like?page=${page + 1}&limit=8`,
+				{
+					method: 'GET',
+					headers: {
+						Authorization: `Bearer ${token || user.token}`,
+						'Content-Type': 'application/json',
+					},
+				}
+			);
 			const result = await response.json();
 			if (result.success) {
 				setResult({
 					...result,
-					payload: { data: data.concat(...result.payload.data) },
+					payload: { data: result.payload.data.concat(...result.payload.data) },
 				});
 			}
 			if (!result.payload.next) {
@@ -55,33 +60,49 @@ function LikedVideos() {
 		getMoreVideos();
 	};
 
-	if (isLoading) return <p>Loading</p>;
-	const {
-		payload: { data = [] },
-	} = result;
+	const InfiniteScrollStyle = {
+		backgroundColor: '#f1f1f1',
+		padding: '1em 2em 0 0.5em',
+		overflowY: 'hidden',
+		minHeight: '90vh',
+	};
 
 	return (
 		<div className='liked-videos'>
-			<InfiniteScroll
-			 	style={{ overflowY: 'hidden' }}
-				dataLength={data.length}
-				next={fetchNext}
-				hasMore={hasMore}
-				loader={
-					<div className='recommended-loading-container'>
-						<CircularLoading />
-					</div>
-				}
-			>
+			{!isLoading ? (
 				<PlaylistInfo
 					playlistType={'Liked Videos'}
 					user={user}
-					videosCount={data.length}
-					lastThumbnail={data.length ? data[0].video.thumbnail : ''}
+					videosCount={result.payload.data?.length || 0}
+					lastThumbnail={
+						result.payload.data?.length
+							? result.payload.data[0].video.thumbnail
+							: ''
+					}
 				/>
-				<div className='liked-videos-right'>
-					{data.length ? (
-						data.map((likedVideo, index) => {
+			) : (
+				<p>loading...</p>
+			)}
+			<div className='liked-videos-right'>
+			{isLoading ? (
+					Array.from(new Array(8)).map((i) => (
+						<LikedVideoSkeleton />
+					))
+			) : 
+				<>
+					{result.payload.data?.length ? (
+					<InfiniteScroll
+						style={InfiniteScrollStyle}
+						dataLength={result.payload.data.length}
+						next={fetchNext}
+						hasMore={hasMore}
+						loader={
+							<div className='recommended-loading-container'>
+								<CircularLoading />
+							</div>
+						}
+					>
+						{result.payload.data.map((likedVideo, index) => {
 							const {
 								_id: id,
 								video: {
@@ -104,14 +125,18 @@ function LikedVideos() {
 									channelName={channelName}
 								/>
 							);
-						})
+						})}
+					</InfiniteScroll>
 					) : (
-						<div className="no-liked-videos">
-							<p>No videos in this playlist yet</p>
-						</div>
+					<div className='no-liked-videos'>
+						<p>
+							No videos in this playlist
+						</p>
+					</div>
 					)}
-				</div>
-			</InfiniteScroll>
+				</>
+			}
+			</div>
 		</div>
 	);
 }

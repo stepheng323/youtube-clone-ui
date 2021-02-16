@@ -2,16 +2,15 @@
 	margin-left: 17.5%;
 	display: flex;
 	background-color: #f1f1f1;
-	justify-content: flex-start;
-	width: 100%;
 	position: relative;
 }
 
 .watch-history {
 	display: block;
 	background-color: #f9f9f9;
-	padding: 1em ;
-	width: 60%;
+	padding: 1em;
+	width: 58%;
+	min-height: 83vh;
 }
 
 .history-header {
@@ -20,13 +19,12 @@
 	color: #030303;
 }
 
-.no-history{
+.no-history {
 	display: flex;
 	justify-content: center;
 	margin-top: 2em;
 	font-size: 14px;
 	line-height: 21px;
-	/* height: 100%; */
 }
 .search-history {
 	background-color: #f1f1f1;
@@ -71,9 +69,9 @@
 	padding: 1em 0;
 }
 
-.search-history-icons{
+.search-history-icons {
 	color: #3a3838 !important;
-	margin-right: .5em;
+	margin-right: 0.5em;
 }
 @media only screen and (max-width: 1336px) {
 	.history {

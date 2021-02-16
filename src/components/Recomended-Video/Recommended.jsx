@@ -7,76 +7,96 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { CircularLoading } from '../../Utils/Loading';
 
 function Recommended() {
-	const [hasMore, setHasMore] = useState(true)
+	const [hasMore, setHasMore] = useState(true);
 	const [page, setPage] = useState(1);
 	const [videos, setVideos] = useState([]);
 	const [initialLoading, setinitialLoading] = useState(true);
-	const getRecommendedVideoUrl = `${REACT_APP_DEV_BASE_URL}/video/recommended?page=${page}&limit=16`;
-
+	const getRecommendedVideoUrl = `${REACT_APP_DEV_BASE_URL}/video/recommended?page=${page}&limit=8`;
 
 	useEffect(() => {
-		const fetchData = async() => {
+		const fetchData = async () => {
 			const res = await fetch(getRecommendedVideoUrl);
 			const result = await res.json();
 			setVideos(result.payload.data);
-			if(!result.payload.next){
-				setHasMore(false)
+			if (!result.payload.next) {
+				setHasMore(false);
 			}
-			setinitialLoading(false)
-		}
+			setinitialLoading(false);
+		};
 		fetchData();
-	}, [])
+	}, []);
 
-  const fetchNext = async() => {
-		setPage(page => page + 1)
-      const getMoreVideos = async () => {
-        const response = await fetch(`${REACT_APP_DEV_BASE_URL}/video/recommended?page=${page + 1}&limit=8`);
-        const result = await response.json();
-				if(result.success){
-					setVideos(videos.concat(...result.payload.data));
-				}
-				if(!result.payload.next){
-					setHasMore(false)
-				}
-      };
-      getMoreVideos();
-  }
-
+	const fetchNext = async () => {
+		setPage((page) => page + 1);
+		const getMoreVideos = async () => {
+			const response = await fetch(
+				`${REACT_APP_DEV_BASE_URL}/video/recommended?page=${page + 1}&limit=8`
+			);
+			const result = await response.json();
+			if (result.success) {
+				setVideos(videos.concat(...result.payload.data));
+			}
+			if (!result.payload.next) {
+				setHasMore(false);
+			}
+		};
+		getMoreVideos();
+	};
 
 	if (initialLoading) {
-		return (<div className="recommended-video-skeleton">
-			{Array.from(Array(16)).map((item) => <RecommendedSkeleton key={item} /> )}
-			</div>)
+		return (
+			<div className='recommended-video-skeleton'>
+				{Array.from(Array(16)).map((item) => (
+					<RecommendedSkeleton key={item} />
+				))}
+			</div>
+		);
 	}
 
-
 	return (
-			<InfiniteScroll style={{ overflowY: 'hidden' }}
-      dataLength={videos.length}
-      next={fetchNext}
+		<InfiniteScroll style={{width: '100%'}}
+			dataLength={videos.length}
+			next={fetchNext}
 			hasMore={hasMore}
-      loader={<div className="recommended-loading-container"><CircularLoading/></div>}
-      >
-				<div className="recommended-video">
-			{videos.length && videos.map((video) => {
-					const { _id: id, title, thumbnail, duration, channel: { name: channel, _id: channelId, channelAvatar: channelImage}, viewsCount, createdAt } = video;
-					return (
-						<Video
-							key={id}
-							id={id}
-							title={title}
-							thumbnail={`http://localhost:4000/${thumbnail}`}
-							channel={channel}
-							channelId={channelId}
-							channelImage={channelImage || channel}
-							views={viewsCount}
-							duration={duration}
-							date={createdAt}
-						/>
-					);
-				})
-			}</div>
-			</InfiniteScroll>
+			loader={
+				<div className='recommended-loading-container'>
+					<CircularLoading />
+				</div>
+			}
+		>
+			<div className='recommended-video'>
+				{videos.length &&
+					videos.map((video) => {
+						const {
+							_id: id,
+							title,
+							thumbnail,
+							duration,
+							channel: {
+								name: channel,
+								_id: channelId,
+								channelAvatar: channelImage,
+							},
+							viewsCount,
+							createdAt,
+						} = video;
+						return (
+							<Video
+								key={id}
+								id={id}
+								title={title}
+								thumbnail={`http://localhost:4000/${thumbnail}`}
+								channel={channel}
+								channelId={channelId}
+								channelImage={channelImage || channel}
+								views={viewsCount}
+								duration={duration}
+								date={createdAt}
+							/>
+						);
+					})}
+			</div>
+		</InfiniteScroll>
 	);
 }
 

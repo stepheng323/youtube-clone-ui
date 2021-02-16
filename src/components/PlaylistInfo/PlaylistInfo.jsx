@@ -25,7 +25,7 @@ function PlaylistInfo({ user, lastThumbnail, videosCount, playlistType }) {
 			<div className='playlist-info-profile'>
 				<Avatar
 					style={{ marginRight: '1em' }}
-					src={user?.channel?.channelAvatar || ' '}
+					src={`${REACT_APP_DEV_UPLOAD_URL}/${user?.channel?.channelAvatar}`}
 					alt={user?.channel?.name}
 				/>
 				<p>{user?.channel?.name}</p>

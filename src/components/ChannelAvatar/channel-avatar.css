@@ -1,0 +1,19 @@
+.channel-avatar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.channel-avatar-channel-name {
+	font-size: 14px;
+	line-height: 16px;
+	font-weight: 500;
+	color: #030303;
+	margin-top: 0.5em;
+}
+
+.channel-avatar-subscriber-count {
+	font-size: 13px;
+	line-height: 18px;
+	color: #606060;
+	margin-top: 0.3em;
+}

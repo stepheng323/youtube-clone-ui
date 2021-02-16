@@ -30,7 +30,7 @@ function AboutChannel({joinDate, description}) {
 			<div className='about-channel-right'>
 					<h1 className='about-channel-right-headings'>Stats</h1>
 				<Divider />
-				<div>
+				<div style={{display: 'flex', alignItems: 'center'}}>
 					<h1 className='about-channel-right-headings'>Joined</h1>
 					<p>{new Date(joinDate).toDateString()}</p>
 				</div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { trimText } from '../../Utils';
 import Buttons from '../Button/Button';
 
 import './channel-search.css';
@@ -20,7 +21,7 @@ function channelSearch({channelName, subcribersCount, videosCount, description }
 					{subcribersCount} {subcribersCount > 1 ? 'subcribers' : 'subcriber'} •{' '}
 					{videosCount} videos
 				</p>
-				<p className='channel-search-description'>{description|| 'Hi! I like to play Video Game Music on piano and violin. You can find me on Twitch these days: https://www.twitch.tv/lara6683'}</p>
+				<p className='channel-search-description'>{trimText(description, 120)}</p>
 			</div>
 			<Buttons variant="contained" color='secondary'>Subscribe</Buttons>
 		</div>

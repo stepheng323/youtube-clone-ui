@@ -1,9 +1,11 @@
 .playlist-info {
 	padding: 1.5em 2em;
-	width: 28%;
+	min-width: 22em;
+	width: 22em;
 	background-color: #f9f9f9;
 	position: fixed;
 	height: 100%;
+	overflow: auto;
 }
 .playlist-info-img-container {
 	position: relative;

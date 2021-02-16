@@ -11,7 +11,10 @@ import SidebarRow from '../SidebarRow/SidebarRow';
 import './profile.css';
 import { Link } from 'react-router-dom';
 import UseFetch from '../../Api/UseFetch';
-import { REACT_APP_DEV_BASE_URL } from '../../constant';
+import {
+	REACT_APP_DEV_BASE_URL,
+	REACT_APP_DEV_UPLOAD_URL,
+} from '../../constant';
 import { CircularLoading } from '../../Utils/Loading';
 
 function Profile() {
@@ -43,11 +46,13 @@ function Profile() {
 						<Avatar
 							className='profile-card-avatar'
 							alt={user.firstName}
-							src={user?.channel?.channelAvatar || user.firstName}
+							src={`${REACT_APP_DEV_UPLOAD_URL}/${user?.channel?.channelAvatar}`}
 						/>
 						<div className=''>
 							<p className='profile-name'>
-								{user.firstName} {user.lastName}
+								{user.channel
+									? user.channel.name
+									: `${user.firstName} ${user.lastName}`}
 							</p>
 							<p className='profile-email'>{user.email}</p>
 						</div>
@@ -58,14 +63,16 @@ function Profile() {
 							<Link to={`/channel/${result.payload[0].name}`}>
 								<SidebarRow Icon={AccountBoxIcon} title='Your channel' />
 							</Link>
-						): <div onClick={handleChannelModal}>
-						<SidebarRow
-							showCreateChannelModal={handleLogout}
-							Icon={AccountBoxIcon}
-							title='Create a channel'
-						/>
-					</div> }
-							
+						) : (
+							<div onClick={handleChannelModal}>
+								<SidebarRow
+									showCreateChannelModal={handleLogout}
+									Icon={AccountBoxIcon}
+									title='Create a channel'
+								/>
+							</div>
+						)}
+
 						<SidebarRow
 							className='pl-2'
 							Icon={SettingsApplicationsIcon}

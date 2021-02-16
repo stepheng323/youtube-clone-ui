@@ -17,7 +17,7 @@
 	display: flex;
 	font-size: 13px;
 	line-height: 18px;
-	color: gray;
+	color: #606060;
 }
 .trending-video-title {
 	font-size: 18px;
@@ -26,14 +26,13 @@
 }
 
 .trending-video-channel {
-	margin-right: .7em;
-	color: gray;
-
+	margin-right: 0.7em;
+	color: #606060;
 }
 
 .trending-video-details {
 	font-size: 13px;
 	line-height: 18px;
-	color: gray;
+	color: #606060;
 	margin-top: 0.8em;
 }

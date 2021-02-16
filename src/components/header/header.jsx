@@ -10,14 +10,15 @@ import { UserContext } from '../../Context/User';
 import VideoUploadModal from '../FirstUploadModal/UploadModal';
 import logo from '../../img/logo.png';
 import '../header/header.css';
-import { ProfileContext } from '../../Context/ProfileCard';
 import { useHistory } from 'react-router-dom';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import { REACT_APP_DEV_UPLOAD_URL } from '../../constant';
+import { ToggleSidebarContext } from '../../Context/ToggleSidebar';
 
 function Header() {
 	const history = useHistory();
 	const { user } = useContext(UserContext);
-	const { openProfile, setOpenProfile } = useContext(ProfileContext);
+	const { width, setWidth } = useContext(ToggleSidebarContext);
 	const [search, setSearch] = useState('');
 	const [openVideoUpload, setOpenVideoUpload] = useState(false);
 	const [open, setOpen] = React.useState(false);
@@ -60,10 +61,20 @@ function Header() {
 
 	const classes = useStyles();
 
+	const breakPoint = 1336;
+
+	const toggleSidebar = () => {
+		if (width > breakPoint){
+		const handleResixe = () => setWidth(window.innerWidth < breakPoint);
+		return window.addEventListener('resize', handleResixe)
+		}
+		if(!width > breakPoint) setWidth(window.innerWidth > 1336);
+	};
+
 	return (
 		<div className='header'>
 			<div className='header-menu-logo'>
-				<MenuIcon />
+				<MenuIcon onClick={toggleSidebar} />
 				<Link to='/'>
 					<img className='logo' src={logo} alt='logo' />
 				</Link>
@@ -101,14 +112,14 @@ function Header() {
 				>
 					<div>
 						{open ? <Profile /> : null}
-					{userExist && (
-						<Avatar
-							className={`${classes.small} profile`}
-							onClick={handleClick}
-							alt={capitalize(user?.firstName)}
-							src={user?.channel?.channelAvatar || ' '}
-						/>
-						 )}
+						{userExist && (
+							<Avatar
+								className={`${classes.small} profile`}
+								onClick={handleClick}
+								alt={capitalize(user?.channel?.name || user?.firstName)}
+								src={`${REACT_APP_DEV_UPLOAD_URL}/${user?.channel?.channelAvatar}`}
+							/>
+						)}
 					</div>
 				</ClickAwayListener>
 			</div>

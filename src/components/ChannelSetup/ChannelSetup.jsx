@@ -2,8 +2,8 @@ import React, { useContext, useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
-import { Avatar } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar'; 
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import Buttons from '../Button/Button';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import logo from '../../img/logo.png';
@@ -11,15 +11,15 @@ import { UserContext } from '../../Context/User';
 
 import './channel-setup.css';
 import UseForm from '../../Api/UseForm';
-import { REACT_APP_DEV_BASE_URL } from '../../constant';
+import { REACT_APP_DEV_BASE_URL, REACT_APP_DEV_UPLOAD_URL } from '../../constant';
 import UseFetch from '../../Api/UseFetch';
+import { capitalize } from '@material-ui/core';
+
 
 function ChannelSetup() {
 	const history = useHistory();
 	const { channelName } = useParams();
-	const { result, isLoading } = UseFetch(
-		`${REACT_APP_DEV_BASE_URL}/channel/${channelName}`
-	);
+	const { result, isLoading } = UseFetch(`${REACT_APP_DEV_BASE_URL}/channel/${channelName}`);
 	const channelSetupUrl = `${REACT_APP_DEV_BASE_URL}/channel/setup`;
 	const {
 		values,
@@ -61,7 +61,7 @@ function ChannelSetup() {
 	if (multipartResult && multipartResult._id) {
 		history.push(`/channel/${multipartResult.name}`);
 	}
-	if (isLoading) return <p>Loading</p>;
+	if (!result) return <p>Loading</p>
 
 	return (
 		<>
@@ -74,11 +74,11 @@ function ChannelSetup() {
 				<div className='header-icons'>
 					{userExist && (
 						<Avatar
-							className='profile'
-							alt={channelName || user.firstName}
-							src={user?.channel?.channelAvatar || channelName}
-						/>
-					)}
+						className={`${classes.small} profile`}
+						alt={capitalize(user?.channel?.name || user?.firstName)}
+						src={`${REACT_APP_DEV_UPLOAD_URL}/${user?.channel?.channelAvatar}`}
+					/>
+					 )}
 				</div>
 			</div>
 			<div className='channel-setup'>

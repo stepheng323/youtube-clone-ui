@@ -1,7 +1,7 @@
 .subscribedChannel {
 	display: flex;
 	align-items: center;
-  padding-left: 25px;
+  padding: 0 25px;
 	height: 40px;
 }
 
@@ -10,8 +10,8 @@
 	cursor: pointer;
 }
 
-.channelAvatar {
-	margin-right: 20px;
-	height: 29px !important;
-	width: 29px !important;
+.subscribedChannel > p {
+	margin-left: 25px;
+	font-size: 14px;
+
 }

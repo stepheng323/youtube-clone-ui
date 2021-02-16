@@ -15,7 +15,7 @@ function SidebarMini() {
 			<SidebarRowMini
 				Icon={SubscriptionIcon}
 				title='Subscriptions'
-				url='/subcription'
+				url='/subscriptions'
 			/>
 			<SidebarRowMini Icon={VideoLibraryIcon} title='Library' url='/library' />
 		</div>

@@ -3,7 +3,7 @@
 	margin-left: 17.5%;
 	background-color: #f9f9f9;
 	padding: 1.5em 0.8em 0 1.6em;
-	width: 100%;
+	min-height: 83vh;
 	align-items: flex-start;
 	justify-content: space-between;
 }

@@ -15,6 +15,8 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { UserContext } from '../../Context/User';
 import { REACT_APP_DEV_BASE_URL } from '../../constant';
 import { useHistory } from 'react-router-dom';
+import { capitalize } from '@material-ui/core';
+import { REACT_APP_DEV_UPLOAD_URL } from '../../constant';
 
 function CustomChannel() {
 	const history = useHistory();
@@ -28,7 +30,7 @@ function CustomChannel() {
 	const userExist = Object.keys(user).length > 0;
 
 	if (result && result.success) {
-		return history.push(`/channel/setup/${result.payload.name}`);
+		history.push(`/channel/setup/${result.payload.name}`);
 	}
 	const BlackCheckbox = withStyles({
 		root: {
@@ -56,8 +58,8 @@ function CustomChannel() {
 					{userExist && (
 						<Avatar
 							className='profile'
-							alt={user.firstName}
-							src='https://lh3.googleusercontent.com/a-/AOh14GjySH9J2YXSPskpwCZ_l5_LU_r6StEnduNarQ67mw=s88-c-k-c0x00ffffff-no-rj-mo'
+							alt={capitalize(user?.channel?.name || user?.firstName)}
+							src={`${REACT_APP_DEV_UPLOAD_URL}/${user?.channel?.channelAvatar}`}
 						/>
 					)}
 				</div>

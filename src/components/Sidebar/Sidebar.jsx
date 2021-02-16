@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import SidebarRow from '../SidebarRow/SidebarRow';
 import './sidebar.css';
 import HomeIcon from '@material-ui/icons/Home';
@@ -12,27 +12,70 @@ import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUp';
 import ExpandMoreOutlinedIcon from '@material-ui/icons/ExpandMoreOutlined';
 import ExpandLessOutlinedIcon from '@material-ui/icons/ExpandLessOutlined';
 import { Link, useLocation } from 'react-router-dom';
-import useFetch from '../../Api/UseFetch';
 import { REACT_APP_DEV_BASE_URL } from '../../constant';
 import SubscribedChannel from '../SubscribedChannel/subscribedChannel';
 import { UserContext } from '../../Context/User';
+import { SubscriptionContext } from '../../Context/Subsription';
 import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import AccountIcon from '@material-ui/icons/AccountCircle';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { CircularLoading } from '../../Utils/Loading';
+import getToken from '../../Api/GetToken';
+
+const tokenExpiry = JSON.parse(localStorage.getItem('tokenExpiry'));
 
 function Sidebar() {
-	const { user } = useContext(UserContext);
+	const { user, setUser } = useContext(UserContext);
+	const { subscriptions, setSubscriptions } = useContext(SubscriptionContext);
+	const [hasMore, setHasMore] = useState(true);
+	const [page, setPage] = useState(1);
 	const userExist = Object.keys(user).length > 0;
 	const [open, setOpen] = React.useState(false);
+	const subscriptionUrl = `${REACT_APP_DEV_BASE_URL}/subscriber/subscription?page=1&limit=7`;
+
+	useEffect(() => {
+		const fetchdata = async () => {
+			let token;
+			if (Date.now() >= +tokenExpiry * 1000 || !user.token) {
+				const getNewToken = async () => {
+					const response = await getToken();
+					if (response && response.success) {
+						const { payload } = response;
+						token = payload.token;
+						localStorage.setItem('tokenExpiry', payload.tokenExpiry);
+						setUser(() => payload);
+					}
+				};
+				await getNewToken();
+			}
+			try {
+				const res = await fetch(subscriptionUrl, {
+					method: 'GET',
+					headers: {
+						Authorization: `Bearer ${token || user.token}`,
+						'Content-Type': 'application/json',
+					},
+				});
+				const data = await res.json();
+				setSubscriptions(data.payload.data || []);
+				// setLoading(false);
+				return data;
+			} catch (err) {
+				if (err.name === 'AbortError') return;
+				// setError(err);
+				// setLoading(false);
+			}
+		};
+		fetchdata();
+	}, []);
 
 	const handleClick = () => {
 		setOpen(!open);
 	};
 
 	const { pathname } = useLocation();
-	const subscriptionUrl = `${REACT_APP_DEV_BASE_URL}/subscriber/subscription?page=1&limit=7`;
-	const { result } = useFetch(subscriptionUrl);
 	const homeSelected = pathname === '/' ? true : false;
 	const trendingSelected = pathname.startsWith('/trending') ? true : false;
 	const subscriptionSelected = pathname.startsWith('/subscription')
@@ -44,7 +87,9 @@ function Sidebar() {
 	const likedVideosSelected = pathname.startsWith('/liked-videos')
 		? true
 		: false;
-	const watchedVideosSelected = pathname.startsWith('/playlist/watched') ? true : false
+	const watchedVideosSelected = pathname.startsWith('/playlist/watched')
+		? true
+		: false;
 
 	return (
 		<div className=' sidebar'>
@@ -66,12 +111,12 @@ function Sidebar() {
 				/>
 			</Link>
 			<hr />
-			<Link to="/library">
-			<SidebarRow
-				selected={librarySelected}
-				Icon={VideoLibraryIcon}
-				title='Library'
-			/>
+			<Link to='/library'>
+				<SidebarRow
+					selected={librarySelected}
+					Icon={VideoLibraryIcon}
+					title='Library'
+				/>
 			</Link>
 			<Link to='/history'>
 				<SidebarRow
@@ -103,7 +148,6 @@ function Sidebar() {
 							title='Liked Videos'
 						/>
 					</Link>
-					<SidebarRow Icon={ExpandMoreOutlinedIcon} title='Show More' />
 				</>
 			) : (
 				<>
@@ -125,23 +169,48 @@ function Sidebar() {
 			{userExist && (
 				<>
 					<p className='sidebar-title'>SUBSCRIPTIONS</p>
-					{result &&
-						result?.payload?.data?.length &&
-						result?.payload?.data?.map((channel) => {
-							const {
-								channel: { name },
-								channelAvatar,
-							} = channel;
-							return (
-								<SubscribedChannel
-									key={name}
-									channelName={name}
-									channelAvatar={channelAvatar || name}
-								/>
-							);
-						})}
+					{subscriptions?.length
+						? subscriptions.map((channel) => {
+								const {
+									channel: { name, channelAvatar },
+								} = channel;
+								return (
+									<SubscribedChannel
+										key={name}
+										channelName={name}
+										channelAvatar={channelAvatar || name}
+									/>
+								);
+						  })
+						: null}
 					<Collapse in={open} timeout='auto' unmountOnExit>
-						<p>the begin</p>
+						<InfiniteScroll
+							style={{ overflowY: 'hidden' }}
+							dataLength={subscriptions.length}
+							next={() => console.log('me')}
+							hasMore={hasMore}
+							loader={
+								<div className='recommended-loading-container'>
+									<CircularLoading />
+								</div>
+							}
+						>
+							<SubscribedChannel
+								key={'name'}
+								channelName={'Boruto'}
+								channelAvatar={'channelAvatar' || 'name'}
+							/>
+							<SubscribedChannel
+								key={'name'}
+								channelName={'Boruto'}
+								channelAvatar={'channelAvatar' || 'name'}
+							/>
+							<SubscribedChannel
+								key={'name'}
+								channelName={'Boruto'}
+								channelAvatar={'channelAvatar' || 'name'}
+							/>
+						</InfiniteScroll>
 					</Collapse>
 					<div onClick={handleClick}>
 						<SidebarRow

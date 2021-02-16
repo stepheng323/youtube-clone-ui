@@ -3,12 +3,14 @@ import Layout from '../components/Layout/Layout';
 import Channel from '../components/Channel/channel';
 import MyChannel from '../components/MyChannel/MyChannel';
 import { UserContext } from '../Context/User';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 export default function ChannelPage() {
+	const location = useLocation();
 	const { user } = useContext(UserContext);
 	const { channelName } = useParams();
 	const userExist = Object.keys(user).length > 0;
+
 
 	return (
 		<div>
@@ -16,7 +18,7 @@ export default function ChannelPage() {
 				{userExist & (user?.channel?.name === channelName) ? (
 					<MyChannel />
 				) : (
-					<Channel />
+					<Channel key={location.pathname} />
 				)}
 			</Layout>
 		</div>

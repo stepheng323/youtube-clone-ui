@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { REACT_APP_DEV_BASE_URL } from '../../constant';
 import HistoryVideo from '../TrendingVideo/TrendingVideo';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -16,16 +16,40 @@ import { UserContext } from '../../Context/User';
 import UseFetch from '../../Api/UseFetch';
 
 import './history.css';
+import { trimText } from '../../Utils';
 
 function History() {
 	const { setUser, user } = useContext(UserContext);
 	const [hasMore, setHasMore] = useState(true);
 	const [page, setPage] = useState(1);
-
-	const videoHistoryUrl = `${REACT_APP_DEV_BASE_URL}/history?page=1&limit=12`;
-	const { result, setResult, isLoading } = UseFetch(videoHistoryUrl);
+	const [histories, setHistories] = useState([]);
+	const [initialLoading, setinitialLoading] = useState(true);
+	const videoHistoryUrl = `${REACT_APP_DEV_BASE_URL}/history?page=1&limit=8`;
 	const tokenExpiry = JSON.parse(localStorage.getItem('tokenExpiry'));
 	let token;
+
+	useEffect(() => {
+		
+		const fetchData = async() => {
+			if (Date.now() >= +tokenExpiry * 1000 || !user.token) {
+				await getNewToken();
+			}
+			const res = await fetch(videoHistoryUrl, 
+				{
+					headers: {
+						Authorization: `Bearer ${token || user.token}`,
+						'Content-Type': 'application/json',
+					},
+				});
+			const result = await res.json();
+			setHistories(result.payload.data);
+			if(!result.payload.next){
+				setHasMore(false)
+			}
+			setinitialLoading(false)
+		}
+		fetchData();
+	}, [])
 
 	const getNewToken = async () => {
 		const response = await getToken();
@@ -54,10 +78,9 @@ function History() {
 			);
 			const result = await response.json();
 			if (result.success) {
-				setResult({
-					...result,
-					payload: { data: result.payload.data.concat(...result.payload.data) },
-				});
+				if(result.success){
+					setHistories(histories.concat(...result.payload.data));
+				}
 			}
 			if (!result.payload.next) {
 				setHasMore(false);
@@ -65,70 +88,68 @@ function History() {
 		};
 		getMoreVideos();
 	};
-
-	// if(result?.payload?.data?.length){
-	// 	const dates = result.payload.data.map(video => video.updatedAt.split('T')[0]);
-	// 	const distinctDate = [...new Set(dates)]
-	// }
-
 	return (
 		<div className='history'>
-			{isLoading ? (
+			{initialLoading ? (
 				<div style={{ padding: '1em' }}>
 					{Array.from(Array(16)).map((item) => (
 						<TrendingSkeleton key={item} />
 					))}
 				</div>
-			) : result.payload.data?.length ? (
-				<InfiniteScroll
-					style={{ overflowY: 'hidden' }}
-					dataLength={result.payload.data.length}
-					next={fetchNext}
-					hasMore={hasMore}
-					loader={
-						<div className='watch-history'>
-							<CircularLoading />
-						</div>
-					}
-				>
-					<div className='watch-history'>
+			) : histories.length ? (
+				<div className='watch-history'>
+					{/* <InfiniteScroll
+						style={{ overflowY: 'hidden' }}
+						dataLength={histories.length}
+						next={fetchNext}
+						hasMore={hasMore}
+						loader={
+							<div className='watch-history'>
+								<CircularLoading />
+							</div>
+						}
+					> */}
 						<p className='history-header'>Watch history</p>
-						{result.payload.data.map((history) => {
-							const {
-								_id,
-								video: {
-									_id: videoId,
-									title,
-									description,
-									thumbnail,
-									duration,
-									viewsCount,
-									createdAt,
-									channel: { name: channelName },
-								},
-							} = history;
-							return (
-								<HistoryVideo
-									style={{ width: '100%' }}
-									key={_id}
-									id={videoId}
-									description={description}
-									title={title}
-									duration={duration}
-									views={viewsCount}
-									date={createdAt}
-									thumbnail={thumbnail}
-									channelName={channelName}
-								/>
-							);
-						})}
-					</div>
-				</InfiniteScroll>
+						{[...new Set(histories.map(d => d.createdAt.split('T')[0]))].map(header => histories.map(history => {
+							// if(header === history.createdAt.split('T')[0]){
+								const {_id,
+									video: {
+										_id: videoId,
+										title,
+										description,
+										thumbnail,
+										duration,
+										viewsCount,
+										createdAt,
+										channel: { name: channelName },
+									},
+								} = history;
+								return (
+									<>
+									<p>{header}</p>
+									<HistoryVideo
+										style={{ width: '100%' }}
+										key={_id}
+										id={videoId}
+										description={trimText(description, 120)}
+										title={title}
+										duration={duration}
+										views={viewsCount}
+										date={createdAt}
+										thumbnail={thumbnail}
+										channelName={channelName}
+									/>
+									</>
+								);
+							// }
+						}))}
+					{/* </InfiniteScroll> */}
+				</div>
 			) : (
-				<div style={{height: '85vh'}} className='watch-history'>
+				<div style={{ height: '85vh' }} className='watch-history'>
 					<p className='history-header'>Watch history</p>
 					<div className='no-history'>
-						<p>This list has no videos.</p>
+						<p>This list has no histories.</p>
 					</div>
 				</div>
 			)}

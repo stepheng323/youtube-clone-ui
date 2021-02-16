@@ -1,0 +1,28 @@
+.must-sign-in {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #f9f9f9;
+	width: 100%;
+	color: #030303;
+	min-height: 83vh;
+}
+
+.must-sign-in > h1 {
+	font-size: 24px;
+	line-height: 30px;
+	margin-top: 1.5em;
+}
+
+.must-sign-in > p {
+	margin-top: 1.2em;
+	font-size: 14px;
+	line-height: 21px;
+	margin-bottom: 1.5em;
+}
+
+.must-sign-in-icon {
+	color: #909090;
+	font-size: 100px !important;
+}

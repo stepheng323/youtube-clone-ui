@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@material-ui/core';
 import { REACT_APP_DEV_UPLOAD_URL } from '../../constant';
-import { convertSecondsToHms, getRelativeTime } from '../../Utils';
+import { convertSecondsToHms, getRelativeTime, trimText } from '../../Utils';
 
 import './video-row.css';
 
@@ -40,14 +40,14 @@ function VideoRow({
 							<Avatar
 								className='video-row-avatar'
 								alt={channel}
-								src={channelImage || ' '}
+								src={`${REACT_APP_DEV_UPLOAD_URL}/${channelImage}`}
 							/>
 						</Link>
 						<Link to={`/channel/${channel}`}>
 							<p>{channel}</p>
 						</Link>
 					</div>
-					<p className='video-row-description'>{description}</p>
+					<p className='video-row-description'>{trimText(description, 120)}</p>
 				</div>
 			</div>
 		</Link>
