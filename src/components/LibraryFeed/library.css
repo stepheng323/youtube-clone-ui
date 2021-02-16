@@ -48,16 +48,17 @@
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
-.library-history-body > p{
+.library-history-body > p {
 	width: 100%;
 }
 
-.library-no-content{
+.library-no-content {
 	font-size: 14px;
 	line-height: 21px;
 	color: #606060;
 	margin-bottom: 1.5em;
 	margin-top: -1em;
+	width: 100%;
 }
 
 .libray-profile {
