@@ -10,9 +10,10 @@ import './login.css';
 import UseForm from '../../Api/UseForm';
 import UseLogin from '../../Api/HandleLogin';
 import { LinearProgress } from '@material-ui/core';
+import { REACT_APP_DEV_BASE_URL } from '../../constant';
 
 function Login() {
-	const url = 'http://localhost:4000/api/v1/auth/login';
+	const url = `${REACT_APP_DEV_BASE_URL}/auth/login`;
 	const initialValues = {
 		email: '',
 		password: '',

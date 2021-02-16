@@ -6,12 +6,14 @@ import LockIcon from '@material-ui/icons/Lock';
 import { Link } from 'react-router-dom';
 import useLogin from '../../Api/HandleLogin';
 import UseForm from '../../Api/UseForm';
+import { REACT_APP_DEV_BASE_URL } from '../../constant';
+
 
 import './sign-up.css';
 import Alert from '@material-ui/lab/Alert';
 
 function Signup() {
-	const url = 'http://localhost:4000/api/v1/auth/signup';
+	const url = `${REACT_APP_DEV_BASE_URL}auth/signup`;
 	const initialValues = {
 		email: '',
 		password: '',
