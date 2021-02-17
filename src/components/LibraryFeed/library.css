@@ -46,6 +46,7 @@
 .library-history-body {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	width: 100%;
 }
 
 .library-history-body > p {

@@ -14,13 +14,11 @@ export default function LibraryPage() {
 				{userExist ? (
 					<LibraryFeed />
 				) : (
-					<div style={{ marginLeft: '17.5%' , width: '100%'}}>
 						<MustSignIn
 							Icon={VideoLibraryIcon}
 							heading='Enjoy your favorite videos'
 							body='Sign in to access videos that you’ve liked or saved'
 						/>
-					</div>
 				)}
 			</Layout>
 		</div>

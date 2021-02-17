@@ -17,7 +17,7 @@ function Recommended() {
 		const fetchData = async () => {
 			const res = await fetch(getRecommendedVideoUrl);
 			const result = await res.json();
-			setVideos(result.payload.data);
+			setVideos(result.payload.data || []);
 			if (!result.payload.next) {
 				setHasMore(false);
 			}
@@ -65,7 +65,7 @@ function Recommended() {
 			}
 		>
 			<div className='recommended-video'>
-				{videos.length &&
+				{videos.length ?
 					videos.map((video) => {
 						const {
 							_id: id,
@@ -94,7 +94,7 @@ function Recommended() {
 								date={createdAt}
 							/>
 						);
-					})}
+					}) : <p>No videos yet</p>}
 			</div>
 		</InfiniteScroll>
 	);

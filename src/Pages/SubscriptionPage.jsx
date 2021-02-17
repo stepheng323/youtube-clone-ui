@@ -26,13 +26,11 @@ export default function SubscriptionPage() {
 		<div>
 			<Layout>
 				{!userExist ? (
-					<div style={{ marginLeft: '17.5%', width: '100%' }}>
 						<MustSignIn
 							Icon={SubscriptionsIcon}
 							heading='Don’t miss new videos'
 							body='Sign in to see updates from your favorite YouTube channels'
 						/>
-					</div>
 				) : null}
 				{userExist && subscriptionCount === 0 ? (
 					<Subscriptions />

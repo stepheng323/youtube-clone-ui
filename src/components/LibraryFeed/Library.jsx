@@ -204,10 +204,12 @@ function Library() {
 							})}
 						</div>
 					) : (
-						<p className="library-no-content">
+						<div className="library-history-body">
+							<p className="library-no-content">
 							Use the thumbs up icon to like videos. Your list shows up right
 							here.
 						</p>
+						</div>
 					)}
 				</div>
 			</div>
