@@ -19,7 +19,7 @@ const useLogin = (url, values) => {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				// credentials: 'include',
+				credentials: 'include',
 				body: JSON.stringify(values),
 			});
 			const data = await response.json();

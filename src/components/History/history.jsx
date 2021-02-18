@@ -96,9 +96,9 @@ function History() {
 						<TrendingSkeleton key={item} />
 					))}
 				</div>
-			) : histories.length ? (
+			) : histories?.length ? (
 				<div className='watch-history'>
-					{/* <InfiniteScroll
+					<InfiniteScroll
 						style={{ overflowY: 'hidden' }}
 						dataLength={histories.length}
 						next={fetchNext}
@@ -108,7 +108,7 @@ function History() {
 								<CircularLoading />
 							</div>
 						}
-					> */}
+					>
 						<p className='history-header'>Watch history</p>
 						{[...new Set(histories.map(d => d.createdAt.split('T')[0]))].map(header => histories.map(history => {
 							// if(header === history.createdAt.split('T')[0]){
@@ -143,7 +143,7 @@ function History() {
 								);
 							// }
 						}))}
-					{/* </InfiniteScroll> */}
+					</InfiniteScroll>
 				</div>
 			) : (
 				<div style={{ height: '85vh' }} className='watch-history'>

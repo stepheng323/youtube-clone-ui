@@ -44,6 +44,8 @@ function Library() {
 		isLoading: isLoadingUploadCount,
 	} = UseFetch(uploadCountUrl);
 
+
+	console.log(historyResult);
 	return (
 		<div className='library'>
 			<div className='library-main'>
@@ -59,8 +61,8 @@ function Library() {
 					</div>
 					{isLoadingHistory ? (
 						<div className='library-history-body'>
-							{Array.from(new Array(8)).map((i) => (
-								<SmallCardSkeleton />
+							{Array.from(new Array(8)).map((item, index) => (
+								<SmallCardSkeleton  key={index}/>
 							))}
 						</div>
 					) : historyResult.payload.data?.length ? (

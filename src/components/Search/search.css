@@ -2,9 +2,7 @@
 	background-color: #f9f9f9;
 	padding: 1.5em 8em 0 3.5em;
 	min-height: 90vh;
-	width: 90%;
-	/* margin: 0 auto; */
-	/* margin-left: 17.5%; */
+	margin-left: 17.5%;
 }
 
 .search-page-no-result {

@@ -7,7 +7,7 @@ const FetchToken = async () => {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		// credentials: 'include',
+		credentials: 'include',
 	};
 	try {
 		const res = await fetch(url, options);

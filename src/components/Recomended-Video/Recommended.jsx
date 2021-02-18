@@ -46,8 +46,8 @@ function Recommended() {
 	if (initialLoading) {
 		return (
 			<div className='recommended-video-skeleton'>
-				{Array.from(Array(16)).map((item) => (
-					<RecommendedSkeleton key={item} />
+				{Array.from(Array(16)).map((item, index) => (
+					<RecommendedSkeleton key={index} />
 				))}
 			</div>
 		);

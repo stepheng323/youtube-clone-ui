@@ -13,7 +13,7 @@ import './sign-up.css';
 import Alert from '@material-ui/lab/Alert';
 
 function Signup() {
-	const url = `${REACT_APP_DEV_BASE_URL}auth/signup`;
+	const url = `${REACT_APP_DEV_BASE_URL}/auth/signup`;
 	const initialValues = {
 		email: '',
 		password: '',
