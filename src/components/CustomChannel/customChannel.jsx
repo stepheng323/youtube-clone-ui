@@ -74,7 +74,7 @@ function CustomChannel() {
 					<CardContent>
 						<h2 className='custom-channel-heading'>Create your channel name</h2>
 						<p className='custom-channel-info'>
-							You can use your brand's name or another name. A good channel name
+							You can use your brand &rsquo;s name or another name. A good channel name
 							represents you and your content. You can change your channel name
 							at any time. Learn more
 						</p>
@@ -122,7 +122,7 @@ function CustomChannel() {
 						You can view and change your Google Account settings anytime at
 						myaccount.google.com. Your channel name will be linked to a Brand
 						Account managed by sgagnonpie@gmail.com. Learn more about channels
-						and Brand Accounts. By selecting "Create," you agree to YouTube’s
+						and Brand Accounts. By selecting &rsquo;Create,&rsquo; you agree to YouTube’s
 						Terms of Service.
 					</p>
 					<p className='custom-channel-copy'>&copy; 2021 Google</p>

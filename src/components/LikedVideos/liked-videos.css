@@ -1,5 +1,5 @@
 .liked-videos {
-	margin-left: 17.5%;
+	margin-left: 18%;
 	background-color: #f9f9f9;
 	display: flex;
 	min-height: 90vh;
@@ -13,6 +13,9 @@
 
 .no-liked-videos {
 	min-height: 83vh;
+	display: flex;
+	justify-content: center;
+	padding-top: 2em;
 }
 
 @media only screen and (max-width: 1336px) {
@@ -23,6 +26,6 @@
 
 @media only screen and (max-width: 1336px) {
 	.liked-videos {
-		margin-left: 6%;
+    margin-left: 70px;
 	}
 }

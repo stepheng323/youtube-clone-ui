@@ -1,0 +1,30 @@
+.my-subscriptions {
+  margin-left: 17.5%;
+  padding: 0 1.5em 0 1.5em;
+  background-color: #f9f9f9;
+  min-height: 86vh;
+}
+
+
+
+.my-subscription-content{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  margin-bottom: .5em;
+
+}
+
+
+.my-subscription-date{
+  line-height: 20px;
+  color: #030303;
+  font-weight: 500;
+  padding: 1.5em 0;
+}
+
+@media only screen and (max-width: 1336px) {
+  .my-subscriptions {
+    margin-left: 70px;
+    padding: 1.5em 1.5em 0 1.5em;
+  }
+}

@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -10,8 +12,8 @@ import PublishIcon from '@material-ui/icons/Publish';
 import Tooltip from '@material-ui/core/Tooltip';
 import SecondUploadModal from '../SecondUploadModal/SecondUploadModal';
 import jetOut from '../../img/jet_out.gif';
-
 import './modal.css';
+
 
 const useStyles = makeStyles((theme) => ({
 	modal: {

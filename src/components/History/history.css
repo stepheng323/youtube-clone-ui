@@ -1,80 +1,85 @@
 .history {
-	margin-left: 17.5%;
-	display: flex;
-	background-color: #f1f1f1;
-	position: relative;
+  margin-left: 17.5%;
+  display: flex;
+  background-color: #f1f1f1;
+  position: relative;
 }
 
 .watch-history {
-	display: block;
-	background-color: #f9f9f9;
-	padding: 1em;
-	width: 58%;
-	min-height: 83vh;
+  display: block;
+  background-color: #f9f9f9;
+  padding: 1em 1.5em;
+  width: 56%;
 }
 
 .history-header {
-	font-weight: 500;
-	line-height: 22px;
-	color: #030303;
+  font-weight: 500;
+  line-height: 22px;
+  color: #030303;
+  margin-bottom: 1.5em;
 }
 
 .no-history {
-	display: flex;
-	justify-content: center;
-	margin-top: 2em;
-	font-size: 14px;
-	line-height: 21px;
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+  font-size: 14px;
+  line-height: 21px;
 }
 .search-history {
-	background-color: #f1f1f1;
-	height: 100%;
-	position: fixed;
-	right: 0;
-	overflow-y: auto;
-	width: 27%;
-	margin: 0 auto;
-	padding: 2em;
+  background-color: #f1f1f1;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  overflow-y: auto;
+  width: 27%;
+  margin: 0 auto;
+  padding: 2em;
 }
 
 .search-history-text-field-container {
-	width: 70%;
+  width: 70%;
 }
 
 .search-history-buttom {
-	margin-top: 2em;
+  margin-top: 2em;
 }
 .search-history-property {
-	font-size: 16px;
-	line-height: 20px;
-	color: #030303;
-	padding: 1em 0;
+  font-size: 16px;
+  line-height: 20px;
+  color: #030303;
+  padding: 1em 0;
 }
 
 .search-history-container {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .search-history-actions {
-	margin-top: 1em;
-	color: #060606;
-	font-weight: 500;
-	font-size: 14px;
+  margin-top: 1em;
+  color: #060606;
+  font-weight: 500;
+  font-size: 14px;
 }
 .search-history-actions-container {
-	display: flex;
-	text-transform: uppercase;
-	align-items: center;
-	padding: 1em 0;
+  display: flex;
+  text-transform: uppercase;
+  align-items: center;
+  padding: 1em 0;
 }
 
+.history-date {
+  line-height: 20px;
+  color: #030303;
+  padding: .8em 0;
+}
 .search-history-icons {
-	color: #3a3838 !important;
-	margin-right: 0.5em;
+  color: #3a3838 !important;
+  margin-right: 0.5em;
 }
 @media only screen and (max-width: 1336px) {
-	.history {
-		margin-left: 6%;
-	}
+  .history {
+    margin-left: 70px;
+  }
 }

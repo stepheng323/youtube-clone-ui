@@ -1,98 +1,94 @@
 .channel {
-	width: 82.5%;
-	margin-left: 17.5%;
-	background-color: rgba(255, 255, 255, 0);
-	margin-top: 0.5em;
+  width: 82%;
+  margin-left: 17.5%;
+  background-color: rgba(255, 255, 255, 0);
+  margin-top: 0.5em;
 }
 
 .channel-banner {
-	width: 100%;
-	background: center center no-repeat;
-	background-size: cover;
-	/* position: relative; */
-	top: 0;
-	right: 0;
+  background: center center no-repeat;
+  background-size: cover;
+  background-color: #f1f1f1;
+  position: absolute;
 }
 
 .channel-dashboard {
-	display: flex;
-	justify-content: space-between;
-	width: 80%;
-	margin: auto;
-	top: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+  position: relative;
 }
 
 .channel-profile-info {
-	margin-left: 1em;
+  margin-left: 1em;
 }
 
 .channel-name {
-	font-size: 24px;
-	line-height: 30px;
-	color: #030303;
+  font-size: 24px;
+  line-height: 30px;
+  color: #030303;
 }
 .channel-subcriber-count {
-	font-size: 14px;
-	line-height: 21px;
-	color: #606060;
+  font-size: 14px;
+  line-height: 21px;
+  color: #606060;
 }
 
 .channel-subcriber {
-	display: flex;
-	height: 100px;
-	align-items: center;
-	padding-top: 0.4em;
+  display: flex;
+  height: 100px;
+  align-items: center;
+  padding-top: 0.4em;
 }
 .channel-profile-image {
-	border-radius: 50px;
-	margin-right: 0.8em;
-	padding: 0;
-	height: 80px;
-	cursor: pointer;
+  border-radius: 50px;
+  margin-right: 0.8em;
+  padding: 0;
+  height: 80px;
+  cursor: pointer;
 }
 
 .channel-action-button {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .channel-navigation {
-	width: 80%;
-	margin-left: 2em;
-	margin-top: 0.5em;
-	position: sticky;
-	top: 0;
+  width: 80%;
+  margin-left: 2em;
+  margin-top: 0.5em;
+  position: sticky;
+  top: 0;
 }
 
-
-.MuiTabs-root{
-	position: sticky;
-	top: 0;
+.MuiTabs-root {
+  position: sticky;
+  top: 0;
 }
 
 .channel-navigation-tab {
-	display: flex;
+  display: flex;
 }
 
 .channel-navigation-tab-item {
-	font-size: 14px;
-	color: #030303;
-	text-transform: uppercase;
-	font-weight: 500;
-	margin-right: 7em;
-	cursor: pointer;
+  font-size: 14px;
+  color: #030303;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-right: 7em;
+  cursor: pointer;
 }
 
 .channel-uploads-container {
-	background-color: #f1f1f1;
-	margin-top: 0.5em;
-	padding: 1em;
-	min-height: 50vh;
+  background-color: #f1f1f1;
+  padding: 0 1em;
+  min-height: 80vh;
 }
 
 @media only screen and (max-width: 1336px) {
-	.channel {
-		width: 98%;
-		margin-left: 6%;
-	}
+  .channel {
+    width: 98%;
+    margin-left: 70px;
+  }
 }

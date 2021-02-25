@@ -1,12 +1,12 @@
 .trending-videos-container {
   margin-left: 17.5%;
-	background-color: #f9f9f9;
-	padding: 0.2em 12em 0 1.5em;
-	min-height: 83vh;
+  background-color: #f9f9f9;
+  padding: 0.2em 12em 0 1.5em;
+  min-height: 83vh;
 }
 
 @media only screen and (max-width: 1336px) {
-	.trending-videos-container {
-		margin-left: 6%;
-	}
+  .trending-videos-container {
+    margin-left: 70px;
+  }
 }

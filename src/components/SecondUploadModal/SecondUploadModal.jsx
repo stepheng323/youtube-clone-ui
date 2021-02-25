@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -14,8 +16,8 @@ import { LinearProgressWithLabel } from '../Progress/Progress';
 import Buttons from '../Button/Button';
 import { removeSpecialCharacters } from '../../Utils';
 import { REACT_APP_DEV_BASE_URL } from '../../constant';
-// import { Redirect } from 'react-router-dom';
 import UseUpload from '../../Api/UseUpload';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SecondUploadModal({handleClose, handleOpen, open, file}) {
+	const history = useHistory();
 	const formData = new FormData();
 	formData.append("video", file);
 	const videoUploadUrl = `${REACT_APP_DEV_BASE_URL}/video`;
@@ -71,7 +74,8 @@ export default function SecondUploadModal({handleClose, handleOpen, open, file})
 	};
 
 	if(multipartResult && multipartResult._id){
-		alert('uploaded')
+		history.push('/channel')
+		
 	}
 	return (
 		<>

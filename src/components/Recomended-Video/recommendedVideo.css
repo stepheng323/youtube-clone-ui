@@ -1,37 +1,37 @@
 .recommended-video {
-	margin-left: 17.5%;
-	display: grid;
-	padding: 1.5em 1.2em 0 1.5em;
-	background-color: #f9f9f9;
-	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-	min-height: 83vh;
+  margin-left: 17.5%;
+  display: grid;
+  padding: 1.5em 0.5em 0 1.5em;
+  background-color: #f9f9f9;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  min-height: 85vh;
 }
 
 .recommended-video-skeleton {
-	display: grid;
-	margin-left: 17.5%;
-	background-color: #f9f9f9;
-	padding: 1em 0 20em 2em;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: grid;
+  margin-left: 18%;
+  background-color: #f9f9f9;
+  padding: 1em 0 20em 2em;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 .recommended-loading-container {
-	position: absolute;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	background-color: #f9f9f9;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #f9f9f9;
 }
 
 @media only screen and (max-width: 1336px) {
-	.recommended-video {
-		margin-left: 6%;
-		padding: 1.5em 0.5em 0 0.6em;
-	}
+  .recommended-video {
+    margin-left: 70px;
+    padding: 1.5em 0.5em 0 0.6em;
+  }
 }
 
 @media only screen and (max-width: 1336px) {
-	.recommended-video-skeleton {
-		margin-left: 6%;
-	}
+  .recommended-video-skeleton {
+    margin-left: 70px;
+  }
 }

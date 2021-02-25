@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import SmallVideoCard from '../SmallVideoCard/smallVideoCard';
 import './channel-videos.css';
@@ -5,7 +6,7 @@ import './channel-videos.css';
 function ChannelVideos({ videos, title }) {
 	return (
 		<>
-			<p style={{fontWeight: 500,lineHeight: '20px',color: '#030303', padding: '1em 0'}}>{title}</p>
+			<p className="channel-video-title">{title}</p>
 			<div className='channel-uploads'>
 				{videos &&
 					videos.payload.length &&

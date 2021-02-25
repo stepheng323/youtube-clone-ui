@@ -1,15 +1,15 @@
 .library {
 	display: flex;
-	margin-left: 17.5%;
+	margin-left: 18%;
 	background-color: #f9f9f9;
 	padding: 1.5em 0.8em 0 1.6em;
-	min-height: 83vh;
+	min-height: 86vh;
 	align-items: flex-start;
 	justify-content: space-between;
 }
 
 .library-main {
-	width: 79%;
+	width: 77%;
 }
 
 .library-history-header {
@@ -49,17 +49,12 @@
 	width: 100%;
 }
 
-.library-history-body > p {
-	width: 100%;
-}
-
 .library-no-content {
 	font-size: 14px;
 	line-height: 21px;
 	color: #606060;
 	margin-bottom: 1.5em;
 	margin-top: -1em;
-	width: 100%;
 }
 
 .libray-profile {
@@ -90,12 +85,12 @@
 }
 @media only screen and (max-width: 1336px) {
 	.library {
-		margin-left: 6%;
+    margin-left: 70px;
 	}
 }
 
 @media only screen and (max-width: 1336px) {
 	.library {
-		margin-left: 6%;
+    margin-left: 70px;
 	}
 }

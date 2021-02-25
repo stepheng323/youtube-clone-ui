@@ -70,9 +70,9 @@ function UseForm(initialValues, url, options) {
 					'Content-Type': 'multipart/form-data',
 				},
 			});
-			 if (response &&  (response.status === 200 || response.status === 201)) {
-				 setMultipartResult(response.data.payload)
-			 }
+			if (response &&  (response.status === 200 || response.status === 201)) {
+				setMultipartResult(response.data.payload)
+			}
 		} catch (err) {
 			setError(err);
 		}

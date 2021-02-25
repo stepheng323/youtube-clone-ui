@@ -10,7 +10,6 @@
 .playlist-info-img-container {
 	position: relative;
 	height: 210px;
-	background-color: #606060;
 }
 .playlist-info-img-container > img {
 	height: 100%;

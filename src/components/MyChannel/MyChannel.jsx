@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import banner from '../../img/banner.jpg';
 import Buttons from '../Button/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
@@ -57,7 +57,7 @@ function MyChannel() {
 		);
   }
   
-  if(channelInfoLoading) return <p>Loading...</p>
+  if (channelInfoLoading) return <p>Loading...</p>
 
   const { payload:{name, channelAvatar} } = channelInfo;
 
@@ -65,7 +65,7 @@ function MyChannel() {
 		<div className='my-channel'>
 			<div
 				className='my-channel-banner'
-				style={{ height: '175px', backgroundImage: `url(${banner})` }}
+				style={{ height: '155px', backgroundImage: `url()` }}
 			>
 				<div className='my-channel-banner-inner-container'>
 					<div className='my-channel-banner-inner'>
@@ -75,7 +75,7 @@ function MyChannel() {
 						src={`${REACT_APP_DEV_UPLOAD_URL}/${channelAvatar}`}
 						size='medium'
 					/>
-							<div className=''>
+							<div className="my-channel-banner-info">
 								<h2>{name}</h2>
 								<p>No Subscribers</p>
 							</div>
@@ -102,8 +102,6 @@ function MyChannel() {
 							<Tab disableRipple label='Home' {...a11yProps(0)} />
 							<Tab disableRipple label='Video' {...a11yProps(1)} />
 							<Tab disableRipple label='Playlist' {...a11yProps(2)} />
-							<Tab disableRipple label='Channels' {...a11yProps(3)} />
-							<Tab disableRipple label='Discusion' {...a11yProps(4)} />
 							<Tab disableRipple label='About' {...a11yProps(5)} />
 							<Tab disableRipple icon={<SearchIcon />} {...a11yProps(6)} />
 						</Tabs>
@@ -131,18 +129,12 @@ function MyChannel() {
 					</div>
 				</TabPanel>
 				<TabPanel value={value} index={1}>
-					<div className='my-channel-pannel-video'>
+					<div className='my-channel-pannel-no-video'>
 						<p>This channel has no video</p>
 					</div>
 				</TabPanel>
 				<TabPanel value={value} index={2}>
 					Item Three
-				</TabPanel>
-				<TabPanel value={value} index={3}>
-					Item Four
-				</TabPanel>
-				<TabPanel value={value} index={4}>
-					Item Five
 				</TabPanel>
 				<TabPanel value={value} index={5}>
 					Item Six

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useContext } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import Header from '../header/header';

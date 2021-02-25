@@ -1,53 +1,56 @@
 .small-video-card {
-	margin-bottom: 1.5em;
-	margin-right: .3em;
+  margin-bottom: 1.5em;
+  margin-right: 0.3em;
 }
 
 .small-video-image {
-	position: relative;
-	background-color: lightgray
+  position: relative;
+  background-color: lightgray;
 }
 
 .small-video-image > img {
-	width: 100%;
-	object-fit: cover;
-	display: block;
-	height: 115px;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  height: 120px;
 }
 
 .small-video-time {
-	position: absolute;
-	bottom: 6px;
-	right: 6px;
-	background-color: #03030394;
-	color: white;
-	font-size: 12px;
-	line-height: 12px;
-	font-weight: 500;
-	border-radius: 2px;
-	padding: 3px 5px;
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background-color: #03030394;
+  color: white;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 500;
+  border-radius: 2px;
+  padding: 3px 5px;
 }
 .small-video-avatar {
-	height: 37px !important;
-	width: 37px !important;
+  height: 37px !important;
+  width: 37px !important;
 }
 .small-video-infos {
-	display: flex;
-	justify-content: flex-start;
-	margin-top: 0.8em;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 0.5em;
 }
 .small-video-text {
-	margin-left: 0.7em;
+  margin-left: 0.7em;
+}
+
+
+.small-video-text p {
+	color: #606060;
+  font-size: 13px;
+  line-height: 18px;
 }
 
 .small-video-title {
 	margin-bottom: 0.4em;
 	color: #030303;
-	font-size: 15px;
-	line-height: 20px;
-}
-
-.small-video-text p {
-	color: #606060;
 	font-size: 14px;
+	line-height: 16px;
+	font-weight: bold;
 }

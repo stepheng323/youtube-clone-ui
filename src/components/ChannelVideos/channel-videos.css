@@ -1,4 +1,11 @@
 .channel-uploads {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+}
+
+.channel-video-title {
+  font-weight: 500;
+  line-height: 20px;
+  color: #030303;
+	padding: 1.5em 0;
 }

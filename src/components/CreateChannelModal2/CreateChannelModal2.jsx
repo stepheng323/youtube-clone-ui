@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
 import Button from '@material-ui/core/Button';
 import { UserContext } from '../../Context/User';
@@ -12,6 +13,8 @@ import { REACT_APP_DEV_BASE_URL } from '../../constant';
 
 import './channel-modal2.css';
 import UseForm from '../../Api/UseForm';
+import ImageAvatars from '../Avatar/Avatar';
+import { capitalize } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -27,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function CreateChannelModal2({ handleClose, handleOpen, open }) {
+export default function CreateChannelModal2({ handleClose, open }) {
 	const { user } = useContext(UserContext);
 	const classes = useStyles();
 	const createChannelWithUserAccountUrl = `${REACT_APP_DEV_BASE_URL}/channel/with-user-account`;
@@ -67,14 +70,15 @@ export default function CreateChannelModal2({ handleClose, handleOpen, open }) {
 								<p className='channel-modal2-options-sub-header'>
 									Create a channel using the name and picture on your account.
 								</p>
-								<img
-									className='account-avatar'
-									alt='profile'
-									src='https://lh3.googleusercontent.com/a-/AOh14GjySH9J2YXSPskpwCZ_l5_LU_r6StEnduNarQ67mw=s88-c-k-c0x00ffffff-no-rj-mo'
+								<div className="account-avatar"><ImageAvatars
+									alt={capitalize(user?.firstName || "")}
+									size="large"
+									src={user.firstName}
 								/>
-								<p className='channel-modal2-options-username'>{`${user.firstName} ${user.lastName}`}</p>
+								</div>
+								<p className='channel-modal2-options-username'>{`${user?.firstName} ${user?.lastName}`}</p>
 								<p className='channel-modal2-options-terms'>
-									By selecting this option, you agree to YouTube's Terms of
+									By selecting this option, you agree to YouTube &rsquo;s Terms of
 									Service.
 								</p>
 								<div className='channel-modal2-options-button'>
@@ -124,3 +128,5 @@ export default function CreateChannelModal2({ handleClose, handleOpen, open }) {
 		</Modal>
 	);
 }
+
+

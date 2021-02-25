@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, {useState} from 'react'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';

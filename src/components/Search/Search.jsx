@@ -6,7 +6,7 @@ import nodata from '../../img/nodata.png';
 import UseFetch from '../../Api/UseFetch';
 import { REACT_APP_DEV_BASE_URL } from '../../constant';
 import ChannelSearch from '../ChannelSearch/channelSearch';
-import { TrendingSkeleton } from '../Skeleton/Skeleton';
+import { SearchResultSkeleton } from '../Skeleton/Skeleton';
 
 function Search() {
 	const { query } = useParams();
@@ -16,14 +16,13 @@ function Search() {
 	if (isLoading) {
 		return (
 			<div className='search-page'>
-				{Array.from(Array(16)).map((item) => (
-					<TrendingSkeleton key={item} />
+				{Array.from(Array(16)).map((item, index) => (
+					<SearchResultSkeleton key={index} />
 				))}
 			</div>
 		);
 	}
 
-	console.log(result);
 	const { payload: searchResult } = result;
 	return (
 		<div className='search-page'>
@@ -45,6 +44,7 @@ function Search() {
 					) : (
 						<ChannelSearch
 							key={item._id}
+							channelAvatar={item.channelAvatar}
 							channelName={item.name}
 							subcribersCount={item.subcribersCount}
 							videosCount={item.videos.length}

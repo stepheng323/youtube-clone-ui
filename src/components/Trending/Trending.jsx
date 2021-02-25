@@ -48,8 +48,8 @@ function Trending() {
 	if (initialLoading) {
 		return (
 			<div className='trending-videos-container'>
-				{Array.from(Array(16)).map((item) => (
-					<TrendingSkeleton key={item} />
+				{Array.from(Array(16)).map((item, index) => (
+					<TrendingSkeleton key={index} />
 				))}
 			</div>
 		);

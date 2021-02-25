@@ -16,16 +16,18 @@ import {
 	REACT_APP_DEV_UPLOAD_URL,
 } from '../../constant';
 import { CircularLoading } from '../../Utils/Loading';
+import { ProfileContext } from '../../Context/ProfileCard';
 
 function Profile() {
 	const { handleLogout } = useLogout();
 	const { user } = useContext(UserContext);
 	const [openChannelModal, setChannelModal] = useState(false);
-
+	const { openProfile, setOpenProfile } = useContext(ProfileContext)
 	const channelInfoUrl = `${REACT_APP_DEV_BASE_URL}/channel`;
 	const { result, isLoading } = UseFetch(channelInfoUrl);
 
 	const handleChannelModal = () => {
+		// setOpenProfile(false)
 		setChannelModal(!openChannelModal);
 	};
 
@@ -61,16 +63,15 @@ function Profile() {
 					<div>
 						{result.payload.length ? (
 							<Link to={`/channel/${result.payload[0].name}`}>
-								<SidebarRow Icon={AccountBoxIcon} title='Your channel' />
+								<SidebarRow handleClick={e => setOpenProfile(!openProfile)} Icon={AccountBoxIcon} title='Your channel' />
 							</Link>
 						) : (
-							<div onClick={handleChannelModal}>
 								<SidebarRow
+									handleClick={handleChannelModal}
 									showCreateChannelModal={handleLogout}
 									Icon={AccountBoxIcon}
 									title='Create a channel'
 								/>
-							</div>
 						)}
 
 						<SidebarRow
@@ -79,7 +80,7 @@ function Profile() {
 							title='YouTube Studio'
 						/>
 						<SidebarRow
-							handleLogout={handleLogout}
+							handleClick={handleLogout}
 							Icon={ExitToAppIcon}
 							title='Sign out'
 						/>

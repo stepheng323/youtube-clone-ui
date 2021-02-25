@@ -11,7 +11,6 @@ export default function ChannelPage() {
 	const { channelName } = useParams();
 	const userExist = Object.keys(user).length > 0;
 
-
 	return (
 		<div>
 			<Layout>

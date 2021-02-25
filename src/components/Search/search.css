@@ -1,38 +1,38 @@
 .search-page {
-	background-color: #f9f9f9;
-	padding: 1.5em 8em 0 3.5em;
-	min-height: 90vh;
-	margin-left: 17.5%;
+  background-color: #f9f9f9;
+  padding: 1.5em 8em 0 3.5em;
+  min-height: 90vh;
+  margin-left: 17.5%;
 }
 
 .search-page-no-result {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding-top: 8em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8em;
 }
 
 .search-page-no-result-image {
-	width: 100%;
-	height: 50vh;
+  width: 100%;
+  height: 50vh;
 }
 
 .search-page-no-result-header {
-	font-size: 24px;
-	line-height: 30px;
-	color: #030303;
+  font-size: 24px;
+  line-height: 30px;
+  color: #030303;
 }
 
 .search-page-no-result-body {
-	font-size: 14px;
-	line-height: 21px;
-	margin-top: 1em;
+  font-size: 14px;
+  line-height: 21px;
+  margin-top: 1em;
 }
 
 @media only screen and (max-width: 1336px) {
-	.search-page {
-		margin-left: 6%;
-	}
+  .search-page {
+    margin-left: 70px;
+  }
 }

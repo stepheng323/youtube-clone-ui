@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { UserContext } from '../../Context/User';
 import { CircularProgress } from '@material-ui/core';
 
+// eslint-disable-next-line react/prop-types
 function Comments({actionButtonText, parentId, avatarSize, setCommentList, commentList}) {
 	const { setUser, user } = useContext(UserContext);
 	const { id: videoId } = useParams();

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import './channel-avatar.css';
 import Avatar from '../Avatar/Avatar';

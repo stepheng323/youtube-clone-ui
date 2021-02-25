@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import './sidebarRow.css';
 
-function SidebarRow({ selected, title, Icon, handleLogout }) {
+function SidebarRow({ selected, title, Icon, handleClick }) {
 	return (
 		<div
-			onClick={handleLogout}
+			onClick={handleClick}
 			className={`sidebar-row ${selected && 'selected'}`}
 		>
 			<Icon className='sidebar-row-icon' />

@@ -32,7 +32,7 @@ function Subscription() {
 	const tokenExpiry = JSON.parse(localStorage.getItem('tokenExpiry'));
 	let token;
 
-	if (isLoading) return <>loading..........</>;
+	if (isLoading) return <div>loading..........</div>;
 	const {
 		payload: { data: channels = [] },
 	} = result;
@@ -164,6 +164,8 @@ function Subscription() {
 		gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
 	};
 
+
+	console.log(channels);
 	return (
 		<div className='subscription'>
 			<Snackbar
@@ -194,6 +196,7 @@ function Subscription() {
 						const { _id: id, name, channelAvatar, subscriberCount } = channel;
 						return (
 							<ChannelAvatar
+								key={_id}
 								ChannelAvatar={channelAvatar}
 								channelName={name}
 								subscriptions={subscriptions}

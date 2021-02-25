@@ -47,7 +47,6 @@ function UseFetch(url) {
 	useEffect(() => {
 		fetchData();
 		return () => controller.abort();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return { result, error, isLoading, setLoading, setResult };

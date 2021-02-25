@@ -1,31 +1,48 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { REACT_APP_DEV_UPLOAD_URL } from '../../constant';
 import { trimText } from '../../Utils';
+import ImageAvatars from '../Avatar/Avatar';
 import Buttons from '../Button/Button';
 
 import './channel-search.css';
 
-function channelSearch({channelName, subcribersCount, videosCount, description }) {
-	return (
-		<div className='channel-search'>
-			<div className='channel-search-profile-image-container'>
-				<Link to={`/channel/${channelName}`}><img
-					className='channel-search-profile-image'
-					alt='channel'
-					src='https://lh3.googleusercontent.com/a-/AOh14GjySH9J2YXSPskpwCZ_l5_LU_r6StEnduNarQ67mw=s88-c-k-c0x00ffffff-no-rj-mo'
-				/></Link>
-			</div>
-			<div className='channel-search-Info'>
-				<p className='channel-search-name'>{channelName}</p>
-				<p className='channel-search-subcriber-info'>
-					{subcribersCount} {subcribersCount > 1 ? 'subcribers' : 'subcriber'} •{' '}
-					{videosCount} videos
-				</p>
-				<p className='channel-search-description'>{trimText(description, 120)}</p>
-			</div>
-			<Buttons variant="contained" color='secondary'>Subscribe</Buttons>
-		</div>
-	);
+function channelSearch({
+  channelName,
+  subcribersCount,
+  videosCount,
+  description,
+  channelAvatar,
+}) {
+  return (
+    <div className="channel-search">
+      <div className="channel-search-profile-image-container">
+        <Link to={`/channel/${channelName}`}>
+          <ImageAvatars
+            size="large"
+            alt="channel"
+            src={`${REACT_APP_DEV_UPLOAD_URL}/${channelAvatar}`}
+          />
+        </Link>
+      </div>
+      <div className="channel-search-Info">
+        <p className="channel-search-name">{channelName}</p>
+        <p className="channel-search-subcriber-info">
+          {subcribersCount} {subcribersCount > 1 ? 'subcribers' : 'subcriber'} •{' '}
+          {videosCount} videos
+        </p>
+        <p className="channel-search-description">
+          {trimText(description, 120)}
+        </p>
+      </div>
+      <div className="channel-search-button">
+        <Buttons variant="contained" color="secondary">
+          Subscribe
+        </Buttons>
+      </div>
+    </div>
+  );
 }
 
 export default channelSearch;

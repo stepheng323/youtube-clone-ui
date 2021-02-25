@@ -8,5 +8,8 @@
 .recommended-sekeleton-infos {
 	margin-top: 1em;
 	display: flex;
-	justify-content: space-between;
+}
+
+.recommended-sekeleton-infos-text{
+	margin-left: 1em;
 }

@@ -14,21 +14,25 @@ import { useHistory } from 'react-router-dom';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { REACT_APP_DEV_UPLOAD_URL } from '../../constant';
 import { ToggleSidebarContext } from '../../Context/ToggleSidebar';
+import { ProfileContext } from '../../Context/ProfileCard';
+import CreateChannelModal from '../CreatChannelModal/create-channel-modal';
+
 
 function Header() {
 	const history = useHistory();
 	const { user } = useContext(UserContext);
+	const [openChannelModal, setChannelModal] = useState(false);
 	const { width, setWidth } = useContext(ToggleSidebarContext);
 	const [search, setSearch] = useState('');
 	const [openVideoUpload, setOpenVideoUpload] = useState(false);
-	const [open, setOpen] = React.useState(false);
+	const { openProfile, setOpenProfile } = useContext(ProfileContext);
 
 	const handleClick = () => {
-		setOpen((prev) => !prev);
+		setOpenProfile((prev) => !prev);
 	};
 
 	const handleClickAway = () => {
-		setOpen(false);
+		setOpenProfile(false);
 	};
 	const userExist = Object.keys(user).length > 0;
 
@@ -39,6 +43,9 @@ function Header() {
 
 	const handleVideoModal = () => {
 		if (!userExist) return history.push('/login');
+		if (!user.channel?.owner) {
+			return setChannelModal(true);
+		}
 		setOpenVideoUpload(!openVideoUpload);
 	};
 
@@ -71,10 +78,19 @@ function Header() {
 		if(!width > breakPoint) setWidth(window.innerWidth > 1336);
 	};
 
+	const handleChannelModal = () => {
+		setChannelModal(!openChannelModal);
+	};
+
 	return (
 		<div className='header'>
+			<CreateChannelModal
+				handleClose={handleChannelModal}
+				handleOpen={handleChannelModal}
+				open={openChannelModal}
+			/>
 			<div className='header-menu-logo'>
-				<MenuIcon onClick={toggleSidebar} />
+				<MenuIcon className="menu-icon" onClick={toggleSidebar} />
 				<Link to='/'>
 					<img className='logo' src={logo} alt='logo' />
 				</Link>
@@ -111,7 +127,7 @@ function Header() {
 					onClickAway={handleClickAway}
 				>
 					<div>
-						{open ? <Profile /> : null}
+						{openProfile ? <Profile /> : null}
 						{userExist && (
 							<Avatar
 								className={`${classes.small} profile`}

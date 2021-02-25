@@ -17,18 +17,23 @@
 .about-channel-headings {
 	font-size: 16px;
 	line-height: 20px;
-	margin: 0;
 	margin-bottom: 1.5em;
 	padding-top: 1em;
 	color: #030303;
 }
 
 .about-channel-right-headings {
-	font-size: 16px;
-	line-height: 20px;
-  padding: 1em 0 .6em 0;
+	font-size: 14px;
+	line-height: 21px;
+  padding: 1.2em 1.2em .6em 0;
 }
 
+
+.icons{
+	color: #606060;
+	font-size: 22px !important;
+	padding-top: .7em;
+}
 .about-channel-description {
 	font-size: 14px;
 	line-height: 21px;

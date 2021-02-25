@@ -13,7 +13,7 @@ function Watch() {
 		<>
 			<Header />
 			<div className='watch'>
-				<><PlayVideo key={location.pathname} /></>
+				<PlayVideo key={location.pathname} />
 				<Upnext key={location.pathname} />
 			</div>
 		</>

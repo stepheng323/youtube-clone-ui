@@ -27,208 +27,226 @@ import getToken from '../../Api/GetToken';
 const tokenExpiry = JSON.parse(localStorage.getItem('tokenExpiry'));
 
 function Sidebar() {
-	const { user, setUser } = useContext(UserContext);
-	const { subscriptions, setSubscriptions } = useContext(SubscriptionContext);
-	const [hasMore, setHasMore] = useState(true);
-	const [page, setPage] = useState(1);
-	const userExist = Object.keys(user).length > 0;
-	const [open, setOpen] = React.useState(false);
-	const subscriptionUrl = `${REACT_APP_DEV_BASE_URL}/subscriber/subscription?page=1&limit=7`;
+  const { user, setUser } = useContext(UserContext);
+  const { subscriptions, setSubscriptions } = useContext(SubscriptionContext);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
+  const userExist = Object.keys(user).length > 0;
+  const [open, setOpen] = React.useState(false);
+  const subscriptionUrl = `${REACT_APP_DEV_BASE_URL}/subscriber/subscription?page=1&limit=7`;
 
-	useEffect(() => {
-		const fetchdata = async () => {
-			let token;
-			if (Date.now() >= +tokenExpiry * 1000 || !user.token) {
-				const getNewToken = async () => {
-					const response = await getToken();
-					if (response && response.success) {
-						const { payload } = response;
-						token = payload.token;
-						localStorage.setItem('tokenExpiry', payload.tokenExpiry);
-						setUser(() => payload);
-					}
-				};
-				await getNewToken();
-			}
-			try {
-				const res = await fetch(subscriptionUrl, {
-					method: 'GET',
-					headers: {
-						Authorization: `Bearer ${token || user.token}`,
-						'Content-Type': 'application/json',
-					},
-				});
-				const data = await res.json();
-				setSubscriptions(data.payload.data || []);
-				// setLoading(false);
-				return data;
-			} catch (err) {
-				if (err.name === 'AbortError') return;
-				// setError(err);
-				// setLoading(false);
-			}
-		};
-		fetchdata();
-	}, []);
+  useEffect(() => {
+    const fetchdata = async () => {
+      let token;
+      if (Date.now() >= +tokenExpiry * 1000 || !user.token) {
+        const getNewToken = async () => {
+          const response = await getToken();
+          if (response && response.success) {
+            const { payload } = response;
+            token = payload.token;
+            localStorage.setItem('tokenExpiry', payload.tokenExpiry);
+            setUser(() => payload);
+          }
+        };
+        await getNewToken();
+      }
+      try {
+        const res = await fetch(subscriptionUrl, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token || user.token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await res.json();
+        setSubscriptions(data.payload.data || []);
+        // setLoading(false);
+        return data;
+      } catch (err) {
+        if (err.name === 'AbortError') return;
+        // setError(err);
+        // setLoading(false);
+      }
+    };
+    fetchdata();
+  }, []);
 
-	const handleClick = () => {
-		setOpen(!open);
-	};
+  const fetchNext = async () => {
+    setPage((page) => page + 1);
+    const getMoreSubscriptions = async () => {
+      const response = await fetch(
+        `${REACT_APP_DEV_BASE_URL}/subscriber/subscription?page=${
+          page + 1
+        }&limit=2`
+      );
+      const result = await response.json();
+      if (result.success) {
+        setSubscriptions(subscriptions.concat(...result.payload.data));
+      }
+      if (!result.payload.next) {
+        setHasMore(false);
+      }
+    };
+    getMoreSubscriptions();
+  };
 
-	const { pathname } = useLocation();
-	const homeSelected = pathname === '/' ? true : false;
-	const trendingSelected = pathname.startsWith('/trending') ? true : false;
-	const subscriptionSelected = pathname.startsWith('/subscription')
-		? true
-		: false;
-	const librarySelected = pathname.startsWith('/library') ? true : false;
-	const historySelected = pathname.startsWith('/history') ? true : false;
-	const videosSelected = pathname.startsWith('/videos') ? true : false;
-	const likedVideosSelected = pathname.startsWith('/liked-videos')
-		? true
-		: false;
-	const watchedVideosSelected = pathname.startsWith('/playlist/watched')
-		? true
-		: false;
+  const handleClick = () => {
+    if (open === false) {
+      fetchNext();
+    }
+    setOpen(!open);
+  };
 
-	return (
-		<div className=' sidebar'>
-			<Link to='/'>
-				<SidebarRow selected={homeSelected} Icon={HomeIcon} title='Home' />
-			</Link>
-			<Link to='/trending'>
-				<SidebarRow
-					selected={trendingSelected}
-					Icon={TrendingIcon}
-					title='Trending'
-				/>
-			</Link>
-			<Link to='/subscriptions'>
-				<SidebarRow
-					selected={subscriptionSelected}
-					Icon={SubscriptionIcon}
-					title='Subscriptions'
-				/>
-			</Link>
-			<hr />
-			<Link to='/library'>
-				<SidebarRow
-					selected={librarySelected}
-					Icon={VideoLibraryIcon}
-					title='Library'
-				/>
-			</Link>
-			<Link to='/history'>
-				<SidebarRow
-					selected={historySelected}
-					Icon={HistoryIcon}
-					title='History'
-				/>
-			</Link>
-			{userExist ? (
-				<>
-					<Link to='videos'>
-						<SidebarRow
-							selected={videosSelected}
-							Icon={OndemandIcon}
-							title='Your Videos'
-						/>
-					</Link>
-					<Link to='/playlist/watched'>
-						<SidebarRow
-							selected={watchedVideosSelected}
-							Icon={WatchLaterIcon}
-							title='Watch Later'
-						/>
-					</Link>
-					<Link to='/liked-videos'>
-						<SidebarRow
-							selected={likedVideosSelected}
-							Icon={ThumbUpAltOutlinedIcon}
-							title='Liked Videos'
-						/>
-					</Link>
-				</>
-			) : (
-				<>
-					<Divider />
-					<div className='sidebar-signin'>
-						<p>
-							Sign in to like videos,
-							<br /> comment, and subscribe.
-						</p>
-						<Link to='/login'>
-							<Button className='header-btn' variant='outlined' color='primary'>
-								<AccountIcon className='header-btn-icon' /> SIGN IN
-							</Button>
-						</Link>
-					</div>
-				</>
-			)}
-			<hr />
-			{userExist && (
-				<>
-					<p className='sidebar-title'>SUBSCRIPTIONS</p>
-					{subscriptions?.length
-						? subscriptions.map((channel) => {
-								const {
-									channel: { name, channelAvatar },
-								} = channel;
-								return (
-									<SubscribedChannel
-										key={name}
-										channelName={name}
-										channelAvatar={channelAvatar || name}
-									/>
-								);
-						  })
-						: null}
-					<Collapse in={open} timeout='auto' unmountOnExit>
-						<InfiniteScroll
-							style={{ overflowY: 'hidden' }}
-							dataLength={subscriptions.length}
-							next={() => console.log('me')}
-							hasMore={hasMore}
-							loader={
-								<div className='recommended-loading-container'>
-									<CircularLoading />
-								</div>
-							}
-						>
-							<SubscribedChannel
-								key={'name'}
-								channelName={'Boruto'}
-								channelAvatar={'channelAvatar' || 'name'}
-							/>
-							<SubscribedChannel
-								key={'name'}
-								channelName={'Boruto'}
-								channelAvatar={'channelAvatar' || 'name'}
-							/>
-							<SubscribedChannel
-								key={'name'}
-								channelName={'Boruto'}
-								channelAvatar={'channelAvatar' || 'name'}
-							/>
-						</InfiniteScroll>
-					</Collapse>
-					<div onClick={handleClick}>
-						<SidebarRow
-							Icon={!open ? ExpandMoreOutlinedIcon : ExpandLessOutlinedIcon}
-							title={`${!open ? 'Show More' : 'Show Fewer'}`}
-						/>
-					</div>
-					<hr />
-				</>
-			)}
-			<SidebarRow Icon={WatchLaterIcon} title='Help' />
-			<SidebarRow Icon={WatchLaterIcon} title='Send Feedback' />
-			<SidebarRow Icon={WatchLaterIcon} title='Send Feedback' />
-			<SidebarRow Icon={WatchLaterIcon} title='Send Feedback' />
-			<hr />
-			<div> © 2021 Googlo LLC </div>
-		</div>
-	);
+  const { pathname } = useLocation();
+  const homeSelected = pathname === '/' ? true : false;
+  const trendingSelected = pathname.startsWith('/trending') ? true : false;
+  const subscriptionSelected = pathname.startsWith('/subscription')
+    ? true
+    : false;
+  const librarySelected = pathname.startsWith('/library') ? true : false;
+  const historySelected = pathname.startsWith('/history') ? true : false;
+  const videosSelected = pathname.startsWith('/videos') ? true : false;
+  const likedVideosSelected = pathname.startsWith('/liked-videos')
+    ? true
+    : false;
+  const watchedVideosSelected = pathname.startsWith('/playlist/watched')
+    ? true
+    : false;
+
+  return (
+    <div className=" sidebar">
+      <Link to="/">
+        <SidebarRow selected={homeSelected} Icon={HomeIcon} title="Home" />
+      </Link>
+      <Link to="/trending">
+        <SidebarRow
+          selected={trendingSelected}
+          Icon={TrendingIcon}
+          title="Trending"
+        />
+      </Link>
+      <Link to="/subscriptions">
+        <SidebarRow
+          selected={subscriptionSelected}
+          Icon={SubscriptionIcon}
+          title="Subscriptions"
+        />
+      </Link>
+      <hr />
+      <Link to="/library">
+        <SidebarRow
+          selected={librarySelected}
+          Icon={VideoLibraryIcon}
+          title="Library"
+        />
+      </Link>
+      <Link to="/history">
+        <SidebarRow
+          selected={historySelected}
+          Icon={HistoryIcon}
+          title="History"
+        />
+      </Link>
+      {userExist ? (
+        <>
+          <Link to="videos">
+            <SidebarRow
+              selected={videosSelected}
+              Icon={OndemandIcon}
+              title="Your Videos"
+            />
+          </Link>
+          <Link to="/playlist/watched">
+            <SidebarRow
+              selected={watchedVideosSelected}
+              Icon={WatchLaterIcon}
+              title="Watch Later"
+            />
+          </Link>
+          <Link to="/liked-videos">
+            <SidebarRow
+              selected={likedVideosSelected}
+              Icon={ThumbUpAltOutlinedIcon}
+              title="Liked Videos"
+            />
+          </Link>
+        </>
+      ) : (
+        <>
+          <Divider />
+          <div className="sidebar-signin">
+            <p>
+              Sign in to like videos,
+              <br /> comment, and subscribe.
+            </p>
+            <Link to="/login">
+              <Button className="header-btn" variant="outlined" color="primary">
+                <AccountIcon className="header-btn-icon" /> SIGN IN
+              </Button>
+            </Link>
+          </div>
+        </>
+      )}
+      <hr />
+      {userExist && (
+        <>
+          <p className="sidebar-title">SUBSCRIPTIONS</p>
+          {subscriptions?.length
+            ? subscriptions.slice(0, 7).map((channel, index) => {
+                const {
+                  channel: { name, channelAvatar },
+                } = channel;
+                return (
+                  <SubscribedChannel
+                    key={name}
+                    channelName={name}
+                    channelAvatar={channelAvatar || name}
+                  />
+                );
+              })
+            : null}
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <InfiniteScroll
+              style={{ overflowY: 'hidden' }}
+              dataLength={subscriptions.length}
+              next={fetchNext}
+              hasMore={hasMore}
+              loader={
+                <div className="recommended-loading-container">
+                  <CircularLoading />
+                </div>
+              }
+            >
+              {subscriptions?.length
+                ? subscriptions.slice(7, 0).map((channel, index) => {
+                    const {
+                      channel: { name, channelAvatar },
+                    } = channel;
+                    return (
+                      <SubscribedChannel
+                        key={name}
+                        channelName={name}
+                        channelAvatar={channelAvatar || name}
+                      />
+                    );
+                  })
+                : null}
+            </InfiniteScroll>
+          </Collapse>
+          <SidebarRow
+            handleClick={handleClick}
+            Icon={!open ? ExpandMoreOutlinedIcon : ExpandLessOutlinedIcon}
+            title={`${!open ? 'Show More' : 'Show Fewer'}`}
+          />
+          <hr />
+        </>
+      )}
+      <SidebarRow Icon={WatchLaterIcon} title="Help" />
+      <SidebarRow Icon={WatchLaterIcon} title="Send Feedback" />
+      <hr />
+      <div style={{ paddingLeft: '25px' }}> © 2021 Googlo LLC </div>
+    </div>
+  );
 }
 
 export default Sidebar;
