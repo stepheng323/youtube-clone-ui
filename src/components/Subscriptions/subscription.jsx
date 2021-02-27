@@ -196,7 +196,7 @@ function Subscription() {
 						const { _id: id, name, channelAvatar, subscriberCount } = channel;
 						return (
 							<ChannelAvatar
-								key={_id}
+								key={id}
 								ChannelAvatar={channelAvatar}
 								channelName={name}
 								subscriptions={subscriptions}

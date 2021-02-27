@@ -5,7 +5,7 @@ import FlagIcon from '@material-ui/icons/Flag';
 
 import './about-channel.css';
 
-function AboutChannel({ joinDate, description }) {
+function AboutChannel({ joinDate, description, email }) {
   return (
     <div className="about-channel">
       <div className="about-channel-left">
@@ -18,7 +18,7 @@ function AboutChannel({ joinDate, description }) {
           <h1 className="about-channel-headings">Details</h1>
           <div className="detail-top">
             <p className="detail-top-property">For business inquiries:</p>
-            <p className="detail-top-value">stepheng323@gmail.com</p>
+            <p className="detail-top-value">{email}</p>
           </div>
           <div className="detail-top">
             <p style={{ color: '#888888' }} className="detail-top-property">

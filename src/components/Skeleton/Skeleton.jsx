@@ -65,7 +65,12 @@ export const SearchResultSkeleton = () => {
           height={20}
         />
         <div className="video-row-channel-info">
-          <Skeleton style={{marginRight: '1em'}} variant="circle" width={30} height={30} />
+          <Skeleton
+            style={{ marginRight: '1em' }}
+            variant="circle"
+            width={30}
+            height={30}
+          />
           <Skeleton variant="text" width={100} />
         </div>
         <Skeleton
@@ -83,9 +88,9 @@ export const SmallCardSkeleton = () => {
   return (
     <div className="small-video-card">
       <Skeleton variant="rect" height={115} />
-        <Skeleton variant="text" width={200} height={20} />
-        <Skeleton variant="text" width={150} height={20} />
-       </div>
+      <Skeleton variant="text" width={200} height={20} />
+      <Skeleton variant="text" width={150} height={20} />
+    </div>
   );
 };
 
@@ -141,6 +146,42 @@ export const UpNextSkeleton = () => {
         <Skeleton variant="text" width={180} />
         <Skeleton variant="text" width={120} />
         <Skeleton variant="text" width={150} />
+      </div>
+    </div>
+  );
+};
+
+export const SidebarSkeleton = () => {
+  return (
+    <div className="sidebar">
+      <div className="sidebar-row">
+        <Skeleton variant="text" height={20} width={150} />
+      </div>
+      <div className="sidebar-row">
+        <Skeleton variant="text" height={20} width={100} />
+      </div>
+      <div className="sidebar-row">
+        <Skeleton variant="text" height={20} width={100} />
+      </div>
+      <Divider />
+      <div className="sidebar-row">
+        <Skeleton variant="text" height={20} width={150} />
+      </div>
+      <div className="sidebar-row">
+        <Skeleton variant="text" height={20} width={100} />
+      </div>
+      <div className="sidebar-row">
+        <Skeleton variant="text" height={20} width={100} />
+      </div>
+      <Divider />
+      <div className="sidebar-row">
+        <Skeleton variant="text" height={20} width={150} />
+      </div>
+      <div className="sidebar-row">
+        <Skeleton variant="text" height={20} width={100} />
+      </div>
+      <div className="sidebar-row">
+        <Skeleton variant="text" height={20} width={100} />
       </div>
     </div>
   );

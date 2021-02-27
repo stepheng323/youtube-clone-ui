@@ -24,7 +24,8 @@ import { SubscriptionContext } from '../../Context/Subsription';
 import UnsubscribeModal from '../UnsubscribeModal/unsubscribeModal';
 import Snackbar from '../Snackbar/snackbar';
 import Divider from '@material-ui/core/Divider';
-import { Subscriptions } from '@material-ui/icons';
+import banner from '../../img/banner.jpg';
+import ChannelVideosScroll from '../ChannelVideosScroll/ChannelVideoScroll';
 
 function Channel() {
   const { setUser, user } = useContext(UserContext);
@@ -33,14 +34,15 @@ function Channel() {
   const userExist = Object.keys(user).length > 0;
   const { channelName } = useParams();
   const channelUrl = `${REACT_APP_DEV_BASE_URL}/channel/${channelName}`;
-  const videosUrl = `${REACT_APP_DEV_BASE_URL}/video/channel/${channelName}`;
+  const channelVideosUrl = `${REACT_APP_DEV_BASE_URL}/channel/videos/${channelName}?page=1&limit=4`;
+  const popularVideoUrl = `${REACT_APP_DEV_BASE_URL}/channel/popular-videos/${channelName}?page=1&limit=4`;
+  const channelVideoScrollUrl = `${REACT_APP_DEV_BASE_URL}/channel/videos/${channelName}?page=1&limit=15`;
 
   const alreadySubscribed = subscriptions.filter(
     (sub) => sub.channel.name === channelName
   );
 
   const { result, isLoading, setResult } = UseFetch(channelUrl);
-  const { result: videos, isLoading: videosLoading } = UseFetch(videosUrl);
 
   const [value, setValue] = useState(0);
   const [unsubscribeModal, setUnsubscribeModal] = useState(false);
@@ -50,12 +52,15 @@ function Channel() {
   const tokenExpiry = JSON.parse(localStorage.getItem('tokenExpiry'));
   let token;
 
-  if (isLoading || videosLoading) return <CircularLoading />;
+  if (isLoading) return <CircularLoading />;
 
   const {
     message,
-    payload: { createdAt, channelDescription, _id: channelId, channelAvatar },
+    payload: { createdAt, channelDescription, _id: channelId, channelAvatar, owner: {email} },
   } = result;
+
+
+  console.log(result);
   if (message === 'No channel found for this user')
     return <p>Channel not found</p>;
 
@@ -123,9 +128,7 @@ function Channel() {
           subscriberCount: result.payload.subscriberCount + 1,
         },
       });
-      // if(subscriptions.length < 7){
-        setSubscriptions([...subscriptions, res.payload]);
-      // }
+      setSubscriptions([...subscriptions, res.payload]);
       setSubscriptionMessage('Subscription Added');
       setSnackbarStatus(true);
     } catch (error) {
@@ -190,8 +193,12 @@ function Channel() {
       />
       <div
         className="channel-banner"
-        style={{ height: '175px', backgroundImage: `url()` }}
-      ></div>
+        style={{
+          backgroundImage: `url(${banner})`,
+          backgroundAttachment: 'fixed',
+        }}
+      >
+      </div>
       <div className="channel-dashboard">
         <div className="channel-subcriber">
           <Avatar
@@ -207,7 +214,7 @@ function Channel() {
           </div>
         </div>
         <div className="channel-action-button">
-          {alreadySubscribed.length === 0? (
+          {alreadySubscribed.length === 0 ? (
             <Buttons
               handleClick={handleSusbcribe}
               variant="contained"
@@ -246,19 +253,19 @@ function Channel() {
       <div className="channel-uploads-container">
         <TabPanel value={value} index={0}>
           <div>
-            <ChannelVideos title="Uploads" videos={videos} />
+            <ChannelVideos title="Uploads" url={channelVideosUrl} />
             <Divider />
-            <ChannelVideos title="Popular Uploads" videos={videos} />
+            <ChannelVideos title="Popular Uploads" url={popularVideoUrl} />
           </div>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <ChannelVideos title="Uploads" videos={videos} />
+          <ChannelVideosScroll title="Uploads" url={channelVideoScrollUrl} />
         </TabPanel>
         <TabPanel value={value} index={2}>
           Item Three
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <AboutChannel description={channelDescription} joinDate={createdAt} />
+          <AboutChannel description={channelDescription} email={email} joinDate={createdAt} />
         </TabPanel>
         <TabPanel value={value} index={4}>
           Item Seven

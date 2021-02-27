@@ -25,10 +25,12 @@ const TrendingPage = lazy(() => import('./Pages/Trending'));
 const MyChannel = lazy(() => import('./components/MyChannel/MyChannel'));
 
 function App() {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser, setUserLoading } = useContext(UserContext);
   useEffect(() => {
     const fetchdata = async () => {
+      setUserLoading(true);
       const response = await fetchToken();
+      setUserLoading(false);
       if (response && response.success) {
         const { payload } = response;
         localStorage.setItem('tokenExpiry', payload.tokenExpiry);

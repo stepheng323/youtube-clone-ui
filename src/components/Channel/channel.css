@@ -2,14 +2,14 @@
   width: 82%;
   margin-left: 17.5%;
   background-color: rgba(255, 255, 255, 0);
-  margin-top: 0.5em;
+  margin-top: 0.2em;
 }
 
 .channel-banner {
-  background: center center no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
-  background-color: #f1f1f1;
-  position: absolute;
+  height: 175px;
 }
 
 .channel-dashboard {
@@ -55,16 +55,13 @@
 }
 
 .channel-navigation {
-  width: 80%;
-  margin-left: 2em;
-  margin-top: 0.5em;
   position: sticky;
+  padding: 0;
+  margin: 0;
   top: 0;
-}
-
-.MuiTabs-root {
-  position: sticky;
-  top: 0;
+  z-index: 999;
+  background-color: #fff;
+  padding: 0 10%;
 }
 
 .channel-navigation-tab {

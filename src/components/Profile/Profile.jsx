@@ -48,7 +48,7 @@ function Profile() {
 						<Avatar
 							className='profile-card-avatar'
 							alt={user.firstName}
-							src={`${REACT_APP_DEV_UPLOAD_URL}/${user?.channel?.channelAvatar}`}
+							src={user.channel?.channelAvatar ? `${REACT_APP_DEV_UPLOAD_URL}/${user.channel.channelAvatar}` : ' '}
 						/>
 						<div className=''>
 							<p className='profile-name'>

@@ -95,7 +95,7 @@ function VideoCard({
           <Avatar
             className="video-avatar"
             alt={capitalize(channel)}
-            src={`${REACT_APP_DEV_UPLOAD_URL}/${channelImage}`}
+            src={ channelImage ? `${REACT_APP_DEV_UPLOAD_URL}/${channelImage}`: ' '}
           />
         </Link>
         <div className="video-text">

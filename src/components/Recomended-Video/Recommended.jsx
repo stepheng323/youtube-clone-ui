@@ -89,7 +89,7 @@ function Recommended() {
                 thumbnail={thumbnail}
                 channel={channel}
                 channelId={channelId}
-                channelImage={channelImage || channel}
+                channelImage={channelImage}
                 views={viewsCount}
                 duration={duration}
                 date={createdAt}

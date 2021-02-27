@@ -23,11 +23,11 @@ import AccountIcon from '@material-ui/icons/AccountCircle';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { CircularLoading } from '../../Utils/Loading';
 import getToken from '../../Api/GetToken';
-
+import {SidebarSkeleton} from '../Skeleton/Skeleton';
 const tokenExpiry = JSON.parse(localStorage.getItem('tokenExpiry'));
 
 function Sidebar() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, userLoading } = useContext(UserContext);
   const { subscriptions, setSubscriptions } = useContext(SubscriptionContext);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
@@ -112,6 +112,9 @@ function Sidebar() {
   const watchedVideosSelected = pathname.startsWith('/playlist/watched')
     ? true
     : false;
+
+
+if(userLoading) return <SidebarSkeleton/>
 
   return (
     <div className=" sidebar">
