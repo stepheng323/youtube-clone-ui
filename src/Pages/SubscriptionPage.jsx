@@ -26,11 +26,14 @@ export default function SubscriptionPage() {
       <div>
         <Layout>
           <div className="my-subscriptions">
-          <div style={{paddingTop: '2em'}} className="my-subscription-content">
-            {Array.from(Array(16)).map((item, index) => (
-              <SmallCardSkeleton key={index} />
-            ))}
-          </div>
+            <div
+              style={{ paddingTop: '2em' }}
+              className="my-subscription-content"
+            >
+              {Array.from(Array(16)).map((item, index) => (
+                <SmallCardSkeleton key={index} />
+              ))}
+            </div>
           </div>
         </Layout>
       </div>

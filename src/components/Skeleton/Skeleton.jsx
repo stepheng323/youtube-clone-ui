@@ -154,35 +154,20 @@ export const UpNextSkeleton = () => {
 export const SidebarSkeleton = () => {
   return (
     <div className="sidebar">
-      <div className="sidebar-row">
-        <Skeleton variant="text" height={20} width={150} />
-      </div>
-      <div className="sidebar-row">
-        <Skeleton variant="text" height={20} width={100} />
-      </div>
-      <div className="sidebar-row">
-        <Skeleton variant="text" height={20} width={100} />
-      </div>
-      <Divider />
-      <div className="sidebar-row">
-        <Skeleton variant="text" height={20} width={150} />
-      </div>
-      <div className="sidebar-row">
-        <Skeleton variant="text" height={20} width={100} />
-      </div>
-      <div className="sidebar-row">
-        <Skeleton variant="text" height={20} width={100} />
-      </div>
-      <Divider />
-      <div className="sidebar-row">
-        <Skeleton variant="text" height={20} width={150} />
-      </div>
-      <div className="sidebar-row">
-        <Skeleton variant="text" height={20} width={100} />
-      </div>
-      <div className="sidebar-row">
-        <Skeleton variant="text" height={20} width={100} />
-      </div>
+      {Array.from(Array(4)).map((item, index) => (
+        <div key={index}>
+          <div className="sidebar-row">
+            <Skeleton variant="text" height={20} width={100} />
+          </div>
+          <div className="sidebar-row">
+            <Skeleton variant="text" height={20} width={150} />
+          </div>
+          <div className="sidebar-row">
+            <Skeleton variant="text" height={20} width={100} />
+          </div>
+          <Divider />
+        </div>
+      ))}
     </div>
   );
 };

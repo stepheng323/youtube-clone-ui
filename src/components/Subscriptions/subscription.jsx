@@ -164,8 +164,6 @@ function Subscription() {
 		gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
 	};
 
-
-	console.log(channels);
 	return (
 		<div className='subscription'>
 			<Snackbar
@@ -180,7 +178,7 @@ function Subscription() {
 				channelName={channelNameToUnsubscribe}
 				handleUnsubscribe={handleFinalUnsubscribe}
 			/>
-			{channels.length ? (
+			{channels?.length ? (
 				<InfiniteScroll
 					style={infiniteScrollStyle}
 					dataLength={channels.length}

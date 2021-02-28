@@ -26,7 +26,6 @@ function Header() {
   const [search, setSearch] = useState('');
   const [openVideoUpload, setOpenVideoUpload] = useState(false);
   const { openProfile, setOpenProfile } = useContext(ProfileContext);
-  console.log({userLoading});
   const handleClick = () => {
     setOpenProfile((prev) => !prev);
   };

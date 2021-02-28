@@ -11,6 +11,8 @@ import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUp';
 import ExpandMoreOutlinedIcon from '@material-ui/icons/ExpandMoreOutlined';
 import ExpandLessOutlinedIcon from '@material-ui/icons/ExpandLessOutlined';
+import HelpIcon from '@material-ui/icons/Help';
+import FeedbackIcon from '@material-ui/icons/Feedback';
 import { Link, useLocation } from 'react-router-dom';
 import { REACT_APP_DEV_BASE_URL } from '../../constant';
 import SubscribedChannel from '../SubscribedChannel/subscribedChannel';
@@ -23,7 +25,7 @@ import AccountIcon from '@material-ui/icons/AccountCircle';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { CircularLoading } from '../../Utils/Loading';
 import getToken from '../../Api/GetToken';
-import {SidebarSkeleton} from '../Skeleton/Skeleton';
+import { SidebarSkeleton } from '../Skeleton/Skeleton';
 const tokenExpiry = JSON.parse(localStorage.getItem('tokenExpiry'));
 
 function Sidebar() {
@@ -113,8 +115,7 @@ function Sidebar() {
     ? true
     : false;
 
-
-if(userLoading) return <SidebarSkeleton/>
+  if (userLoading) return <SidebarSkeleton />;
 
   return (
     <div className=" sidebar">
@@ -244,10 +245,19 @@ if(userLoading) return <SidebarSkeleton/>
           <hr />
         </>
       )}
-      <SidebarRow Icon={WatchLaterIcon} title="Help" />
-      <SidebarRow Icon={WatchLaterIcon} title="Send Feedback" />
+      <SidebarRow Icon={HelpIcon} title="Help" />
+      <SidebarRow Icon={FeedbackIcon} title="Send Feedback" />
       <hr />
-      <div style={{ paddingLeft: '25px' }}> © 2021 Googlo LLC </div>
+      <div>
+        <p className="trademark-text">
+          This website is only for educational purpose.
+        </p>
+        <p style={{paddingTop: '.5em'}} className="trademark-text">
+          All product names, logos, and brands are property of their respective
+          owners in the United States and/or other countries.
+        </p>
+        <p style={{paddingTop: '.5em', fontWeight: 'normal'}} className="trademark-text">© 2021 Googlo LLC </p>
+      </div>
     </div>
   );
 }

@@ -80,7 +80,6 @@ function VideoCard({
       <Link to={`/watch/${id}`}>
         <div className="video-image">
           <img
-            style={{ display: 'block' }}
             src={`${REACT_APP_DEV_UPLOAD_URL}/${thumbnail}`}
             alt="thumbnail"
           />

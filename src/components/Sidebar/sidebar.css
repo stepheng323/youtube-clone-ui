@@ -58,3 +58,12 @@
 	margin: 1em 0;
 }
 
+
+.trademark-text{
+	width: 70%;
+	padding: 0 25px;
+	color: #606060;
+	font-size: 13px;
+	line-height: 18px;
+	font-weight: 500;
+}
