@@ -1,69 +1,67 @@
 .sidebar {
-	width: 17.5%;
-	line-height: 22px;
-	position: fixed;
-	z-index: 999;
-	height: 87vh;
-	left: 0;
-	font-size: 16px;
-	background-color: #ffffff;
-	overflow: hidden;
-	padding-top: .8em;
+  width: 17.5%;
+  line-height: 22px;
+  position: fixed;
+  z-index: 999;
+  height: 87vh;
+  left: 0;
+  font-size: 16px;
+  background-color: #ffffff;
+  overflow: hidden;
+  padding-top: 0.8em;
 }
 .sidebar-title {
-	padding-left: 25px;
-	font-weight: 500;
-	color: #606060;
-	font-size: 14px;
-	line-height: 21px;
-	margin-bottom: .5em;
-	margin-top: .5em;
+  padding-left: 25px;
+  font-weight: 500;
+  color: #606060;
+  font-size: 14px;
+  line-height: 21px;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
 }
 .sidebar:hover {
-	overflow-y: auto;
+  overflow-y: auto;
 }
 .sidebar hr {
-	height: 1px;
-	border: 0;
-	background-color: lightgray;
-	margin: 10px 0;
+  height: 1px;
+  border: 0;
+  background-color: lightgray;
+  margin: 10px 0;
 }
 
 .sidebar::-webkit-scrollbar {
-	width: 8px;
+  width: 8px;
 }
 
 .sidebar::-webkit-scrollbar-track {
-	background: white;
+  background: white;
 }
 
-
 .sidebar::-webkit-scrollbar-thumb {
-	background-color: lightgray;
+  background-color: lightgray;
 }
 
 .search-btn {
-	border: none;
-	outline: none;
+  border: none;
+  outline: none;
+  padding: 0;
 }
 
-.sidebar-signin{
-	padding-left: 25px
-
+.sidebar-signin {
+  padding-left: 30px;
 }
 
 .sidebar-signin > p {
-	font-size: 14px;
-	line-height: 20px;
-	margin: 1em 0;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 1em 0px;
 }
 
-
-.trademark-text{
-	width: 70%;
-	padding: 0 25px;
-	color: #606060;
-	font-size: 13px;
-	line-height: 18px;
-	font-weight: 500;
+.trademark-text {
+  width: 70%;
+  padding: 0 25px;
+  color: #606060;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
 }

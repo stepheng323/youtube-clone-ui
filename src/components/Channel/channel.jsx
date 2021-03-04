@@ -60,7 +60,6 @@ function Channel() {
   } = result;
 
 
-  console.log(result);
   if (message === 'No channel found for this user')
     return <p>Channel not found</p>;
 
@@ -194,9 +193,7 @@ function Channel() {
       <div
         className="channel-banner"
         style={{
-          backgroundImage: `url(${banner})`,
-          backgroundAttachment: 'fixed',
-        }}
+          backgroundImage: `url(${banner})`}}
       >
       </div>
       <div className="channel-dashboard">
@@ -209,7 +206,9 @@ function Channel() {
           <div className="channel-profile-info">
             <p className="channel-name">{channelName}</p>
             <p className="channel-subcriber-count">
+            <p className="channel-subcriber-count">
               {result.payload.subscriberCount} subscibers
+            </p>
             </p>
           </div>
         </div>

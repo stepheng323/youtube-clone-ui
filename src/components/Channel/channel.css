@@ -58,9 +58,9 @@
   position: sticky;
   padding: 0;
   margin: 0;
-  top: 6.5vh;
+  top: 7.5vh;
   z-index: 999;
-  background-color: #fff;
+  background-color: #f9f9f9;
   padding: 0 10%;
 }
 

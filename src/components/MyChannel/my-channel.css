@@ -36,20 +36,18 @@
   margin-right: 1em;
 }
 
+
 .my-channel-banner-info {
   margin-left: 1em;
 }
 
-.my-channel-banner-info > h2 {
-  font-size: 24px;
-  line-height: 30px;
-  color: #030303;
-}
 .my-channel-banner-info > p {
   font-size: 14px;
   line-height: 21px;
   color: #606060;
 }
+
+
 .my-channel-banner-inner-right {
   display: flex;
 }
@@ -130,6 +128,7 @@
   color: #606060;
   margin-top: 2em;
 }
+
 
 @media only screen and (max-width: 1336px) {
   .my-channel {

@@ -100,7 +100,7 @@ function VideoCard({
         <div className="video-text">
           <div className="video-title-container">
             <Link to={`/watch/${id}`}>
-              <h4 className="video-title">{trimText(title, 37)}</h4>
+              <h3 className="video-title">{trimText(title, 37)}</h3>
             </Link>
             <div onClick={handleShow} className="video-more-icon hidden">
               <MoreVertIcon />
@@ -122,10 +122,10 @@ function VideoCard({
           </div>
 
           <Link to={`/channel/${channel}`}>
-            <p>{channel}</p>
+            <p className="video-subtitle">{channel}</p>
           </Link>
           <Link to={`/watch/${id}`}>
-            <p>
+            <p className="video-subtitle">
               {views} {views > 1 ? 'views' : 'view'} • {getRelativeTime(date)}{' '}
               ago
             </p>

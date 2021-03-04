@@ -194,7 +194,7 @@ function Sidebar() {
       <hr />
       {userExist && (
         <>
-          <p className="sidebar-title">SUBSCRIPTIONS</p>
+          <p style={{marginTop: '1em'}} className="sidebar-title">SUBSCRIPTIONS</p>
           {subscriptions?.length
             ? subscriptions.slice(0, 7).map((channel, index) => {
                 const {

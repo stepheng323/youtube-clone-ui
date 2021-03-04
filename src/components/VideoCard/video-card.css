@@ -64,6 +64,13 @@
 	width: 100%;
 	justify-content: space-between;
 }
+.video-subtitle {
+	color: #606060;
+	font-size: 14px;
+	line-height: 18px;
+	margin: none;
+
+}
 .video-title {
 	margin: 0;
 	margin-bottom: 0.4em;
@@ -71,18 +78,14 @@
 	font-size: 14px;
 	line-height: 20px;
 	width: 185px;
+	font-weight: 500;
+	color: #030303;
+	line-height: 20px;
 }
 .video-more-icon {
 	cursor: pointer;
 }
 
-.video-text p {
-	color: #606060;
-	font-size: 14px;
-	line-height: 18px;
-	margin: none;
-
-}
 
 .video-more-list {
 	position: fixed;
