@@ -11,8 +11,8 @@ export const RecommendedSkeleton = () => {
       <div className="recommended-sekeleton-infos">
         <Skeleton variant="circle" width={40} height={40} />
         <div className="recommended-sekeleton-infos-text">
-          <Skeleton variant="text" width={180} height={30} />
-          <Skeleton variant="text" width={150} height={30} />
+          <Skeleton variant="text" width={165} height={30} />
+          <Skeleton variant="text" width={135} height={30} />
         </div>
       </div>
     </div>
@@ -29,18 +29,16 @@ export const TrendingSkeleton = () => {
         height={150}
       />
       <div className="trending-video-info">
-        <Skeleton variant="text" width={500} height={20} />
+        <Skeleton variant="text" width={500} height={30} />
         <Skeleton
-          style={{ marginTop: '.5em' }}
           variant="text"
-          width={200}
-          height={30}
+          width={300}
+          height={20}
         />
         <Skeleton
-          style={{ marginTop: '1em' }}
           variant="text"
-          width={550}
-          height={30}
+          width={200}
+          height={20}
         />
       </div>
     </div>

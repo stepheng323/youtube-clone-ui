@@ -145,7 +145,7 @@ function Header() {
                     onClick={handleClick}
                     alt={capitalize(user.channel?.name || user.firstName)}
                     src={
-                      user.channel.channelAvatar
+                      user.channel?.channelAvatar
                         ? `${REACT_APP_DEV_UPLOAD_URL}/${user.channel.channelAvatar}`
                         : ' '
                     }

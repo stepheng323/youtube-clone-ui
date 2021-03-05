@@ -26,6 +26,7 @@ import Snackbar from '../Snackbar/snackbar';
 import Divider from '@material-ui/core/Divider';
 import banner from '../../img/banner.jpg';
 import ChannelVideosScroll from '../ChannelVideosScroll/ChannelVideoScroll';
+import { SmallCardSkeleton } from '../Skeleton/Skeleton';
 
 function Channel() {
   const { setUser, user } = useContext(UserContext);
@@ -36,7 +37,6 @@ function Channel() {
   const channelUrl = `${REACT_APP_DEV_BASE_URL}/channel/${channelName}`;
   const channelVideosUrl = `${REACT_APP_DEV_BASE_URL}/channel/videos/${channelName}?page=1&limit=4`;
   const popularVideoUrl = `${REACT_APP_DEV_BASE_URL}/channel/popular-videos/${channelName}?page=1&limit=4`;
-  const channelVideoScrollUrl = `${REACT_APP_DEV_BASE_URL}/channel/videos/${channelName}?page=1&limit=15`;
 
   const alreadySubscribed = subscriptions.filter(
     (sub) => sub.channel.name === channelName
@@ -49,6 +49,13 @@ function Channel() {
   const [subscriptionMessage, setSubscriptionMessage] = useState('');
   const [snackbarStatus, setSnackbarStatus] = useState(false);
 
+  const { result: channelVideos, isLoading: channelVideosLoading } = UseFetch(
+    channelVideosUrl
+  );
+  const { result: popularVideos, isLoading: popularVideosLoading } = UseFetch(
+    popularVideoUrl
+  );
+
   const tokenExpiry = JSON.parse(localStorage.getItem('tokenExpiry'));
   let token;
 
@@ -56,9 +63,14 @@ function Channel() {
 
   const {
     message,
-    payload: { createdAt, channelDescription, _id: channelId, channelAvatar, owner: {email} },
+    payload: {
+      createdAt,
+      channelDescription,
+      _id: channelId,
+      channelAvatar,
+      owner: { email },
+    },
   } = result;
-
 
   if (message === 'No channel found for this user')
     return <p>Channel not found</p>;
@@ -193,9 +205,9 @@ function Channel() {
       <div
         className="channel-banner"
         style={{
-          backgroundImage: `url(${banner})`}}
-      >
-      </div>
+          backgroundImage: `url(${banner})`,
+        }}
+      ></div>
       <div className="channel-dashboard">
         <div className="channel-subcriber">
           <Avatar
@@ -206,9 +218,9 @@ function Channel() {
           <div className="channel-profile-info">
             <p className="channel-name">{channelName}</p>
             <p className="channel-subcriber-count">
-            <p className="channel-subcriber-count">
-              {result.payload.subscriberCount} subscibers
-            </p>
+              <p className="channel-subcriber-count">
+                {result.payload.subscriberCount} subscibers
+              </p>
             </p>
           </div>
         </div>
@@ -250,21 +262,54 @@ function Channel() {
         </Tabs>
       </div>
       <div className="channel-uploads-container">
-        <TabPanel value={value} index={0}>
-          <div>
-            <ChannelVideos title="Uploads" url={channelVideosUrl} />
-            <Divider />
-            <ChannelVideos title="Popular Uploads" url={popularVideoUrl} />
-          </div>
-        </TabPanel>
+        {
+          <TabPanel value={value} index={0}>
+            {channelVideosLoading ? (
+              <div style={{ paddingTop: '2em' }} className="channel-uploads">
+                {Array.from(Array(5)).map((item, index) => (
+                  <>
+                    <SmallCardSkeleton key={index} />
+                  </>
+                ))}
+              </div>
+            ) : !channelVideos.payload.data?.length ? (
+              <p>No videos ......</p>
+            ) : (
+              <div>
+                <ChannelVideos title="Uploads" videos={channelVideos} />
+                <Divider />
+              </div>
+            )}
+            {popularVideosLoading ? (
+              <div style={{ paddingTop: '2em' }} className="channel-uploads">
+                {Array.from(Array(5)).map((item, index) => (
+                  <>
+                    <SmallCardSkeleton key={index} />
+                  </>
+                ))}
+              </div>
+            ) : !popularVideos.payload.data?.length ? (
+              <p>No videos ......</p>
+            ) : (
+              <div>
+                <ChannelVideos title="Popular Uploads" videos={popularVideos} />
+                <Divider />
+              </div>
+            )}
+          </TabPanel>
+        }
         <TabPanel value={value} index={1}>
-          <ChannelVideosScroll title="Uploads" url={channelVideoScrollUrl} />
+          <ChannelVideosScroll title="Uploads" />
         </TabPanel>
         <TabPanel value={value} index={2}>
           Item Three
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <AboutChannel description={channelDescription} email={email} joinDate={createdAt} />
+          <AboutChannel
+            description={channelDescription}
+            email={email}
+            joinDate={createdAt}
+          />
         </TabPanel>
         <TabPanel value={value} index={4}>
           Item Seven

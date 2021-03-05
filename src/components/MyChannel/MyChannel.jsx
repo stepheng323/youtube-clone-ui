@@ -17,6 +17,9 @@ import {
 import { useParams } from 'react-router-dom';
 import ChannelVideos from '../ChannelVideos/ChannelVideos';
 import { Divider } from '@material-ui/core';
+import { SmallCardSkeleton } from '../Skeleton/Skeleton';
+import AboutChannel from '../AboutChannel/AboutChannel';
+import ChannelVideosScroll from '../ChannelVideosScroll/ChannelVideoScroll';
 
 function MyChannel() {
   const [value, setValue] = React.useState(0);
@@ -25,7 +28,11 @@ function MyChannel() {
   const { result: channelInfo, isLoading: channelInfoLoading } = UseFetch(
     channelUrl
   );
+
   const channelVideosUrl = `${REACT_APP_DEV_BASE_URL}/channel/videos/${channelName}?page=1&limit=4`;
+  const { result: channelVideos, isLoading: channelVideosLoading } = UseFetch(
+    channelVideosUrl
+  );
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -83,7 +90,7 @@ function MyChannel() {
     <div className="my-channel">
       <div
         className="my-channel-banner"
-        style={{ height: '155px', backgroundImage: `url()` }}
+        style={{ backgroundImage: `url()`, paddingTop: '1em' }}
       >
         <div className="my-channel-banner-inner-container">
           <div className="my-channel-banner-inner">
@@ -133,48 +140,63 @@ function MyChannel() {
               <Tab disableRipple label="Home" {...a11yProps(0)} />
               <Tab disableRipple label="Video" {...a11yProps(1)} />
               <Tab disableRipple label="Playlist" {...a11yProps(2)} />
-              <Tab disableRipple label="About" {...a11yProps(5)} />
-              <Tab disableRipple icon={<SearchIcon />} {...a11yProps(6)} />
+              <Tab disableRipple label="About" {...a11yProps(3)} />
+              <Tab disableRipple icon={<SearchIcon />} {...a11yProps(4)} />
             </Tabs>
           </div>
         </div>
       </div>
       <div className="my-channel-pannel">
-        <TabPanel value={value} index={0}>
-          <div>
-            <ChannelVideos title="Uploads" url={channelVideosUrl} />
-            <Divider />
-          </div>
-          <div className="my-channel-pannel-home">
-            <img
-              alt=""
-              src="https://www.gstatic.com/youtube/img/channels/empty_channel_illustration.svg"
-            />
-            <h1>Upload a video to get started</h1>
-            <p className="my-channel-pannel-home">
-              Start sharing your story and connecting with viewers. Videos you
-              upload <br /> will show up here
-            </p>
-            <Buttons color="primary" variant="contained">
-              Upload video
-            </Buttons>
-            <p className="my-channel-pannel-home-footnote">
-              Learn more about how to get started
-            </p>
-          </div>
-        </TabPanel>
+        {
+          <TabPanel value={value} index={0}>
+            {channelVideosLoading ? (
+              <div style={{ paddingTop: '2em' }} className="channel-uploads">
+                {Array.from(Array(5)).map((item, index) => (
+                  <>
+                    <SmallCardSkeleton key={index} />
+                  </>
+                ))}
+              </div>
+            ) : !channelVideos.payload.data?.length ? (
+              <div className="my-channel-pannel-home">
+                <img
+                  alt=""
+                  src="https://www.gstatic.com/youtube/img/channels/empty_channel_illustration.svg"
+                />
+                <h1>Upload a video to get started</h1>
+                <p className="my-channel-pannel-home">
+                  Start sharing your story and connecting with viewers. Videos
+                  you upload <br /> will show up here
+                </p>
+                <Buttons color="primary" variant="contained">
+                  Upload video
+                </Buttons>
+                <p className="my-channel-pannel-home-footnote">
+                  Learn more about how to get started
+                </p>
+              </div>
+            ) : (
+              <div>
+                <ChannelVideos title="Uploads" videos={channelVideos} />
+                <Divider />
+              </div>
+            )}
+          </TabPanel>
+        }
         <TabPanel value={value} index={1}>
-          <div className="my-channel-pannel-no-video">
-            <p>This channel has no video</p>
-          </div>
+          <ChannelVideosScroll title="Uploads" />
         </TabPanel>
         <TabPanel value={value} index={2}>
           Item Three
         </TabPanel>
-        <TabPanel value={value} index={5}>
-          Item Six
+        <TabPanel value={value} index={3}>
+          <AboutChannel
+            description={channelDescription}
+            email={email}
+            joinDate={createdAt}
+          />
         </TabPanel>
-        <TabPanel value={value} index={6}>
+        <TabPanel value={value} index={4}>
           Item Seven
         </TabPanel>
       </div>
