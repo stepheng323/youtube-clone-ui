@@ -153,7 +153,7 @@ function Sidebar() {
       </Link>
       {userExist ? (
         <>
-          <Link to="videos">
+          <Link to="/studio/content">
             <SidebarRow
               selected={videosSelected}
               Icon={OndemandIcon}
@@ -194,7 +194,9 @@ function Sidebar() {
       <hr />
       {userExist && (
         <>
-          <p style={{marginTop: '1em'}} className="sidebar-title">SUBSCRIPTIONS</p>
+          <p style={{ marginTop: '1em' }} className="sidebar-title">
+            SUBSCRIPTIONS
+          </p>
           {subscriptions?.length
             ? subscriptions.slice(0, 7).map((channel, index) => {
                 const {
@@ -252,11 +254,16 @@ function Sidebar() {
         <p className="trademark-text">
           This website is only for educational purpose.
         </p>
-        <p style={{paddingTop: '.5em'}} className="trademark-text">
+        <p style={{ paddingTop: '.5em' }} className="trademark-text">
           All product names, logos, and brands are property of their respective
           owners in the United States and/or other countries.
         </p>
-        <p style={{paddingTop: '.5em', fontWeight: 'normal'}} className="trademark-text">© 2021 Googlo LLC </p>
+        <p
+          style={{ paddingTop: '.5em', fontWeight: 'normal' }}
+          className="trademark-text"
+        >
+          © 2021 Googlo LLC{' '}
+        </p>
       </div>
     </div>
   );

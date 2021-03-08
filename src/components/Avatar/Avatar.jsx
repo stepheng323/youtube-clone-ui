@@ -21,14 +21,18 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(13),
     height: theme.spacing(13),
   },
+  larger: {
+    width: theme.spacing(15),
+    height: theme.spacing(15),
+  },
 }));
 
-export default function ImageAvatars({alt, size, src}) {
+export default function ImageAvatars({ alt, size, src }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Avatar alt={alt} src={src} className={classes.[size]} />
+      <Avatar alt={alt} src={src} className={classes[size]} />
     </div>
   );
 }

@@ -36,7 +36,6 @@
   margin-right: 1em;
 }
 
-
 .my-channel-banner-info {
   margin-left: 1em;
 }
@@ -47,15 +46,18 @@
   color: #606060;
 }
 
-
 .my-channel-banner-inner-right {
   display: flex;
 }
 
 .my-channel-navigation {
-  width: 90%;
-  margin: auto;
   position: sticky;
+  padding: 0;
+  margin: 0;
+  top: 7.5vh;
+  z-index: 99;
+  background-color: #f9f9f9;
+  padding: 0 10%;
 }
 
 .my-channel-navigation-tab {
@@ -127,7 +129,6 @@
   color: #606060;
   margin-top: 2em;
 }
-
 
 @media only screen and (max-width: 1336px) {
   .my-channel {

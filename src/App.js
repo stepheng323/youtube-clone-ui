@@ -6,8 +6,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import { UserContext } from './Context/User';
 import fetchToken from './Api/GetToken';
-
+import StudioContentPage from './Pages/StudioContentPage';
 import './App.css';
+import StudioDashboardPage from './Pages/StudioDashboard';
+import StudioPlaylistPage from './Pages/StudioPlaylistPage';
+import StudioCustomisePage from './Pages/StudioCustomisePage';
 
 const Login = lazy(() => import('./Pages/Login/Login'));
 const Signup = lazy(() => import('./Pages/Signup/signup'));
@@ -23,6 +26,7 @@ const SubscriptionsPage = lazy(() => import('./Pages/SubscriptionPage'));
 const LikedVideoPage = lazy(() => import('./Pages/LikedVideoPage'));
 const TrendingPage = lazy(() => import('./Pages/Trending'));
 const MyChannel = lazy(() => import('./components/MyChannel/MyChannel'));
+
 
 function App() {
   const { setUser, setUserLoading } = useContext(UserContext);
@@ -63,6 +67,10 @@ function App() {
           <Route exact path="/liked-videos" component={LikedVideoPage} />
           <Route exact path="/playlist/watched" component={WatchedVideosPage} />
           <Route exact path="/subscriptions" component={SubscriptionsPage} />
+          <Route exact path="/studio/dashboard" component={StudioDashboardPage} />
+          <Route exact path="/studio/content" component={StudioContentPage} />
+          <Route exact path="/studio/Playlist" component={StudioPlaylistPage} />
+          <Route exact path="/studio/customise" component={StudioCustomisePage} />
         </Suspense>
       </Switch>
     </Router>

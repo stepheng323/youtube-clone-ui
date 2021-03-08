@@ -1,0 +1,38 @@
+.studio-sidebar-row {
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+  height: 45px;
+}
+
+.studio-sidebar-row-icon {
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 1.5em !important;
+}
+
+.studio-sidebar-row-title {
+  flex: 1;
+  margin: 0.8em;
+  margin-left: 25px;
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.studio-sidebar-row:hover {
+  background-color: rgba(211, 211, 211, 0.685);
+  cursor: pointer;
+}
+
+.studio-sidebar-row.selected {
+  background-color: lightgray;
+}
+.studio-sidebar-row.selected > .studio-sidebar-row-icon {
+  color: red;
+}
+.studio-sidebar-row.selected {
+  border-left: 4px solid red;
+}
+.studio-sidebar-row.selected > .studio-sidebar-row-title {
+  font-weight: bold;
+}

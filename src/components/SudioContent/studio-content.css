@@ -1,0 +1,28 @@
+.studio-content {
+  margin-left: 17.5%;
+  min-height: 85vh;
+}
+
+.studio-content-container {
+  padding: 1em 3%;
+
+}
+
+.channel-content > h3 {
+  line-height: 32px;
+  font-size: 22px;
+  margin-top: 1em;
+
+}
+.channel-content > p {
+  font-size: 14px;
+  line-height: 18px;
+  color: #065fd4;
+  margin-top: 1.3em;
+}
+
+.channel-filter {
+  font-size: 14px;
+  line-height: 24px;
+  color: #0d0d0d;
+}
