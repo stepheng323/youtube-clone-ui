@@ -6,6 +6,7 @@ import noThumnail from '../../img/noThumbnail.jpg';
 import { REACT_APP_DEV_UPLOAD_URL } from '../../constant';
 
 import './playlist-info.css';
+import { Link } from 'react-router-dom';
 
 function PlaylistInfo({ user, lastThumbnail, videosCount, playlistType }) {
 	return (
@@ -23,7 +24,7 @@ function PlaylistInfo({ user, lastThumbnail, videosCount, playlistType }) {
 				<p>updated 2 days ago</p>
 			</div>
 			<Divider />
-			<div className='playlist-info-profile'>
+			<Link to={`/channel/${user.channel?.name}`}><div className='playlist-info-profile'>
 				<Avatar
 					style={{ marginRight: '1em' }}
 					src={`${REACT_APP_DEV_UPLOAD_URL}/${user?.channel?.channelAvatar}`}
@@ -31,6 +32,7 @@ function PlaylistInfo({ user, lastThumbnail, videosCount, playlistType }) {
 				/>
 				<p>{user?.channel?.name}</p>
 			</div>
+			</Link>
 		</div>
 	);
 }

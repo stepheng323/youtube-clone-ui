@@ -14,7 +14,7 @@ import {
   REACT_APP_DEV_BASE_URL,
   REACT_APP_DEV_UPLOAD_URL,
 } from '../../constant';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ChannelVideos from '../ChannelVideos/ChannelVideos';
 import { Divider } from '@material-ui/core';
 import { SmallCardSkeleton } from '../Skeleton/Skeleton';
@@ -119,12 +119,16 @@ function MyChannel() {
               </div>
             </div>
             <div className="my-channel-banner-inner-right">
-              <Buttons color="primary" variant="contained">
-                Customize Channel
-              </Buttons>
-              <Buttons color="primary" variant="contained">
-                Manage Videos
-              </Buttons>
+              <Link to="/studio/customise">
+                <Buttons color="primary" variant="contained">
+                  Customize Channel
+                </Buttons>
+              </Link>
+              <Link to="/studio/content">
+                <Buttons color="primary" variant="contained">
+                  Manage Videos
+                </Buttons>
+              </Link>
             </div>
           </div>
           <div className="my-channel-navigation">

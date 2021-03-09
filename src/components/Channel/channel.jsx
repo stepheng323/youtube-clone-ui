@@ -219,7 +219,7 @@ function Channel() {
             <p className="channel-name">{channelName}</p>
             <p className="channel-subcriber-count">
               <p className="channel-subcriber-count">
-                {result.payload.subscriberCount} subscibers
+                {result.payload.subscriberCount} subscribers
               </p>
             </p>
           </div>

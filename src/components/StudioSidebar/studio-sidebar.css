@@ -1,0 +1,49 @@
+.studio-sidebar {
+  width: 17.5%;
+  line-height: 22px;
+  position: fixed;
+  z-index: 999;
+  height: 87vh;
+  left: 0;
+  font-size: 16px;
+  background-color: #ffffff;
+  overflow: hidden;
+  padding-top: 0.8em;
+  color: rgba(0, 0, 0, 0.55);
+  border-right: 1px solid lightgray;
+}
+
+.studio-sidebar-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5em;
+}
+
+.studio-sidebar-profile-desc {
+  margin-top: 1em;
+  font-size: 13px;
+  line-height: 24px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+}
+.studio-sidebar-profile-name {
+  margin-top: 0.2em;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.studio-sidebar-menu {
+  margin-top: 1em;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.studio-sidebar-footer {
+  margin-top: 1em;
+}
+
+.link {
+  color: rgba(0, 0, 0, 0.55);
+}
