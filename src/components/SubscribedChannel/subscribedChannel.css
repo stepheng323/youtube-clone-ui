@@ -3,6 +3,8 @@
 	align-items: center;
   padding: 0 25px;
 	height: 40px;
+	line-height: 21px;
+
 }
 
 .subscribedChannel:hover {
@@ -11,7 +13,7 @@
 }
 
 .subscribedChannel > p {
-	margin-left: 25px;
+  margin-left: 25px;
 	font-size: 14px;
 
 }

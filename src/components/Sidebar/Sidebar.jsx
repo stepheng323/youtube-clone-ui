@@ -262,7 +262,7 @@ function Sidebar() {
           style={{ paddingTop: '.5em', fontWeight: 'normal' }}
           className="trademark-text"
         >
-          © 2021 Googlo LLC{' '}
+          © 2021 Tubetube LLC{' '}
         </p>
       </div>
     </div>

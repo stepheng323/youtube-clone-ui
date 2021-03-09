@@ -12,9 +12,9 @@ function Watch() {
 	return (
 		<>
 			<Header />
-			<div className='watch'>
-				<PlayVideo key={location.pathname} />
-				<Upnext key={location.pathname} />
+			<div key={location.pathname} className='watch'>
+				<PlayVideo  />
+				<Upnext />
 			</div>
 		</>
 	);

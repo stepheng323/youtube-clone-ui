@@ -6,12 +6,14 @@ import { CircularLoading } from '../../Utils/Loading';
 
 import './up-next.css';
 import { UpNextSkeleton } from '../Skeleton/Skeleton';
+import { useLocation } from 'react-router';
 
 function Upnext() {
   const [page, setPage] = useState(1);
   const [videos, setVideos] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [initialLoading, setinitialLoading] = useState(true);
+	const location = useLocation();
 
   const getUpNextVideosUrl = `${REACT_APP_DEV_BASE_URL}/video/upnext?page=${page}&limit=8`;
   useEffect(() => {
@@ -27,7 +29,7 @@ function Upnext() {
       } catch (error) {}
     };
     fetchData();
-  }, []);
+  }, [location.pathname]);
 
   const fetchNext = async () => {
     setPage((page) => page + 1);

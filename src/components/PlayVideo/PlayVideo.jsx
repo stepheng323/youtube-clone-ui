@@ -29,7 +29,6 @@ function PlayVideo() {
   const userExist = Object.keys(user).length > 0;
   const { id } = useParams();
 
-	// alert(JSON.stringify(user))
   const url = `${REACT_APP_DEV_BASE_URL}/video/view/${id}`;
   const videoCountUrl = `${REACT_APP_DEV_BASE_URL}/video/metric-count/${id}`;
   const likeVideoUrl = `${REACT_APP_DEV_BASE_URL}/video/like/${id}`;

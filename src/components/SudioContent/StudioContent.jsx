@@ -15,7 +15,8 @@ function StudioContent() {
   if(isLoading) return <p>Loading...</p>
 
 
-  const rows = channelVideos.payload?.data?.map(video => {
+  const { payload } = channelVideos;
+  const rows = payload?.data?.map(video => {
     const { title, thumbnail, status,  viewsCount, createdAt} = video;
     return {video: title, visibility: status, date: createdAt, views: viewsCount, comments: '', like: '', thumbnail }
   })
